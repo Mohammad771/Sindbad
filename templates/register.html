@@ -1,0 +1,54 @@
+<!doctype html>
+{% extends 'baseView.html' %}
+{% load static %}
+<head>
+{% block title %}
+    <title>تسجيل جديد</title>
+{% endblock %}
+
+{% block pageCSS %}
+  
+{% endblock %}
+
+
+{% block content %}
+
+</head>
+  <body>
+    <!-- enctype="multipart/form-data" -->
+    <div class="container-sm">
+      {{form_errors.errors}}
+      <form action="{% url 'users:register' %}" method="POST">
+        {%csrf_token%}
+        <div class="form-floating">
+          <input type="text" class="form-control" name="first_name" id="first_name" placeholder="John">
+          <label for="first_name">الاسم الاول</label>
+        </div>
+        
+        <div class="form-floating">
+          <input type="text" class="form-control" name="last_name" id="last_name" placeholder="Doe">
+          <label for="last_name">اسم العائلة</label>
+        </div>
+        
+        <div class="form-floating">
+          <input type="email" class="form-control" name="email" id="email" placeholder="name@example.com">
+          <label for="email">البريد الالكتروني</label>
+        </div>
+
+        <div class="form-floating">
+          <input type="password" class="form-control" name="password1" id="password1" placeholder="Password">
+          <label for="password">كلمة المرور</label>
+        </div>
+
+        <div class="form-floating">
+          <input type="password" class="form-control" name="password2" id="password2" placeholder="Confirm Password">
+          <label for="password2">تأكيد كلمة المرور</label>
+        </div>
+
+        <button type="submit" class="btn btn-primary">إرسال</button>    
+      </form> 
+  </div>
+  </body>
+  
+</html>
+{% endblock %}

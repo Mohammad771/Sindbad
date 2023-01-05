@@ -1,0 +1,39 @@
+<!doctype html>
+{% extends 'baseView.html' %}
+{% load static %}
+<head>
+{% block title %}
+    <title>تسجيل الدخول</title>
+{% endblock %}
+
+{% block pageCSS %}
+  
+{% endblock %}
+
+
+{% block content %}
+
+</head>
+  <body>
+    <!-- enctype="multipart/form-data" -->
+    <div class="container-sm">
+      <form action="{% url 'users:user_login' %}" method="POST">
+        {%csrf_token%}        
+        <div class="form-floating">
+          <input type="email" class="form-control" name="email" id="email" placeholder="name@example.com">
+          <label for="email">البريد الالكتروني</label>
+        </div>
+
+        <div class="form-floating">
+          <input type="password" class="form-control" name="password1" id="password1" placeholder="Password">
+          <label for="password">كلمة المرور</label>
+        </div>
+
+        <button type="submit" class="btn btn-primary">إرسال</button>    
+      </form>
+      <h5><a href="{% url 'users:forgot_password' %}">نسيت كلمة المرور؟</a></h5>
+  </div>
+  </body>
+  
+</html>
+{% endblock %}
