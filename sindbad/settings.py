@@ -14,6 +14,9 @@ from pathlib import Path
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
+STATIC_DIR = os.path.join(BASE_DIR, "static")
+STATIC_URL = 'static/'
+
 
 
 # Quick-start development settings - unsuitable for production
@@ -118,7 +121,6 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/4.1/howto/static-files/
 
-STATIC_URL = 'static/'
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.1/ref/settings/#default-auto-field
@@ -126,3 +128,9 @@ STATIC_URL = 'static/'
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 AUTH_USER_MODEL = 'users.User'
+
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+EMAIL_HOST = 'smtp.mailtrap.io'
+EMAIL_HOST_USER = 'd9c75f694692b3'
+EMAIL_HOST_PASSWORD = '3cc4d57aa4ccee'
+EMAIL_PORT = '2525'

@@ -4,6 +4,7 @@ from django.contrib.auth import authenticate, login, logout as user_logout
 from django.contrib.auth.decorators import login_required
 from django.http import HttpResponseRedirect, HttpResponse
 from django.contrib.auth.forms import PasswordResetForm
+from django.core.mail import send_mail
 
 
 # Create your views here.
@@ -39,12 +40,12 @@ def register(request):
             context['errors'] =  form.errors
             context['form_errors'] = form
             # return redirect('/register')
-            return render(request, 'register.html', context)
+            return render(request, 'users/register.html', context)
 
             
     else: #GET request
         
-        return render(request, 'register.html', context)
+        return render(request, 'users/register.html', context)
 
 
 
@@ -78,22 +79,31 @@ def user_login(request):
             else:
                 print("User is not yet activated")
                 context['login_error'] = "User is not yet activated"
-                return render(request, 'login.html', context)
+                return render(request, 'users/login.html', context)
                 
         
         else:
             print("incorrect credentials")
             context['msg'] = "incorrect credentials"
-            return render(request, 'login.html', context)
+            return render(request, 'users/login.html', context)
     
     else:
-        return render(request, 'login.html')
+        return render(request, 'users/login.html')
 
 @login_required
 def logout(request):
     context = {}
     user_logout(request)
     context['msg'] = "Logout Successful"
+
+    send_mail(
+        'Subject here',
+        'Here is the message.',
+        'from@example.com',
+        ['mohmd.mohmds@gmail.com'],
+        fail_silently=False,
+    )
+    print("email sent")
     # return HttpResponse("Success")
     # back_home(request,context)
     return redirect('/')
@@ -104,9 +114,9 @@ def logout(request):
 # def back_home(request, context=None):
 #     return render(request,'Home.html', context)
 
-def forgot_password(request):
+# def forgot_password(request):
 
-    return render(request,'forgot_password.html')
+#     return render(request,'forgot_password.html')
 
 
 def admin(request):

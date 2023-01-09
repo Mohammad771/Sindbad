@@ -4,3 +4,6 @@ from django.shortcuts import render
 
 def home(request):
     return render(request,'Home.html')
+
+def store_profile(request):
+    return render(request,'stores/store_profile.html')

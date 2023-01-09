@@ -1,6 +1,10 @@
 from django.db import models
 from django.contrib.auth.models import AbstractUser
 from django.utils import timezone
+from stores.models import Store
+from django.core.validators import FileExtensionValidator
+
+
 
 
 
@@ -13,6 +17,11 @@ class User(AbstractUser):
     last_name = models.CharField(max_length=24)
     username = models.CharField(max_length=30, unique=True)
     email = models.EmailField(verbose_name="email", max_length=60, unique=True)
+    store_id = models.ForeignKey(Store, on_delete=models.CASCADE, related_name="+", null = True, default=None, blank=True)
+    photo = models.FileField(null = True, default=None, blank=True, upload_to='static/upload/users_photos',
+        validators=[FileExtensionValidator(allowed_extensions=['png','jpg',"jpeg"])])
+
+
 
     created_at = models.DateTimeField(default=timezone.now)
     updated_at = models.DateTimeField(null = True, default=None, blank=True)
