@@ -123,9 +123,27 @@ def admin(request):
     return render(request,'admin.html')
 
 
-def customer(request):
-    return render(request,'customer.html')
+def profile(request):
+    return render(request,'profile.html')
+
+def list_wholesalers(request):
+    return render(request,'users/list_wholesalers.html')
+
+def list_reps(request):
+    return render(request,'users/list_reps.html')
 
 
-def employee(request):
-    return render(request,'employee.html')
+# def profile_edit(request):
+#     return render(request,'edit_profile.html')
+
+
+# def seller(request):
+#     return render(request,'seller.html')
+
+
+# def wholesaler(request):
+#     return render(request,'wholesaler.html')
+    
+
+# def rep(request):
+#     return render(request,'rep.html')

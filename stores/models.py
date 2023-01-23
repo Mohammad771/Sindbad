@@ -7,4 +7,4 @@ class Store(models.Model):
     name = models.CharField(max_length=24)
     descriptoin = models.TextField()
     link = models.CharField(max_length=300)
-    city = models.CharField(max_length=24)
+    city = models.ForeignKey('users.city', on_delete=models.CASCADE, related_name="+")

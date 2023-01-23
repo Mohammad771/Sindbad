@@ -1,0 +1,61 @@
+<!doctype html>
+{% extends 'main/baseView.html' %}
+{% load static %}
+<head>
+{% block title %}
+    <title>معلومات المتجر</title>
+{% endblock %}
+
+{% block pageCSS %}
+  
+{% endblock %}
+
+
+{% block content %}
+
+</head>
+  <body>
+    {% if not request.user.seller_id %}
+    <p>لا يمكنك إنشاء متجر خاص بك لأنك لست مسجلاً كبائع</p>
+    {% else %}
+        {% if not request.user.seller_id.store_id %}
+            <p>لم تقم بإنشاء متجرك بعد</p>
+            <a href="">انشئ متجرك</a>
+        {% else %}
+            <div class="container-sm">
+            <form action="{% url 'stores:create_store' %}" method="POST">
+                {%csrf_token%}        
+                <div class="form-floating">
+                <input type="text" class="form-control" name="name" id="name" placeholder="اسم المتجر..">
+                <label for="text">اسم المتجر</label>
+                </div>
+
+                <div class="form-floating">
+                <textarea id="description" name="description" rows="4" cols="50"></textarea>
+                <label for="description">وصف المتجر</label>
+                </div>
+
+                <div class="form-floating">
+                <input type="text" class="form-control" name="link" id="link" placeholder="رابط المتجر..">
+                <label for="link">رابط المتجر</label>
+                </div>
+
+                <div class="form-floating">
+                <input type="text" class="form-control" name="name" id="name" placeholder="المدينة">
+                <label for="text">المدينة</label>
+                </div>
+
+                <div class="form-floating">
+                <input type="tel" class="form-control" name="phone" id="phone" placeholder="رقم التواصل">
+                <label for="text">رقم التواصل</label>
+                </div>
+
+                <button type="submit" class="btn btn-primary">إرسال</button>    
+            </form>
+            </div>
+        {% endif %}
+    {% endif %}
+  </body>
+  
+</html>
+{% endblock %}
