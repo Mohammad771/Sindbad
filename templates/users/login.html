@@ -1,39 +1,55 @@
 <!doctype html>
 {% extends 'main/baseView.html' %}
 {% load static %}
-<head>
-{% block title %}
-    <title>تسجيل الدخول</title>
-{% endblock %}
-
-{% block pageCSS %}
-  
-{% endblock %}
-
-
-{% block content %}
-
-</head>
+<html>
+  <head>
+    {% block title %}
+      <title>تسجيل الدخول</title>
+    {% endblock %}
+    {% block pageCSS %}
+      <link rel="stylesheet" href="{% static 'assets/css/form-grid.css'%}" />
+    {% endblock %}
+  </head>
+  {% block content %}
   <body>
-    <!-- enctype="multipart/form-data" -->
-    <div class="container-sm">
-      <form action="{% url 'users:user_login' %}" method="POST">
-        {%csrf_token%}        
-        <div class="form-floating">
-          <input type="email" class="form-control" name="email" id="email" placeholder="name@example.com">
-          <label for="email">البريد الالكتروني</label>
+    <div class="container login">
+      <div class="square">
+        <div class="picture">
+          <img id="logo-img" src="{% static 'assets/img/sindibad-logo.png'%}" />
         </div>
 
-        <div class="form-floating">
-          <input type="password" class="form-control" name="password1" id="password1" placeholder="Password">
-          <label for="password">كلمة المرور</label>
-        </div>
+        <div class="form">
+          <form action="{% url 'users:user_login' %}" method="POST">
+            {%csrf_token%}        
+          <div class="form-header">
+            <label class="title">تسجيل الدخول</label>
+          </div>
 
-        <button type="submit" class="btn btn-primary">إرسال</button>    
-      </form>
-      <p><a href='{% url "users:reset_password" %}'>نسيت كلمة السر؟</a></p>
+          <div class="form-content">
+            <div class="userInfoContainer">
+              <input
+                type="email"
+                name="email"
+                placeholder="البريد الإلكتروني"
+                required=""
+              />
+              <input
+                type="password"
+                name="password"
+                placeholder="كلمة السر"
+                required=""
+              />
+            </div>
+          </div>
+
+          <div class="form-footer">
+            <button class="inlineInput first sign">تسجيل الدخول</button>
+            <button class="inlineInput">إنشاء حساب</button>
+          </div>
+        </form>
+        </div>
+      </div>
     </div>
   </body>
-  
 </html>
 {% endblock %}

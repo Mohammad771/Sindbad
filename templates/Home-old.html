@@ -1,0 +1,28 @@
+<!doctype html>
+{% extends 'main/baseView.html' %}
+{% load static %}
+<head>
+{% block title %}
+    <title>الصفحة الرئيسية</title>
+{% endblock %}
+
+{% block pageCSS %}
+  
+{% endblock %}
+
+
+{% block content %}
+
+  <body>
+    <div class="container-sm">
+      <h1>موقع سندباد</h1>
+      
+        {% if request.user.is_authenticated %}
+        <h3>مرحباً! لقد تم تسجيل دخولك باسم {{request.user.first_name}}</h3>
+        <h5><a href="{% url 'users:logout' %}">تسجيل الخروج</a></h5>
+      {% endif %}
+    </div>
+  </body>
+  
+</html>
+{% endblock %}

@@ -1,0 +1,289 @@
+body{
+    padding: 0;
+    margin: 0;
+    direction: rtl;
+    background: linear-gradient(to top, #5b3c14, #a87027, #e09730);;
+
+}
+.container {  
+  display: grid; 
+  grid-template-columns: 1fr 1fr 0.7fr 1.3fr 1fr 1fr; 
+  grid-template-rows: 0.4fr 0.7fr 1fr 1fr 0.5fr 0.4fr; 
+  gap: 0px 0px; 
+    grid-auto-flow: row;
+    width: 100%;
+    height: 100%;
+    
+  }
+
+  .login{
+    display: grid; 
+    grid-template-columns: 1fr 1fr 0.7fr 1.3fr 1fr 1fr; 
+    grid-template-rows: 1fr 0.5fr 0.5fr 0.5fr 0.5fr 1fr; 
+    gap: 0px 0px;
+  }
+
+  
+  .picture { grid-area: 2 / 2 / 6 / 4; 
+background-color: rgb(255, 255, 255);
+justify-content: center;
+align-content: center;
+display: grid;
+
+border-radius: 0px 10px 10px 0px;
+box-shadow: 5px 20px 50px #000;
+
+
+}
+  
+  .form { grid-area: 2 / 4 / 6 / 6; 
+background-color: #ffffff;
+border-radius: 10px 0px 0px 10px;
+box-shadow: 5px 5px 0px 0px 50px #000;
+
+
+}
+  
+  .form-header { grid-area: 2 / 4 / 3 / 6;
+	justify-content: center;
+    align-content: center;
+
+    display: grid;
+
+}
+  
+  .form-content { grid-area: 3 / 4 / 5 / 6; 
+}
+  
+  .form-footer { 
+    grid-area: 5 / 4 / 6 / 6;
+    justify-content: center;
+    align-content: center;
+   }
+
+
+
+  #logo-img{
+    width: 80%;
+    margin: auto;
+    max-height: 100%;
+  }
+
+  .title{
+	color: #7d5e49;
+	font-size: 2em;
+	font-weight: bold;
+    margin-top: 9%;
+}
+
+input{
+	width: 90%;
+	height: 10%;
+	background: #c9c4be8a;
+  color: #000000;
+	justify-content: center;
+	display: flex;
+	margin: 3% auto;
+	padding: 10px;
+	border: none;
+	outline: none;
+	border-radius: 5px;
+}
+::placeholder { 
+  color: #a87027;
+}
+
+.inlineInput{
+  width: 43%;
+  float: right;
+  margin-right: auto;
+  margin-top: 0;
+}
+.first{
+  margin-left: 4%;
+  margin-right: 5%;
+}
+
+input[type="radio"]{
+  display: none;
+}
+input[type="radio"] + label span {
+  display: inline-block;
+  width: 10px;
+  height: 10px;
+  background: transparent;
+  vertical-align: middle;
+  border: 2px solid #e09730;
+  border-radius: 50%;
+  padding: 2px;
+  margin:0 5px;
+}
+input[type="radio"]:checked + label span {
+  width: 10px;
+  height: 10px;
+  background: #e09730;
+  background-clip: content-box;
+}  
+
+.form-content span{
+	padding: 10px;
+	color: #e09730;
+	font-size: 1em;
+}
+
+
+button{
+	width: 35%;
+	height: 40px;
+	/*margin: 0px auto;*/
+	justify-content: center;
+	display: block;
+	color: #ffffff;
+	background: #7d5e49;
+	font-size: 1em;
+	font-weight: bold;
+	outline: none;
+	border: none;
+	border-radius: 5px;
+	transition: .2s ease-in;
+	cursor: pointer;
+  display: inline-block;
+}
+.sign:hover{
+	background: #b46e0c;
+}
+.sign{
+	background: #e09730;
+}
+button:hover{
+	background: #523e30;
+}
+
+
+
+a{
+  color: #000000;
+  text-decoration: none;
+  justify-content: center;
+display: flex;
+}
+a:hover{
+  color: #e09730;
+}
+
+.userTrypeContainer{
+  justify-content: center;
+  text-align:center;
+	margin: 0px 25%;
+	padding: 10px;
+  height: 40px;
+}
+.userType{
+  margin: auto;
+}
+
+.login .form{
+  float: right;
+  width: 70%;
+  height: 100%;
+
+}
+
+.login .picture{
+  float: right;
+  width: 30%;
+  height: 100%;
+
+}
+
+.login .form-header{
+  margin: 6% 0px;
+}
+
+.login .form-content{
+  margin: 4% 0px;
+}
+
+.login .form-footer{
+  margin: 4% 0px;
+}
+
+.login input{
+  height: 15%;
+}
+
+.square { grid-area: 2 / 2 / 6 / 6;
+
+
+}
+
+
+@media screen and (max-width: 570px) {
+
+  .form { 
+    grid-area: 2 / 2 / 6 / 6; 
+    border-radius: 10px;
+
+  }
+  .form-header { grid-area: 2 / 2 / 3 / 6;
+  }
+
+  .form-content { grid-area: 3 / 2 / 5 / 6; 
+    margin-bottom: 2%;
+  }
+
+  .form-footer { 
+    grid-area: 5 / 2 / 6 / 6;
+  }
+
+  .login .picture{
+    display: none;
+    visibility: hidden;
+
+  }
+  .login .form{
+    grid-area: 2 / 2 / 6 / 6;
+    width: 100%;
+  }
+
+
+
+
+}
+
+
+@media screen and (max-height: 660px) {
+
+  .login .form-header{
+    margin: 4%;
+  }
+
+  .login .title{
+    margin-top: 1%;
+  }
+}
+
+
+
+@media screen and (max-width: 660px) {
+
+  .login .form-header{
+    margin: 8%;
+  }
+
+  .login .title{
+    margin: 0px;
+  }
+}
+
+@media screen and (min-width: 1400px) {
+
+
+  .login input{
+    margin: 1% auto;
+
+  }
+  .login .form-content{
+    margin: 1%;
+  }
+}

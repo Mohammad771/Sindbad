@@ -2,7 +2,8 @@ from django.db import models
 from django.contrib.auth.models import AbstractUser
 from django.utils import timezone
 from stores.models import Store
-from django.core.validators import FileExtensionValidator
+from django.core.validators import FileExtensionValidator, ValidationError
+
 
 # Create your models here.
 
@@ -49,6 +50,7 @@ class User(AbstractUser):
     first_name = models.CharField(max_length=24)
     last_name = models.CharField(max_length=24)
     username = models.CharField(max_length=30, unique=True)
+    phone_number = models.CharField(max_length=10, blank=True)
     email = models.EmailField(verbose_name="email", max_length=60, unique=True)
     photo = models.FileField(null = True, default=None, blank=True, upload_to='static/upload/users_photos',
         validators=[FileExtensionValidator(allowed_extensions=['png','jpg',"jpeg"])])
@@ -66,6 +68,15 @@ class User(AbstractUser):
 
     def __str__(self):
         return self.username 
+
+    def clean(self):
+        phone_number = self.phone_number
+
+        try:
+            float(phone_number)
+        except ValueError:
+            raise ValidationError(
+                {'phone_number': "يجب ان يحتوي رقم الجوال على أرقام فقط"})
 
     # def save(self, *args, **kwargs):
     #     self.username = self.email

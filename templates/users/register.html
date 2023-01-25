@@ -7,48 +7,53 @@
 {% endblock %}
 
 {% block pageCSS %}
-  
+<link rel="stylesheet" href="{% static 'assets/css/form-grid.css'%}">
 {% endblock %}
 
 
 {% block content %}
 
-</head>
-  <body>
-    <!-- enctype="multipart/form-data" -->
-    <div class="container-sm">
-      {{form_errors.errors}}
-      <form action="{% url 'users:register' %}" method="POST">
+<div class="container">
+    <div class="picture">
+        <img id="logo-img" src="{% static 'assets/img/sindibad-logo.png'%}">
+
+    </div>
+
+    <div class="form"></div>
+    <div class="form-header">
+        <label class="title">التسجيل في الموقع</label>
+    </div>
+
+    <div class="form-content">
+        {{form_errors.errors}}
+    <form action="{% url 'users:register' %}" method="POST">
         {%csrf_token%}
-        <div class="form-floating">
-          <input type="text" class="form-control" name="first_name" id="first_name" placeholder="John">
-          <label for="first_name">الاسم الاول</label>
-        </div>
+        <div class="userInfoContainer">
+        <input type="text" name="first_name" class="inlineInput first" placeholder="الاسم الأول" required="">
+
+        <input type="text" name="last_name" class="inlineInput" placeholder="اسم العائلة" required="">
+
+        <input type="email" name="email"  placeholder="البريد الإلكتروني" required="">
+
+        <input type="text" name="phone_number" placeholder="رقم الجوال" required="">
+
+        <input type="password" name="password1" class="inlineInput first" placeholder="كلمة السر" required="">
+
+        <input type="password" name="password2" class="inlineInput" placeholder="تأكيد كلمة السر" required="">
         
-        <div class="form-floating">
-          <input type="text" class="form-control" name="last_name" id="last_name" placeholder="Doe">
-          <label for="last_name">اسم العائلة</label>
         </div>
-        
-        <div class="form-floating">
-          <input type="email" class="form-control" name="email" id="email" placeholder="name@example.com">
-          <label for="email">البريد الالكتروني</label>
+        <div class="userTrypeContainer">
+        <input class="userType" id="customer" type="radio" name="user" value="Individual">
+        <label class="userType" for="customer"><span></span>عميل</label>
+        <input class="userType" id="seller" type="radio" name="user" value="Organization">
+        <label class="userType" for="seller"><span></span>تاجر</label>
         </div>
+        </div>
+        <div class="form-footer">
+            <button type="submit" class="inlineInput first sign">التسجيل</button>
+            <button class="inlineInput">لدي حساب مسجل</button>
+        </div>
+    </form>
 
-        <div class="form-floating">
-          <input type="password" class="form-control" name="password1" id="password1" placeholder="Password">
-          <label for="password">كلمة المرور</label>
-        </div>
-
-        <div class="form-floating">
-          <input type="password" class="form-control" name="password2" id="password2" placeholder="Confirm Password">
-          <label for="password2">تأكيد كلمة المرور</label>
-        </div>
-
-        <button type="submit" class="btn btn-primary">إرسال</button>    
-      </form> 
   </div>
-  </body>
-  
-</html>
-{% endblock %}
+  {% endblock %}

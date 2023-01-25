@@ -16,15 +16,12 @@ def register(request):
     if request.method == "POST":
         request_post_copy = request.POST.copy()
         request_post_copy['username'] = request.POST['email']
-        
         form = register_form(request_post_copy, request.FILES)
 
         if form.is_valid():
             form.save()
             email = request_post_copy['email']
             password = request_post_copy['password1']
-            print(email)
-            print(password)
             user = authenticate(request,username=email, password=password)
             if user is not None:
                 login(request, user)
@@ -42,10 +39,8 @@ def register(request):
             # return redirect('/register')
             return render(request, 'users/register.html', context)
 
-            
-    else: #GET request
         
-        return render(request, 'users/register.html', context)
+    return render(request, 'users/register.html', context)
 
 
 
@@ -61,7 +56,7 @@ def user_login(request):
     if request.method == "POST":
         requried_page = request.GET.get('next', None)
         email = request.POST.get('email')
-        password = request.POST.get('password1')
+        password = request.POST.get('password')
 
         user = authenticate(request, username=email, password=password)
         if user:
@@ -73,14 +68,10 @@ def user_login(request):
                 else:
                     return redirect('/')
 
-                
-
-
             else:
                 print("User is not yet activated")
                 context['login_error'] = "User is not yet activated"
-                return render(request, 'users/login.html', context)
-                
+                return render(request, 'users/login.html', context)              
         
         else:
             print("incorrect credentials")
