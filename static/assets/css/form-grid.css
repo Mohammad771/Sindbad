@@ -3,6 +3,8 @@ body{
     margin: 0;
     direction: rtl;
     background: linear-gradient(to top, #5b3c14, #a87027, #e09730);;
+    min-height: 100%;
+
 
 }
 .container {  
@@ -78,7 +80,7 @@ box-shadow: 5px 5px 0px 0px 50px #000;
 
 input{
 	width: 90%;
-	height: 10%;
+	height: 13%;
 	background: #c9c4be8a;
   color: #000000;
 	justify-content: center;
@@ -149,14 +151,32 @@ button{
 	cursor: pointer;
   display: inline-block;
 }
+
+.button{
+	width: 43%;
+	line-height: 40px;
+	/*margin: 0px auto;*/
+  color: #ffffff;
+	background: #7d5e49;
+	font-size: 1em;
+	font-weight: bold;
+	outline: none;
+	border: none;
+	border-radius: 5px;
+	transition: .2s ease-in;
+	cursor: pointer;
+  display: block;
+  text-align: center;  
+}
 .sign:hover{
 	background: #b46e0c;
 }
 .sign{
 	background: #e09730;
 }
-button:hover{
+button:hover,  .button:hover{
 	background: #523e30;
+  color: white;
 }
 
 
@@ -174,9 +194,16 @@ a:hover{
 .userTrypeContainer{
   justify-content: center;
   text-align:center;
-	margin: 0px 25%;
 	padding: 10px;
   height: 40px;
+  margin-top: 15%;
+}
+
+@media screen and (max-width: 768px){
+  .userTrypeContainer{
+    margin-top: 21%;
+
+  }
 }
 .userType{
   margin: auto;

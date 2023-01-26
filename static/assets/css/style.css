@@ -24,12 +24,10 @@ body {
 }
 
 a {
-  color: #4154f1;
   text-decoration: none;
 }
 
 a:hover {
-  color: #717ff5;
   text-decoration: none;
 }
 
@@ -98,6 +96,9 @@ section {
 @media (max-width: 992px) {
   .breadcrumbs {
     margin-top: 57px;
+  }
+  .Header-buttons{
+    display: none;
   }
 }
 
@@ -184,6 +185,8 @@ section {
   transition: all 0.5s;
   z-index: 997;
   padding: 20px 0;
+  max-height: 100px;
+  
 }
 
 .header.header-scrolled {
@@ -260,20 +263,37 @@ section {
   color: #E09730;
 }
 
-.navbar .getstarted,
-.navbar .getstarted:focus {
-  background: #E09730;
+ .signUp,
+ .signUp:focus {
+  background: #7d5e49;
   padding: 8px 20px;
-  margin-left: 30px;
+  margin-left: 15px;
   border-radius: 4px;
   color: #fff;
+
 }
 
-.navbar .getstarted:hover,
-.navbar .getstarted:focus:hover {
-  color: #fff;
-  background: #5969f3;
+.logIn,
+.logIn:focus {
+ background: #e09730;
+ padding: 8px 20px;
+ margin-left: 15px;
+ border-radius: 4px;
+ color: #fff;
 }
+
+ .signUp:hover,
+ .signUp:focus:hover {
+  color: #fff;
+  background: #523e30;
+}
+
+.logIn:hover,
+.logIn:focus:hover {
+ color: #fff;
+ background: #b46e0c;
+}
+
 
 .navbar .dropdown ul {
   display: block;
@@ -411,8 +431,8 @@ section {
   color: #4154f1;
 }
 
-.navbar-mobile .getstarted,
-.navbar-mobile .getstarted:focus {
+.navbar-mobile .signUp,
+.navbar-mobile .signUp:focus {
   margin: 15px;
 }
 
@@ -2581,3 +2601,11 @@ object-position: 25% 25%;
 
 }
 
+.Header-links{
+  margin-right: 10%;
+}
+.Header-picture{
+}
+
+.Header-buttons{
+}

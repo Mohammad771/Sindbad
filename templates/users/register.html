@@ -1,22 +1,17 @@
-<!doctype html>
-{% extends 'main/baseView.html' %}
 {% load static %}
-<head>
-{% block title %}
-    <title>تسجيل جديد</title>
-{% endblock %}
+<html>
+  <head>
+      <title>التسجيل في الموقع</title>
+      <link rel="stylesheet" href="{% static 'assets/css/form-grid.css'%}" />
+      <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-{% block pageCSS %}
-<link rel="stylesheet" href="{% static 'assets/css/form-grid.css'%}">
-{% endblock %}
-
-
-{% block content %}
+  </head>
 
 <div class="container">
     <div class="picture">
-        <img id="logo-img" src="{% static 'assets/img/sindibad-logo.png'%}">
-
+        <a href="{% url 'stores:home' %}"title="الصفحة الرئيسية">
+            <img id="logo-img" src="{% static 'assets/img/sindibad-logo.png'%}" />
+            </a>
     </div>
 
     <div class="form"></div>
@@ -43,17 +38,22 @@
         
         </div>
         <div class="userTrypeContainer">
-        <input class="userType" id="customer" type="radio" name="user" value="Individual">
+        <input class="userType" id="customer" type="radio" name="user" value="customer">
         <label class="userType" for="customer"><span></span>عميل</label>
-        <input class="userType" id="seller" type="radio" name="user" value="Organization">
+        <input class="userType" id="seller" type="radio" name="user" value="seller">
         <label class="userType" for="seller"><span></span>تاجر</label>
+        <br>
+        <br>
+        <input class="userType" id="wholesaler" type="radio" name="user" value="wholesaler">
+        <label class="userType" for="wholesaler"><span></span>بائع جملة</label>
+        <input class="userType" id="delivery" type="radio" name="user" value="delivery">
+        <label class="userType" for="delivery"><span></span>مندوب توصيل</label>
         </div>
         </div>
         <div class="form-footer">
             <button type="submit" class="inlineInput first sign">التسجيل</button>
-            <button class="inlineInput">لدي حساب مسجل</button>
+            <a class="inlineInput button" href="{% url 'users:user_login' %}" class="inlineInput">لدي حساب مسجل</a>
         </div>
     </form>
 
   </div>
-  {% endblock %}

@@ -1,21 +1,18 @@
-<!doctype html>
-{% extends 'main/baseView.html' %}
 {% load static %}
 <html>
   <head>
-    {% block title %}
       <title>تسجيل الدخول</title>
-    {% endblock %}
-    {% block pageCSS %}
       <link rel="stylesheet" href="{% static 'assets/css/form-grid.css'%}" />
-    {% endblock %}
+      <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
   </head>
-  {% block content %}
   <body>
     <div class="container login">
       <div class="square">
         <div class="picture">
+          <a href="{% url 'stores:home' %}"title="الصفحة الرئيسية">
           <img id="logo-img" src="{% static 'assets/img/sindibad-logo.png'%}" />
+          </a>
         </div>
 
         <div class="form">
@@ -43,8 +40,8 @@
           </div>
 
           <div class="form-footer">
-            <button class="inlineInput first sign">تسجيل الدخول</button>
-            <button class="inlineInput">إنشاء حساب</button>
+            <button type="submit" class="inlineInput first sign">تسجيل الدخول</button>
+            <a class="inlineInput button" href="{% url 'users:register' %}">إنشاء حساب</a>
           </div>
         </form>
         </div>
@@ -52,4 +49,3 @@
     </div>
   </body>
 </html>
-{% endblock %}
