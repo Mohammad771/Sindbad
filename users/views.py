@@ -115,7 +115,7 @@ def admin(request):
 
 
 def profile(request):
-    return render(request,'profile.html')
+    return render(request,'users/profile.html')
 
 def list_wholesalers(request):
     return render(request,'users/list_wholesalers.html')
