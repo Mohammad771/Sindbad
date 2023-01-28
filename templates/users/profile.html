@@ -1,60 +1,498 @@
-<!doctype html>
+<!DOCTYPE html>
+<html>
 {% extends 'main/baseView.html' %}
 {% load static %}
 <head>
-{% block title %}
-    <title>معلومات المتجر</title>
-{% endblock %}
+    {% block title %}
+        <title>إعدادات الحساب</title>
+    {% endblock %}
 
-{% block pageCSS %}
-  
-{% endblock %}
+    {% block pageCSS %}
+    {% endblock %}
 
-{% block content %}
-
+    {% block content %}
 </head>
   <body>
-    {% if not request.user.seller_id %}
-    <p>لا يمكنك إنشاء متجر خاص بك لأنك لست مسجلاً كبائع</p>
-    {% else %}
-        {% if not request.user.seller_id.store_id %}
-            <p>لم تقم بإنشاء متجرك بعد</p>
-            <a href="">انشئ متجرك</a>
-        {% else %}
-            <div class="container-sm">
-            <form action="{% url 'stores:create_store' %}" method="POST">
-                {%csrf_token%}        
-                <div class="form-floating">
-                <input type="text" class="form-control" name="name" id="name" placeholder="اسم المتجر..">
-                <label for="text">اسم المتجر</label>
-                </div>
+    <div class="settings-container seller">
+      <div class="settings-form">
+        <form>
+          <h2 class="settings-title">معلومات المتجر</h2>
 
-                <div class="form-floating">
-                <textarea id="description" name="description" rows="4" cols="50"></textarea>
-                <label for="description">وصف المتجر</label>
-                </div>
+          <div class="form-element first-input">
+            <label class="input-label">الصورة</label>
+            <img
+              class="prof-img"
+              src="{% static 'assets/img/store.webp'%}"
+            />
+          </div>
 
-                <div class="form-floating">
-                <input type="text" class="form-control" name="link" id="link" placeholder="رابط المتجر..">
-                <label for="link">رابط المتجر</label>
-                </div>
+          <div class="form-element">
+            <label class="input-label"></label>
+            <input
+              class="img-input"
+              type="file"
+              id="img"
+              name="img"
+              accept="image/*"
+            />
+          </div>
 
-                <div class="form-floating">
-                <input type="text" class="form-control" name="name" id="name" placeholder="المدينة">
-                <label for="text">المدينة</label>
-                </div>
 
-                <div class="form-floating">
-                <input type="tel" class="form-control" name="phone" id="phone" placeholder="رقم التواصل">
-                <label for="text">رقم التواصل</label>
-                </div>
+          <div class="form-element">
+            <label class="input-label">اسم المتجر</label>
+            <input
+              class="settings-input"
+              type="text"
+              name="first_name"
+              class="inlineInput first"
+              placeholder="Lille Bittie"
+              required=""
+            />
+          </div>
 
-                <button type="submit" class="btn btn-primary">إرسال</button>    
-            </form>
-            </div>
-        {% endif %}
-    {% endif %}
-  </body>
+          <div class="form-element">
+          <label for="store-descrption" class="input-label">وصف المتجر</label>
+          <textarea class="settings-input" name="store-descrption" placeholder="قرطاسية، أدوات مدرسية، فواصل كتب"
+          ></textarea>
+        </div>
+
+
+          <div class="form-element">
+            <label class="input-label">رابط المتجر </label>
+            <input
+              type="url"
+              class="settings-input"
+              name="phone_number"
+              placeholder="https://www.instagram.com/lille.bitte.cr/"
+              required=""
+            />
+          </div>
+
+          <div class="form-element">
+            <label class="input-label">رقم التواصل </label>
+            <input
+              class="settings-input"
+              type="text"
+              name="phone_number"
+              placeholder="0557189956"
+              required=""
+            />
+          </div>          
+          
+
+
+          <div class="form-element">
+            <label class="input-label"></label>
+            <button class="settings-btn">حفظ</button>
+          </div>
+        </form>
+      </div>
+    </div>
+    
+    <div class="settings-container wholesaler">
+        <div class="settings-form">
+          <form>
+            <h2 class="settings-title">معلومات تاجر الجملة</h2>
   
+            <div class="form-element first-input">
+              <label class="input-label">الصورة</label>
+              <img
+                class="prof-img"
+                src="{% static 'assets/img/store.webp'%}"
+                />
+            </div>
+  
+            <div class="form-element">
+              <label class="input-label"></label>
+              <input
+                class="img-input"
+                type="file"
+                id="img"
+                name="img"
+                accept="image/*"
+              />
+            </div>
+  
+  
+            <div class="form-element">
+                <label class="input-label">الاسم التاجر أو المؤسسة</label>
+                <input
+                class="settings-input"
+                type="text"
+                name="wholesaler-name"
+                class="inlineInput first"
+                placeholder="اسم التاجر أو المؤسسة"
+                required=""
+              />
+            </div>
+
+            <div class="form-element">
+                <label for="store-descrption" class="input-label">وصف البضائع</label>
+                <textarea class="settings-input" name="store-descrption" placeholder="قرطاسية، أدوات مدرسية، فواصل كتب"
+                ></textarea>
+              </div>
+  
+            <div class="form-element">
+              <label class="input-label">الموقع</label>
+
+              <select class="settings-input" name="locations-list" id="locations-list">
+              <option value="rigatoni">Rigatoni</option>
+              <option value="dave">Dave</option>
+              <option value="pumpernickel">Pumpernickel</option>         
+              <option value="reeses">Reeses</option>
+            </select>
+            </div>
+            <div class="form-element">
+                <label class="input-label">رقم الجوال </label>
+                <input
+                  class="settings-input"
+                  type="text"
+                  name="phone_number"
+                  placeholder="رقم الجوال"
+                  required=""
+                />
+              </div>
+
+  
+            <div class="form-element">
+              <label class="input-label"></label>
+              <button class="settings-btn">حفظ</button>
+            </div>
+          </form>
+        </div>
+      </div>
+    
+    <div class="settings-container reps">
+    <div class="settings-form">
+        <form>
+        <h2 class="settings-title">معلومات المندوب</h2>
+
+
+        <div class="form-element">
+            <label class="input-label">الاسم الأول</label>
+            <input
+            class="settings-input"
+            type="text"
+            name="first_name"
+            class="inlineInput first"
+            placeholder="الاسم الأول"
+            required=""
+            />
+        </div>
+
+        <div class="form-element">
+            <label class="input-label">اسم العائلة</label>
+            <input
+            class="settings-input"
+            type="text"
+            name="last_name"
+            class="inlineInput"
+            placeholder="اسم العائلة"
+            required=""
+            />
+        </div>
+
+
+        <div class="form-element">
+          <label class="input-label">الموقع</label>
+
+          <select class="settings-input" name="locations-list" id="locations-list">
+          <option value="rigatoni">Rigatoni</option>
+          <option value="dave">Dave</option>
+          <option value="pumpernickel">Pumpernickel</option>         
+          <option value="reeses">Reeses</option>
+        </select>
+        </div>
+
+
+
+        <div class="form-element">
+            <label class="input-label">رقم الجوال </label>
+            <input
+            class="settings-input"
+            type="text"
+            name="phone_number"
+            placeholder="رقم الجوال"
+            required=""
+            />
+        </div>
+
+        <div class="form-element">
+            <label class="input-label"></label>
+            <button class="settings-btn">حفظ</button>
+        </div>
+        </form>
+    </div>
+    </div>
+
+    
+    <div class="settings-container user">
+    <div class="settings-form">
+        <form>
+        <h2 class="settings-title">معلومات المستخدم</h2>
+
+        <div class="form-element">
+            <label class="input-label">الاسم الأول</label>
+            <input
+            class="settings-input"
+            type="text"
+            name="first_name"
+            class="inlineInput first"
+            placeholder="الاسم الأول"
+            required=""
+            />
+        </div>
+
+        <div class="form-element">
+            <label class="input-label">اسم العائلة</label>
+            <input
+            class="settings-input"
+            type="text"
+            name="last_name"
+            class="inlineInput"
+            placeholder="اسم العائلة"
+            required=""
+            />
+        </div>
+
+
+        <div class="form-element">
+            <label class="input-label">البريد الإلكتروني</label>
+            <input
+            class="settings-input"
+            class="email"
+            type="email"
+            name="email"
+            placeholder="البريد الإلكتروني"
+            required=""
+            />
+        </div>
+        <div class="form-element">
+            <label class="input-label">رقم الجوال </label>
+            <input
+            class="settings-input"
+            type="text"
+            name="phone_number"
+            placeholder="رقم الجوال"
+            required=""
+            />
+        </div>
+        <div class="form-element">
+            <label class="input-label"> كلمة السر</label>
+            <a class="change-pass-btn">تغيير</a>
+        </div>
+
+        <div class="form-element">
+            <label class="input-label"></label>
+            <button class="settings-btn">حفظ</button>
+        </div>
+        </form>
+    </div>
+    </div>
+
+    <!-- ======= Testimonials Section ======= -->
+    <section id="testimonials" class="testimonials mls">
+      <div class="container" data-aos="fade-up">
+        <header class="section-header">
+          <p style="color: white">المتاجر المفضلة</p>
+        </header>
+
+        <div
+          class="testimonials-slider swiper"
+          data-aos="fade-up"
+          data-aos-delay="200"
+        >
+          <div class="swiper-wrapper">
+            <div class="swiper-slide">
+              <div class="testimonial-item">
+                <div class="stars">
+                  <i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i
+                  ><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i
+                  ><i class="bi bi-star-fill"></i>
+                </div>
+
+                <img
+                  src="static/assets/img/blog/clothes.webp"
+                  class="img-fluid most-liked-stores-pic"
+                  alt=""
+                />
+
+                <div class="profile mt-auto">
+                  <img
+                    src="static/assets/img/clothes-logo.jpg"
+                    class="testimonial-img"
+                    alt=""
+                  />
+                  <h3 class="post-title">H&M</h3>
+
+                  <span class="post-date"
+                    >ملابس نسائية، ملابس رجالية، ملابس للأطفال</span
+                  >
+                  <br />
+
+                  <a
+                    href="blog-single.html"
+                    class="readmore stretched-link mt-auto"
+                    ><span>عرض المتجر</span><i class="bi bi-arrow-right"></i
+                  ></a>
+                </div>
+              </div>
+            </div>
+            <!-- End testimonial item -->
+
+            <div class="swiper-slide">
+              <div class="testimonial-item">
+                <div class="stars">
+                  <i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i
+                  ><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i
+                  ><i class="bi bi-star-fill"></i>
+                </div>
+
+                <img
+                  src="static/assets/img/blog/perfume.jpg"
+                  class="img-fluid most-liked-stores-pic"
+                  alt=""
+                />
+
+                <div class="profile mt-auto">
+                  <img
+                    src="static/static/assets/img/per-logo.webp"
+                    class="testimonial-img"
+                    alt=""
+                  />
+                  <h3 class="post-title">H&M</h3>
+
+                  <span class="post-date"
+                    >ملابس نسائية، ملابس رجالية، ملابس للأطفال</span
+                  >
+                  <br />
+
+                  <a
+                    href="blog-single.html"
+                    class="readmore stretched-link mt-auto"
+                    ><span>عرض المتجر</span><i class="bi bi-arrow-right"></i
+                  ></a>
+                </div>
+              </div>
+            </div>
+            <!-- End testimonial item -->
+
+            <div class="swiper-slide">
+              <div class="testimonial-item">
+                <div class="stars">
+                  <i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i
+                  ><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i
+                  ><i class="bi bi-star-fill"></i>
+                </div>
+
+                <img
+                  src="static/assets/img/blog/cake.jpg"
+                  class="img-fluid most-liked-stores-pic"
+                  alt=""
+                />
+
+                <div class="profile mt-auto">
+                  <img
+                    src="static/assets/img/cake-logo.webp"
+                    class="testimonial-img"
+                    alt=""
+                  />
+                  <h3 class="post-title">H&M</h3>
+
+                  <span class="post-date"
+                    >ملابس نسائية، ملابس رجالية، ملابس للأطفال</span
+                  >
+                  <br />
+
+                  <a
+                    href="blog-single.html"
+                    class="readmore stretched-link mt-auto"
+                    ><span>عرض المتجر</span><i class="bi bi-arrow-right"></i
+                  ></a>
+                </div>
+              </div>
+            </div>
+            <!-- End testimonial item -->
+
+            <div class="swiper-slide">
+              <div class="testimonial-item">
+                <div class="stars">
+                  <i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i
+                  ><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i
+                  ><i class="bi bi-star-fill"></i>
+                </div>
+
+                <img
+                  src="static/assets/img/blog/clothes.webp"
+                  class="img-fluid most-liked-stores-pic"
+                  alt=""
+                />
+
+                <div class="profile mt-auto">
+                  <img
+                    src="static/assets/img/testimonials/testimonials-1.jpg"
+                    class="testimonial-img"
+                    alt=""
+                  />
+                  <h3 class="post-title">H&M</h3>
+
+                  <span class="post-date"
+                    >ملابس نسائية، ملابس رجالية، ملابس للأطفال</span
+                  >
+                  <br />
+
+                  <a
+                    href="blog-single.html"
+                    class="readmore stretched-link mt-auto"
+                    ><span>عرض المتجر</span><i class="bi bi-arrow-right"></i
+                  ></a>
+                </div>
+              </div>
+            </div>
+            <!-- End testimonial item -->
+
+            <div class="swiper-slide">
+              <div class="testimonial-item">
+                <div class="stars">
+                  <i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i
+                  ><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i
+                  ><i class="bi bi-star-fill"></i>
+                </div>
+
+                <img
+                  src="static/assets/img/blog/clothes.webp"
+                  class="img-fluid most-liked-stores-pic"
+                  alt=""
+                />
+
+                <div class="profile mt-auto">
+                  <img
+                    src="assets/img/testimonials/testimonials-1.jpg"
+                    class="testimonial-img"
+                    alt=""
+                  />
+                  <h3 class="post-title">H&M</h3>
+
+                  <span class="post-date"
+                    >ملابس نسائية، ملابس رجالية، ملابس للأطفال</span
+                  >
+                  <br />
+
+                  <a
+                    href="blog-single.html"
+                    class="readmore stretched-link mt-auto"
+                    ><span>عرض المتجر</span><i class="bi bi-arrow-right"></i
+                  ></a>
+                </div>
+              </div>
+            </div>
+            <!-- End testimonial item -->
+          </div>
+          <div class="swiper-pagination"></div>
+        </div>
+      </div>
+    </section>
+    <!-- End Testimonials Section -->
+  </body>
 </html>
 {% endblock %}

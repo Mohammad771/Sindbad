@@ -5,6 +5,8 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
+    <link rel="stylesheet" href="https://kit.fontawesome.com/0e05f91eab.css" crossorigin="anonymous">
+
     <!-- Favicons -->
     <!-- <link href="assets/img/favicon.png" rel="icon">
     <link href="assets/img/apple-touch-icon.png" rel="apple-touch-icon"> -->
@@ -70,14 +72,28 @@
         </div>
 
         <div class="Header-buttons">
-          {% if not request.user.is_authenticated %}
-            <a class="logIn scrollto" href="{% url 'users:user_login' %}">تسجيل الدخول</a>
-            <a class="signUp scrollto" href="{% url 'users:register' %}">التسجيل</a>
-          {% endif %}
-
+          <a class="logIn scrollto" href="{% url 'users:user_login' %}">تسجيل الدخول</a>
+          <a class="signUp scrollto" href="{% url 'users:register' %}">التسجيل</a>
+          <nav id="navbar" class="navbar">
+          <ul>
+            <li class="dropdown">        
+              <i class="fa-solid fa-bars main-list"></i>
+            </i>
+              <ul>
+                <li><a class="main-links" href="{% url 'stores:home' %}">الصفحة الرئيسية</a></li>
+                <li><a class="main-links" href="{% url 'users:rep' %}">التقديم كمندوب توصيل</a></li>
+                <li><a class="main-links" href="{% url 'users:wholesaler' %}">التقديم كتاجر جملة</a></li>
+                <li><a class="main-links" href="{% url 'users:list_reps' %}">عرض المندوبين المتاحين</a></li>
+                <li><a class="main-links" href="{% url 'users:list_wholesalers' %}">عرض تجار الجملة</a></li>
+                <li><a class="main-links" href="{% url 'users:profile' %}">إعدادت الحساب</a></li>
+                <li><a class="main-links" href="">تسجيل الخروج</a></li> 
+              </ul>
+            </li>
+          </ul>
+          </nav>
           </div>
 
-        <i class="bi bi-list mobile-nav-toggle"></i>
+       <!-- <i class="bi bi-list mobile-nav-toggle"></i> -->
       </nav><!-- .navbar -->
 
     </div>
@@ -96,5 +112,7 @@
   
     <!-- Template Main JS File -->
     <script src="../../static/assets/js/main.js"></script>
+    <script src="https://kit.fontawesome.com/0e05f91eab.js" crossorigin="anonymous"></script>
+
 {% block content %}
 {% endblock %}

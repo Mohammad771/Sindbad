@@ -4,7 +4,6 @@ from users.models import city, region
 # Create your views here.
 
 def home(request):
-
     # cursor = connection.cursor()
     # cursor.execute("")
     return render(request,'Home.html')

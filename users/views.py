@@ -153,7 +153,7 @@ def admin(request):
 
 
 def profile(request):
-    return render(request,'profile.html')
+    return render(request,'users/profile.html')
 
 def list_wholesalers(request):
     return render(request,'users/list_wholesalers.html')
@@ -161,6 +161,12 @@ def list_wholesalers(request):
 def list_reps(request):
     return render(request,'users/list_reps.html')
 
+def wholesaler(request):
+    return render(request,'users/wholesalers-form.html')
+    
+
+def rep(request):
+    return render(request,'users/reps-form.html')
 
 # def profile_edit(request):
 #     return render(request,'edit_profile.html')
@@ -170,9 +176,3 @@ def list_reps(request):
 #     return render(request,'seller.html')
 
 
-# def wholesaler(request):
-#     return render(request,'wholesaler.html')
-    
-
-# def rep(request):
-#     return render(request,'rep.html')
