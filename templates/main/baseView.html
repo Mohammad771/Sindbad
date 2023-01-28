@@ -58,22 +58,24 @@
           <li><a class="nav-link scrollto" href="#">من نحن</a></li>
 
 
-          <li class="dropdown"><a href="#"><span>Dev</span> <i class="bi bi-chevron-right"></i></a>
+          <!-- <li class="dropdown"><a href="#"><span>Dev</span> <i class="bi bi-chevron-right"></i></a>
             <ul>
               <li><a class="" href="{% url 'users:profile' %}">الملف الشخصي</a></li> 
               <li><a class="" href="{% url 'users:list_wholesalers' %}">البحث عن تاجر جملة</a></li> 
               <li><a class="" href="{% url 'users:list_reps' %}">البحث عن مندوبين</a></li> 
-              <!-- <li><a class="" href="{% url 'stores:about_us' %}">معلومات المتجر</a></li>  -->
+              < <li><a class="" href="{% url 'stores:about_us' %}">معلومات المتجر</a></li> 
             </ul>
-          </li>
+          </li> -->
 
 
           </ul>
         </div>
 
         <div class="Header-buttons">
+          {% if request.user.is_authenticated %}
           <a class="logIn scrollto" href="{% url 'users:user_login' %}">تسجيل الدخول</a>
           <a class="signUp scrollto" href="{% url 'users:register' %}">التسجيل</a>
+          {% endif %}
           <nav id="navbar" class="navbar">
           <ul>
             <li class="dropdown">        
