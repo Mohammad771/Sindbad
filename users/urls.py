@@ -36,7 +36,10 @@ urlpatterns = [
 
     # __________________________________________________
 
+    # Admin
     # path('admin/', views.admin, name='admin'),
+
+    # __________________________________________________
 
     path('password_reset/',auth_views.PasswordResetView.as_view(template_name =
     'users/password_reset_form.html') ,name='reset_password'),

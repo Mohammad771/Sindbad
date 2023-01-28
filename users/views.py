@@ -5,6 +5,7 @@ from django.contrib.auth.decorators import login_required
 from django.http import HttpResponseRedirect, HttpResponse
 from django.contrib.auth.forms import PasswordResetForm
 from django.core.mail import send_mail
+from .models import allowed_seller_numbers, seller
 
 
 # Create your views here.
@@ -23,12 +24,46 @@ def register(request):
             email = request_post_copy['email']
             password = request_post_copy['password1']
             user = authenticate(request,username=email, password=password)
+
             if user is not None:
-                login(request, user)
+                # login(request, user)
                 context["msg"] = "Login Successful"
-            else:
-                print("user not found")
-                context["msg"] = "user not found"
+
+
+                # ----------------- Checking if the registering user has a seller phone number-------------
+                allowed_phone_numbers = allowed_seller_numbers.objects.filter(is_available=True) # fetching the allowed & unused phone numbers
+                print(allowed_phone_numbers)
+                print(user)
+                for allowed_number in allowed_phone_numbers:
+                    print(allowed_number)
+                    print("from db: "+ allowed_number.phone_number)
+                    print("from request: "+request_post_copy['phone_number'])                    
+                    if (allowed_number.phone_number == request_post_copy['phone_number']): # if the user's number was found in the allowed list
+                        
+                        try:
+                            new_seller = seller() # create a new seller
+                            new_seller.save() # save the change
+
+                        except Exception as e:
+                            print("There was an error while creating a new seller account, The error is:")
+                            print(e)
+
+                        try:
+                            user.seller_id = new_seller # assign the new seller id to the new user account
+                            user.save() # save the change
+
+                        except Exception as e:
+                            print("There was an error while assigning the new seller account to the user account, The error is:")
+                            print(e)
+
+                        try:
+                            allowed_number.is_available = False # assign the number as taken
+                            allowed_number.user_id = user
+                            allowed_number.save() # save the change
+
+                        except Exception as e:
+                            print("There was an error while assigning the user to the seller number and making the seller number unavailable, The error is:")
+                            print(e)
 
             return redirect('/')
 
@@ -38,6 +73,9 @@ def register(request):
             context['form_errors'] = form
             # return redirect('/register')
             return render(request, 'users/register.html', context)
+
+
+        
 
         
     return render(request, 'users/register.html', context)
@@ -75,7 +113,7 @@ def user_login(request):
         
         else:
             print("incorrect credentials")
-            context['msg'] = "incorrect credentials"
+            context['msg'] = "البريد الالكتروني او كلمة المرور غير صحيحة"
             return render(request, 'users/login.html', context)
     
     else:
