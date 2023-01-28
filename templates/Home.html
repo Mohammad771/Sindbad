@@ -1,13 +1,11 @@
 <!DOCTYPE html>
 {% extends 'main/baseView.html' %}
-</head>
 
 {% block title %}
     <title>الصفحة الرئيسية</title>
 {% endblock %}
 
 {% block content %}
-<body>
 
   <div class="container-sm">
     <h1>موقع سندباد</h1>
@@ -15,7 +13,7 @@
       {% if request.user.is_authenticated %}
       <h3>مرحباً! لقد تم تسجيل دخولك باسم {{request.user.first_name}}</h3>
       <h5><a href="{% url 'users:logout' %}">تسجيل الخروج</a></h5>
-    {% endif %}
+      {% endif %}
   </div>
     <!-- ======= Recent Blog Posts Section ======= -->
     <section id="recent-blog-posts" class="recent-blog-posts">
@@ -435,8 +433,4 @@
 
   <a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>
 
-
-</body>
-
-</html>
 {% endblock %}

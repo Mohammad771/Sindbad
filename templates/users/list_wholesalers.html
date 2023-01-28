@@ -1,200 +1,196 @@
 <!DOCTYPE html>
 {% extends 'main/baseView.html' %}
-</head>
+{% load static %}
 
 {% block title %}
-    <title>الصفحة الرئيسية</title>
+<title>الصفحة الرئيسية</title>
 {% endblock %}
 
 {% block content %}
-{% load static %}
 
 <body>
 
   <main id="main">
 
-      <!-- ======= Pricing Section ======= -->
-      <section id="pricing" class="pricing">
+    <!-- ======= Pricing Section ======= -->
+    <section id="pricing" class="pricing">
 
-        <div class="container" data-aos="fade-up">
-  
-          <header class="section-header" >
-            <p>تجار الجملة</p>
-          </header>
-  
+      <div class="container" data-aos="fade-up">
+
+        <header class="section-header">
+          <p>تجار الجملة</p>
+        </header>
 
 
-          <div class="row" data-aos="fade-up" data-aos-delay="100">
-            <div class="col-lg-12 d-flex justify-content-center">
-              <ul id="portfolio-flters">
-                <li data-filter="*" class="filter-active">جميع المدن</li>
-                <li data-filter=".filter-app">الرياض</li>
-                <li data-filter=".filter-card">جدة</li>
-                <li data-filter=".filter-web">الدمام</li>
-                <li data-filter=".filter-web">اختر المدينة</li>
 
-              </ul>
-            </div>
+        <div class="row" data-aos="fade-up" data-aos-delay="100">
+          <div class="col-lg-12 d-flex justify-content-center">
+            <ul id="portfolio-flters">
+              <li data-filter="*" class="filter-active">جميع المدن</li>
+              <li data-filter=".filter-app">الرياض</li>
+              <li data-filter=".filter-card">جدة</li>
+              <li data-filter=".filter-web">الدمام</li>
+              <li data-filter=".filter-web">اختر المدينة</li>
+
+            </ul>
           </div>
-
-          <div class="row gy-4" data-aos="fade-left">
-  
-            <div class="col-lg-3 col-md-6" data-aos="zoom-in" data-aos-delay="100">
-              <div class="box">
-                <img src="{% static 'assets/img/hareer.jpg'%}" class="img-fluid" alt="">
-
-                <div class="price " style="color: #E09730;">متجر الحرير</div>
-
-                <h3>الرياض</h3>
-
-                <ul>
-                  <li>ملبوسات</li>
-                  <li>منسوجات</li>
-                  <li>أحذية</li>
-                </ul>
-                <a href="#" class="btn-buy">0551234567</a>
-              </div>
-            </div>
-  
-            <div class="col-lg-3 col-md-6" data-aos="zoom-in" data-aos-delay="100">
-                <div class="box">
-                  <img src="{% static 'assets/img/gifts.webp' %}" class="img-fluid" alt="">
-  
-                  <div class="price " style="color: #E09730;">متجر هديتي</div>
-  
-                  <h3>الرياض</h3>
-  
-                  <ul>
-                    <li>هدايا</li>
-                    <li>زهور</li>
-                    <li>زينة</li>
-                  </ul>
-                  <a href="#" class="btn-buy">0551234567</a>
-                </div>
-              </div>
-
-
-              <div class="col-lg-3 col-md-6" data-aos="zoom-in" data-aos-delay="100">
-                <div class="box">
-                  <img src="{% static 'assets/img/pens.jpg' %}" class="img-fluid" alt="">
-  
-                  <div class="price " style="color: #E09730;">قرطاسية النور</div>
-  
-                  <h3>الدمام</h3>
-  
-                  <ul>
-                    <li>قرطاسية</li>
-                    <li>أدوات مكتبية</li>
-                    <li>اقلام</li>
-                  </ul>
-                  <a href="#" class="btn-buy">0551234567</a>
-                </div>
-              </div>
-
-              <div class="col-lg-3 col-md-6" data-aos="zoom-in" data-aos-delay="100">
-                <div class="box">
-                  <img src="{% static 'assets/img/giza.png' %}" class="img-fluid" alt="">
-  
-                  <div class="price " style="color: #E09730;">متجر غذاء</div>
-  
-                  <h3>جدة</h3>
-  
-                  <ul>
-                    <li>مواد غذائية</li>
-                    <li>معلبات</li>
-                    <li>أجبان</li>
-                  </ul>
-                  <a href="#" class="btn-buy">0551234567</a>
-                </div>
-              </div>
-
-
-              <div class="col-lg-3 col-md-6" data-aos="zoom-in" data-aos-delay="100">
-                <div class="box">
-                  <img src="{% static 'assets/img/hareer.jpg' %}" class="img-fluid" alt="">
-  
-                  <div class="price " style="color: #E09730;">متجر الحرير</div>
-  
-                  <h3>الرياض</h3>
-  
-                  <ul>
-                    <li>ملبوسات</li>
-                    <li>منسوجات</li>
-                    <li>أحذية</li>
-                  </ul>
-                  <a href="#" class="btn-buy">0551234567</a>
-                </div>
-              </div>
-    
-              <div class="col-lg-3 col-md-6" data-aos="zoom-in" data-aos-delay="100">
-                  <div class="box">
-                    <img src="{% static 'assets/img/gifts.webp' %}" class="img-fluid" alt="">
-    
-                    <div class="price " style="color: #E09730;">متجر هديتي</div>
-    
-                    <h3>الرياض</h3>
-    
-                    <ul>
-                      <li>هدايا</li>
-                      <li>زهور</li>
-                      <li>زينة</li>
-                    </ul>
-                    <a href="#" class="btn-buy">0551234567</a>
-                  </div>
-                </div>
-  
-  
-                <div class="col-lg-3 col-md-6" data-aos="zoom-in" data-aos-delay="100">
-                  <div class="box">
-                    <img src="{% static 'assets/img/pens.jpg' %}" class="img-fluid" alt="">
-    
-                    <div class="price " style="color: #E09730;">قرطاسية النور</div>
-    
-                    <h3>الدمام</h3>
-    
-                    <ul>
-                      <li>قرطاسية</li>
-                      <li>أدوات مكتبية</li>
-                      <li>اقلام</li>
-                    </ul>
-                    <a href="#" class="btn-buy">0551234567</a>
-                  </div>
-                </div>
-  
-                <div class="col-lg-3 col-md-6" data-aos="zoom-in" data-aos-delay="100">
-                  <div class="box">
-                    <img src="{% static 'assets/img/giza.png' %}" class="img-fluid" alt="">
-    
-                    <div class="price " style="color: #E09730;">متجر غذاء</div>
-    
-                    <h3>جدة</h3>
-    
-                    <ul>
-                      <li>مواد غذائية</li>
-                      <li>معلبات</li>
-                      <li>أجبان</li>
-                    </ul>
-                    <a href="#" class="btn-buy">0551234567</a>
-                  </div>
-                </div>
-
-
-
-  
-          </div>
-  
         </div>
-  
-      </section><!-- End Pricing Section -->
+
+        <div class="row gy-4" data-aos="fade-left">
+
+          <div class="col-lg-3 col-md-6" data-aos="zoom-in" data-aos-delay="100">
+            <div class="box">
+              <img src="{% static 'assets/img/hareer.jpg'%}" class="img-fluid" alt="">
+
+              <div class="price " style="color: #E09730;">متجر الحرير</div>
+
+              <h3>الرياض</h3>
+
+              <ul>
+                <li>ملبوسات</li>
+                <li>منسوجات</li>
+                <li>أحذية</li>
+              </ul>
+              <a href="#" class="btn-buy">0551234567</a>
+            </div>
+          </div>
+
+          <div class="col-lg-3 col-md-6" data-aos="zoom-in" data-aos-delay="100">
+            <div class="box">
+              <img src="{% static 'assets/img/gifts.webp' %}" class="img-fluid" alt="">
+
+              <div class="price " style="color: #E09730;">متجر هديتي</div>
+
+              <h3>الرياض</h3>
+
+              <ul>
+                <li>هدايا</li>
+                <li>زهور</li>
+                <li>زينة</li>
+              </ul>
+              <a href="#" class="btn-buy">0551234567</a>
+            </div>
+          </div>
 
 
-      </main>
+          <div class="col-lg-3 col-md-6" data-aos="zoom-in" data-aos-delay="100">
+            <div class="box">
+              <img src="{% static 'assets/img/pens.jpg' %}" class="img-fluid" alt="">
+
+              <div class="price " style="color: #E09730;">قرطاسية النور</div>
+
+              <h3>الدمام</h3>
+
+              <ul>
+                <li>قرطاسية</li>
+                <li>أدوات مكتبية</li>
+                <li>اقلام</li>
+              </ul>
+              <a href="#" class="btn-buy">0551234567</a>
+            </div>
+          </div>
+
+          <div class="col-lg-3 col-md-6" data-aos="zoom-in" data-aos-delay="100">
+            <div class="box">
+              <img src="{% static 'assets/img/giza.png' %}" class="img-fluid" alt="">
+
+              <div class="price " style="color: #E09730;">متجر غذاء</div>
+
+              <h3>جدة</h3>
+
+              <ul>
+                <li>مواد غذائية</li>
+                <li>معلبات</li>
+                <li>أجبان</li>
+              </ul>
+              <a href="#" class="btn-buy">0551234567</a>
+            </div>
+          </div>
 
 
-      <a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>
+          <div class="col-lg-3 col-md-6" data-aos="zoom-in" data-aos-delay="100">
+            <div class="box">
+              <img src="{% static 'assets/img/hareer.jpg' %}" class="img-fluid" alt="">
+
+              <div class="price " style="color: #E09730;">متجر الحرير</div>
+
+              <h3>الرياض</h3>
+
+              <ul>
+                <li>ملبوسات</li>
+                <li>منسوجات</li>
+                <li>أحذية</li>
+              </ul>
+              <a href="#" class="btn-buy">0551234567</a>
+            </div>
+          </div>
+
+          <div class="col-lg-3 col-md-6" data-aos="zoom-in" data-aos-delay="100">
+            <div class="box">
+              <img src="{% static 'assets/img/gifts.webp' %}" class="img-fluid" alt="">
+
+              <div class="price " style="color: #E09730;">متجر هديتي</div>
+
+              <h3>الرياض</h3>
+
+              <ul>
+                <li>هدايا</li>
+                <li>زهور</li>
+                <li>زينة</li>
+              </ul>
+              <a href="#" class="btn-buy">0551234567</a>
+            </div>
+          </div>
 
 
-    </body>
+          <div class="col-lg-3 col-md-6" data-aos="zoom-in" data-aos-delay="100">
+            <div class="box">
+              <img src="{% static 'assets/img/pens.jpg' %}" class="img-fluid" alt="">
 
-    </html>
-    {% endblock %}
+              <div class="price " style="color: #E09730;">قرطاسية النور</div>
+
+              <h3>الدمام</h3>
+
+              <ul>
+                <li>قرطاسية</li>
+                <li>أدوات مكتبية</li>
+                <li>اقلام</li>
+              </ul>
+              <a href="#" class="btn-buy">0551234567</a>
+            </div>
+          </div>
+
+          <div class="col-lg-3 col-md-6" data-aos="zoom-in" data-aos-delay="100">
+            <div class="box">
+              <img src="{% static 'assets/img/giza.png' %}" class="img-fluid" alt="">
+
+              <div class="price " style="color: #E09730;">متجر غذاء</div>
+
+              <h3>جدة</h3>
+
+              <ul>
+                <li>مواد غذائية</li>
+                <li>معلبات</li>
+                <li>أجبان</li>
+              </ul>
+              <a href="#" class="btn-buy">0551234567</a>
+            </div>
+          </div>
+
+        </div>
+
+      </div>
+
+    </section><!-- End Pricing Section -->
+
+
+  </main>
+
+
+  <a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i
+      class="bi bi-arrow-up-short"></i></a>
+
+
+</body>
+
+{% endblock %}

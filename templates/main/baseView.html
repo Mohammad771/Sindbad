@@ -15,7 +15,7 @@
     <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Nunito:300,300i,400,400i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i" rel="stylesheet">
 
     <!-- Vendor CSS Files -->
-    <link href="{% static 'assets/vendor/aos/aos.css' %}" rel="stylesheet">
+    <!-- <link href="{% static 'assets/vendor/aos/aos.css' %}" rel="stylesheet"> -->
     <link href="{% static 'assets/vendor/bootstrap/css/bootstrap.min.css' %}" rel="stylesheet">
     <link href="{% static 'assets/vendor/bootstrap-icons/bootstrap-icons.css' %}" rel="stylesheet">
     <link href="{% static 'assets/vendor/glightbox/css/glightbox.min.css' %}" rel="stylesheet">
@@ -57,17 +57,6 @@
 
           <li><a class="nav-link scrollto" href="#">من نحن</a></li>
 
-
-          <!-- <li class="dropdown"><a href="#"><span>Dev</span> <i class="bi bi-chevron-right"></i></a>
-            <ul>
-              <li><a class="" href="{% url 'users:profile' %}">الملف الشخصي</a></li> 
-              <li><a class="" href="{% url 'users:list_wholesalers' %}">البحث عن تاجر جملة</a></li> 
-              <li><a class="" href="{% url 'users:list_reps' %}">البحث عن مندوبين</a></li> 
-              < <li><a class="" href="{% url 'stores:about_us' %}">معلومات المتجر</a></li> 
-            </ul>
-          </li> -->
-
-
           </ul>
         </div>
 
@@ -100,7 +89,14 @@
 
     </div>
   </header><!-- End Header -->
+
+  <body>
   <br><br><br><br><br>
+  
+{% block content %}
+
+{% endblock %}
+</body>
 
 
     <!-- Vendor JS Files -->
@@ -116,5 +112,4 @@
     <script src="../../static/assets/js/main.js"></script>
     <script src="https://kit.fontawesome.com/0e05f91eab.js" crossorigin="anonymous"></script>
 
-{% block content %}
-{% endblock %}
+</html>
