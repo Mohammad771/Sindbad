@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html>
+{% extends 'main/baseView.html' %}
+{% load static %}
+<head>
+    {% block title %}
+        <title>إعدادات الحساب</title>
+    {% endblock %}
+
+    {% block pageCSS %}
+    {% endblock %}
+
+    {% block content %}
+</head>
+  <body>
+
+    
+    <div class="settings-container wholesaler">
+        <div class="settings-form">
+          <form>
+            <h2 class="settings-title">التقديم كتاجر الجملة</h2>
+  
+            <div class="form-element first-input">
+              <label class="input-label">صورة المتجر</label>
+              <img
+                class="prof-img"
+                src="{% static 'assets/img/store.webp'%}"
+                />
+            </div>
+  
+            <div class="form-element">
+              <label class="input-label"></label>
+              <input
+                class="img-input"
+                type="file"
+                id="img"
+                name="img"
+                accept="image/*"
+              />
+            </div>
+  
+  
+            <div class="form-element">
+                <label class="input-label">الاسم التاجر أو المؤسسة</label>
+                <input
+                class="settings-input"
+                type="text"
+                name="wholesaler-name"
+                class="inlineInput first"
+                placeholder="اسم التاجر أو المؤسسة"
+                required=""
+              />
+            </div>
+
+            <div class="form-element">
+                <label for="store-descrption" class="input-label">وصف البضائع</label>
+                <textarea class="settings-input" name="store-descrption" placeholder="قرطاسية، أدوات مدرسية، فواصل كتب"
+                ></textarea>
+              </div>
+  
+            <div class="form-element">
+              <label class="input-label">الموقع</label>
+
+              <select class="settings-input" name="locations-list" id="locations-list">
+              <option value="rigatoni">Rigatoni</option>
+              <option value="dave">Dave</option>
+              <option value="pumpernickel">Pumpernickel</option>         
+              <option value="reeses">Reeses</option>
+            </select>
+            </div>
+            <div class="form-element">
+                <label class="input-label">رقم الجوال </label>
+                <input
+                  class="settings-input"
+                  type="text"
+                  name="phone_number"
+                  placeholder="رقم الجوال"
+                  required=""
+                />
+              </div>
+
+  
+            <div class="form-element">
+              <label class="input-label"></label>
+              <button class="settings-btn">التقديم</button>
+            </div>
+          </form>
+        </div>
+      </div>
+
+
+
+  </body>
+</html>
+{% endblock %}

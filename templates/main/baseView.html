@@ -5,7 +5,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="https://kit.fontawesome.com/0e05f91eab.css" crossorigin="anonymous">
 
     <!-- Favicons -->
     <!-- <link href="assets/img/favicon.png" rel="icon">
@@ -56,28 +56,32 @@
           <li><a class="nav-link scrollto" href="#portfolio">تسوق حسب الأقسام </a></li>
 
           <li><a class="nav-link scrollto" href="#">من نحن</a></li>
-
-
-          <!-- <li class="dropdown"><a href="#"><span>Dev</span> <i class="bi bi-chevron-right"></i></a>
-            <ul>
-              <li><a class="" href="{% url 'stores:home' %}">الصفحة الرئيسية</a></li>
-              <li><a class="" href="{% url 'users:register' %}">تسجيل جديد</a></li>
-              <li><a class="" href="{% url 'users:user_login' %}">تسجيل الدخول</a></li>
-              <li><a class="" href="{% url 'stores:store' %}">معلومات المتجر</a></li> 
-            </ul>
-          </li> -->
-
-
           </ul>
         </div>
 
         <div class="Header-buttons">
           <a class="logIn scrollto" href="{% url 'users:user_login' %}">تسجيل الدخول</a>
           <a class="signUp scrollto" href="{% url 'users:register' %}">التسجيل</a>
-
+          <nav id="navbar" class="navbar">
+          <ul>
+            <li class="dropdown">        
+              <i class="fa-solid fa-bars main-list"></i>
+            </i>
+              <ul>
+                <li><a class="main-links" href="{% url 'stores:home' %}">الصفحة الرئيسية</a></li>
+                <li><a class="main-links" href="{% url 'users:rep' %}">التقديم كمندوب توصيل</a></li>
+                <li><a class="main-links" href="{% url 'users:wholesaler' %}">التقديم كتاجر جملة</a></li>
+                <li><a class="main-links" href="{% url 'users:list_reps' %}">عرض المندوبين المتاحين</a></li>
+                <li><a class="main-links" href="{% url 'users:list_wholesalers' %}">عرض تجار الجملة</a></li>
+                <li><a class="main-links" href="{% url 'users:profile' %}">إعدادت الحساب</a></li>
+                <li><a class="main-links" href="">تسجيل الخروج</a></li> 
+              </ul>
+            </li>
+          </ul>
+          </nav>
           </div>
 
-        <i class="bi bi-list mobile-nav-toggle"></i>
+       <!-- <i class="bi bi-list mobile-nav-toggle"></i> -->
       </nav><!-- .navbar -->
 
     </div>
@@ -96,5 +100,7 @@
   
     <!-- Template Main JS File -->
     <script src="../../static/assets/js/main.js"></script>
+    <script src="https://kit.fontawesome.com/0e05f91eab.js" crossorigin="anonymous"></script>
+
 {% block content %}
 {% endblock %}

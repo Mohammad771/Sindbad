@@ -2600,7 +2600,6 @@ section {
 }
 
 .Header-links {
-  margin-right: 10%;
 }
 
 .settings-container {
@@ -2702,3 +2701,22 @@ section {
   max-width: 212px;
 }
 
+/*=======*/
+
+.main-list{
+  font-size: 1.5em;
+}
+.main-list:hover{
+  cursor: pointer;
+  color: #e09730;
+}
+
+.logIn, .signUp{
+  display: none;
+}
+
+.main-links:hover {
+  text-decoration: none;
+  color: white !important;
+  background-color:#e09730 ;
+  }

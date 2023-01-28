@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html>
+{% extends 'main/baseView.html' %}
+{% load static %}
+<head>
+    {% block title %}
+        <title>إعدادات الحساب</title>
+    {% endblock %}
+
+    {% block pageCSS %}
+    {% endblock %}
+
+    {% block content %}
+</head>
+  <body>
+
+    
+    <div class="settings-container reps">
+    <div class="settings-form">
+        <form>
+        <h2 class="settings-title">التقديم كمندوب</h2>
+
+
+        <div class="form-element">
+            <label class="input-label">الاسم الأول</label>
+            <input
+            class="settings-input"
+            type="text"
+            name="first_name"
+            class="inlineInput first"
+            placeholder="الاسم الأول"
+            required=""
+            />
+        </div>
+
+        <div class="form-element">
+            <label class="input-label">اسم العائلة</label>
+            <input
+            class="settings-input"
+            type="text"
+            name="last_name"
+            class="inlineInput"
+            placeholder="اسم العائلة"
+            required=""
+            />
+        </div>
+
+
+        <div class="form-element">
+          <label class="input-label">الموقع</label>
+
+          <select class="settings-input" name="locations-list" id="locations-list">
+          <option value="rigatoni">Rigatoni</option>
+          <option value="dave">Dave</option>
+          <option value="pumpernickel">Pumpernickel</option>         
+          <option value="reeses">Reeses</option>
+        </select>
+        </div>
+
+
+
+        <div class="form-element">
+            <label class="input-label">رقم الجوال </label>
+            <input
+            class="settings-input"
+            type="text"
+            name="phone_number"
+            placeholder="رقم الجوال"
+            required=""
+            />
+        </div>
+
+        <div class="form-element">
+            <label class="input-label"></label>
+            <button class="settings-btn">التقديم</button>
+        </div>
+        </form>
+    </div>
+    </div>
+
+
+
+  </body>
+</html>
+{% endblock %}

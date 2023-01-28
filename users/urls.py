@@ -27,12 +27,12 @@ urlpatterns = [
     # __________________________________________________
 
     # Wholesaler
-    # path('wholesaler/', views.wholesaler, name='wholesaler'), # where he can view his data
+    path('wholesaler-form/', views.wholesaler, name='wholesaler'), # where he can view his data
 
     # __________________________________________________
     
     # Representative
-    # path('rep/', views.rep, name='rep'), # where he can view his data & favorite stores
+    path('rep-form/', views.rep, name='rep'), # where he can view his data & favorite stores
 
     # __________________________________________________
 
