@@ -2,73 +2,71 @@
 <html>
 {% extends 'main/baseView.html' %}
 {% load static %}
+
 <head>
-    {% block title %}
-        <title>إعدادات الحساب</title>
-    {% endblock %}
+  {% block title %}
+  <title>إعدادات الحساب</title>
+  {% endblock %}
 
-    {% block pageCSS %}
-    {% endblock %}
+  {% block pageCSS %}
+  {% endblock %}
 
-    {% block content %}
+  {% block content %}
 </head>
-  <body>
 
-    
-    <div class="settings-container wholesaler">
-        <div class="settings-form">
-          <form>
-            <h2 class="settings-title">التقديم كتاجر الجملة</h2>
-  
-            <div class="form-element first-input">
-              <label class="input-label">صورة المتجر</label>
-              <img
-                class="prof-img"
-                src="{% static 'assets/img/store.webp'%}"
-                />
-            </div>
-  
-            <div class="form-element">
-              <label class="input-label"></label>
-              <input
-                class="img-input"
-                type="file"
-                id="img"
-                name="img"
-                accept="image/*"
-              />
-            </div>
-  
-  
-            <div class="form-element">
-                <label class="input-label">الاسم التاجر أو المؤسسة</label>
-                <input
-                class="settings-input"
-                type="text"
-                name="wholesaler-name"
-                class="inlineInput first"
-                placeholder="اسم التاجر أو المؤسسة"
-                required=""
-              />
-            </div>
+<body>
 
-            <div class="form-element">
-                <label for="store-descrption" class="input-label">وصف البضائع</label>
-                <textarea class="settings-input" name="store-descrption" placeholder="قرطاسية، أدوات مدرسية، فواصل كتب"
-                ></textarea>
-              </div>
-  
-            <div class="form-element">
-              <label class="input-label">الموقع</label>
+  {% if not user.wholesaler_id %}
+  <div class="settings-container wholesaler">
+    <div class="settings-form">
+      <form action="{% url 'users:wholesaler' %}" method="POST" enctype='multipart/form-data'>
+        {%csrf_token%}
+        <h2 class="settings-title">التقديم كتاجر جملة</h2>
 
-              <select class="settings-input" name="locations-list" id="locations-list">
-              <option value="rigatoni">Rigatoni</option>
-              <option value="dave">Dave</option>
-              <option value="pumpernickel">Pumpernickel</option>         
-              <option value="reeses">Reeses</option>
-            </select>
-            </div>
-            <div class="form-element">
+        <div class="form-element first-input">
+          <label class="input-label">صورة المتجر</label>
+          <img class="prof-img" src="{% static 'assets/img/store.webp'%}" />
+        </div>
+
+        <div class="form-element">
+          <label class="input-label"></label>
+          <input class="img-input" type="file" id="img" name="store_photo" accept="image/*" />
+        </div>
+
+        {% if errors %}
+        {% for error in errors %}
+        {{error}}
+        {% endfor %}
+        {% endif %}
+        <div class="form-element">
+
+          <label class="input-label">اسم المؤسسة</label>
+          <input class="settings-input" type="text" name="business_name" class="inlineInput first"
+            placeholder="اسم التاجر أو المؤسسة" />
+        </div>
+
+        <div class="form-element">
+          <label for="store-descrption" class="input-label">نوع البضائع</label>
+          <textarea class="settings-input" name="products_types"
+            placeholder="قرطاسية، أدوات مدرسية، فواصل كتب"></textarea>
+        </div>
+
+        <div class="form-element">
+          <label for="store-descrption" class="input-label">الوصف</label>
+          <textarea class="settings-input" name="descriptoin"
+            placeholder="متجر يقوم ببيع الادوات المكتبية بالجملة مقره في الرياض ويوفر توصيل مجاني لمناطق الملكة"></textarea>
+        </div>
+
+        <div class="form-element">
+          <label class="input-label">الموقع</label>
+
+          <select class="settings-input" name="city" id="locations-list">
+            {% for city in cities %}
+            <option value="{{city.id}}">{{city.name_ar}}</option>
+            {% endfor %}
+          </select>
+        </div>
+        <!-- <div class="form-element">
                 <label class="input-label">رقم الجوال </label>
                 <input
                   class="settings-input"
@@ -77,19 +75,21 @@
                   placeholder="رقم الجوال"
                   required=""
                 />
-              </div>
+              </div> -->
 
-  
-            <div class="form-element">
-              <label class="input-label"></label>
-              <button class="settings-btn">التقديم</button>
-            </div>
-          </form>
+
+        <div class="form-element">
+          <label class="input-label"></label>
+          <button type="submit" class="settings-btn">التقديم</button>
         </div>
-      </div>
+      </form>
+    </div>
+  </div>
+  {% else %}
+  <p>انت مسجل كتاجر جملة مسبقا</p>
+  {% endif %}
 
+</body>
 
-
-  </body>
 </html>
 {% endblock %}

@@ -14,6 +14,7 @@
 
 
 <body>
+  {% if user.seller_id %}
   <main id="main">
 
 
@@ -28,7 +29,7 @@
       
     
     
-              <div class="row" data-aos="fade-up" data-aos-delay="100">
+              <!-- <div class="row" data-aos="fade-up" data-aos-delay="100">
                 <div class="col-lg-12 d-flex justify-content-center">
                   <ul id="portfolio-flters">
                     <li data-filter="*" class="filter-active">جميع المدن</li>
@@ -39,55 +40,28 @@
     
                   </ul>
                 </div>
-              </div>
+              </div> -->
 
   
 
           <div class="row">
-            <div class="col-lg-6">
-             
-                <div class="member d-flex align-items-start">
-                  <div class="pic"><img src="{% static 'assets/img/doctors/d4.jpg' %}" class="img-fluid" alt=""></div>
-                  <div class="member-info">
-                    <h4>عبد الحميد سعيد</h4>
-                    <span>الرياض</span>
-                    <p>أسعار التوصيل تبدأ من 20 ريال</p>
-                        <a href="#" class="btn-buy">0551234567</a>
-
-                  </div>
-                </div>
-              </div>
-
-              <div class="col-lg-6 mt-4 mt-lg-0">
-             
-                <div class="member d-flex align-items-start">
-                  <div class="pic"><img src="{% static 'assets/img/doctors/d2.png' %}" class="img-fluid" alt=""></div>
-                  <div class="member-info">
-                    <h4>محمد عبد الله</h4>
-                    <span>جدة</span>
-                    <p>أسعار التوصيل تبدأ من 16 ريال</p>
-                        <a href="#" class="btn-buy">0551234567</a>
-
-                  </div>
-                </div>
-              </div>
-
+            {% for rep_user in rep_users %}
               <div class="col-lg-6 mt-4">
              
                 <div class="member d-flex align-items-start">
                   <div class="pic"><img src="{% static 'assets/img/doctors/d1.jpg' %}" class="img-fluid" alt=""></div>
                   <div class="member-info">
-                    <h4>هادي خالد</h4>
-                    <span>الدمام</span>
-                    <p>أسعار التوصيل تبدأ من 19 ريال</p>
-                        <a href="#" class="btn-buy">0551234567</a>
+                    <h4>{{rep_user}}</h4>
+                    <span>{{rep_user.rep_id.city}}</span>
+                        <a href="#" class="btn-buy">{{rep_user.phone_number}}</a>
 
                   </div>
                 </div>
               </div>
+              {% endfor %}
 
 
-              <div class="col-lg-6 mt-4">
+              <!-- <div class="col-lg-6 mt-4">
              
                 <div class="member d-flex align-items-start">
                   <div class="pic"><img src="{% static 'assets/img/doctors/d3.jpg' %}" class="img-fluid" alt=""></div>
@@ -157,7 +131,7 @@
 
                   </div>
                 </div>
-              </div>
+              </div> -->
           </div>
 
           
@@ -170,6 +144,9 @@
 
     <a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>
 
+    {% else %}
+    <p>يُسمح للبائعين فقط بعرض هذه الصفحة</p>
+    {% endif %}
   </body>
 
   </html>

@@ -28,22 +28,23 @@ class city(models.Model):
 
 class seller(models.Model):
     id = models.AutoField(primary_key=True)
-    # user_id = models.ForeignKey(User, on_delete=models.CASCADE, related_name="+")
     store_id = models.ForeignKey(Store, on_delete=models.CASCADE, related_name="+", null = True, default=None, blank=True)
     
 
 class wholesaler(models.Model):
     id = models.AutoField(primary_key=True)
-    # user_id = models.ForeignKey(User, on_delete=models.CASCADE, related_name="+")
-    products_types = models.CharField(max_length=500)
-    products_descriptoin = models.TextField()
+    business_name = models.CharField(max_length=100)
+    products_types = models.TextField()
+    descriptoin = models.TextField()
     city = models.ForeignKey(city, on_delete=models.CASCADE, related_name="+")
-
+    store_photo = models.FileField(null = True, default=None, blank=True, upload_to='static/upload/store_photos',
+        validators=[FileExtensionValidator(allowed_extensions=['png','jpg',"jpeg"],message="يمكن رفع الصور فقط بالصيغات التالية: (jpg, png, jpeg)")])
 
 class rep(models.Model):
     id = models.AutoField(primary_key=True)
-    # user_id = models.ForeignKey(User, on_delete=models.CASCADE, related_name="+")
     city = models.ForeignKey(city, on_delete=models.CASCADE, related_name="+")
+    photo = models.FileField(null = True, default=None, blank=True, upload_to='static/upload/rep_photos',
+        validators=[FileExtensionValidator(allowed_extensions=['png','jpg',"jpeg"], message="يمكن رفع الصور فقط بالصيغات التالية: (jpg, png, jpeg)")])
 
 class User(AbstractUser):
     id = models.AutoField(primary_key=True)
@@ -52,8 +53,8 @@ class User(AbstractUser):
     username = models.CharField(max_length=30, unique=True)
     phone_number = models.CharField(max_length=10, blank=True)
     email = models.EmailField(verbose_name="email", max_length=60, unique=True)
-    photo = models.FileField(null = True, default=None, blank=True, upload_to='static/upload/users_photos',
-        validators=[FileExtensionValidator(allowed_extensions=['png','jpg',"jpeg"])])
+    # photo = models.FileField(null = True, default=None, blank=True, upload_to='static/upload/users_photos',
+    #     validators=[FileExtensionValidator(allowed_extensions=['png','jpg',"jpeg"])])
 
     created_at = models.DateTimeField(default=timezone.now)
     updated_at = models.DateTimeField(null = True, default=None, blank=True)
@@ -67,7 +68,7 @@ class User(AbstractUser):
 
 
     def __str__(self):
-        return self.username 
+        return self.first_name + " " + self.last_name
 
     def clean(self):
         phone_number = self.phone_number

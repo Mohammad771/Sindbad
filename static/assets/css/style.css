@@ -2530,7 +2530,7 @@ section {
   font-weight: 500;
 }
 
-.doctors .member span::after {
+/* .doctors .member span::after {
   content: "";
   position: absolute;
   display: block;
@@ -2539,7 +2539,7 @@ section {
   background: #b2c8dd;
   bottom: 0;
   right: 0;
-}
+} */
 
 .doctors .member p {
   margin: 10px 0 0 0;
@@ -2711,9 +2711,9 @@ section {
   color: #e09730;
 }
 
-.logIn, .signUp{
+/* .logIn, .signUp{
   display: none;
-}
+} */
 
 .main-links:hover {
   text-decoration: none;

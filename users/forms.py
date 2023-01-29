@@ -1,6 +1,6 @@
 from django import forms
 from django.contrib.auth.forms import UserCreationForm
-from .models import User
+from .models import User, wholesaler, rep
 
 # class login_form(forms.Form):
 #     email = forms.CharField(
@@ -32,4 +32,45 @@ class register_form(UserCreationForm):
                 'required': ("الرجاء إدخال رقم الهاتف بشكل صحيح، الصيغة الصحيحة: 0512345678"),
                 'invalid': ("الرجاء إدخال رقم الهاتف بشكل صحيح، الصيغة الصحيحة: 0512345678"),
             },
+        }
+        
+class create_wholesaler_form(forms.ModelForm):
+
+    class Meta:
+        model = wholesaler
+        fields = ('business_name', 'products_types', 'descriptoin', 'city','store_photo',)
+        error_messages = {
+            'business_name': {
+                'required': ("الرجاء ادخال اسم المؤسسة"),
+            },
+            'products_types': {
+                'required': ("الرجاء ادخال انواع البضائع الخاصة بمؤسستك"),
+            },
+            'descriptoin': {
+                'required': ("الرجاء ادخال وصف لموسستك ومنتجاتك"),
+            },
+        #    'store_photo': {
+        #         'invalid_extension': ("يمكن رفع الصور فقط بالصيغات التالية: jpg, png"),
+        #     },
+        }
+
+class create_rep_form(forms.ModelForm):
+
+    class Meta:
+        model = rep
+        fields = ('city','photo',)
+        error_messages = {
+            'photo': {
+                'invalid_extension': ("يمكن رفع الصور فقط بالصيغات التالية: jpg, png"),
+            },
+            # 'products_types': {
+            #     'required': ("الرجاء ادخال انواع البضائع الخاصة بمؤسستك"),
+            # },
+            # 'descriptoin': {
+            #     'required': ("الرجاء ادخال وصف لموسستك ومنتجاتك"),
+            # },
+            # 'phone_number': {
+            #     'required': ("الرجاء إدخال رقم الهاتف بشكل صحيح، الصيغة الصحيحة: 0512345678"),
+            #     'invalid': ("الرجاء إدخال رقم الهاتف بشكل صحيح، الصيغة الصحيحة: 0512345678"),
+            # },
         }
