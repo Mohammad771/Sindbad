@@ -1661,9 +1661,9 @@ section {
   object-position: 25% 25%;
 }
 
-.mls {
-  /*background-color: #603601 ;*/
-}
+/* .mls {
+  background-color: #603601 ;
+} */
 
 /*--------------------------------------------------------------
 # Contact
@@ -2486,8 +2486,8 @@ section {
 /*--------------------------------------------------------------
 # Doctors
 --------------------------------------------------------------*/
-.doctors {
-}
+/* .doctors {
+} */
 
 .doctors .member {
   position: relative;
@@ -2599,8 +2599,8 @@ section {
   border: 1px solid #e09730;
 }
 
-.Header-links {
-}
+/* .Header-links {
+} */
 
 .settings-container {
   background-color: #ffffff;
