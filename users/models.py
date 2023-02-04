@@ -35,15 +35,15 @@ class wholesaler(models.Model):
     id = models.AutoField(primary_key=True)
     business_name = models.CharField(max_length=100)
     products_types = models.TextField()
-    descriptoin = models.TextField()
+    description = models.TextField()
     city = models.ForeignKey(city, on_delete=models.CASCADE, related_name="+")
-    store_photo = models.FileField(null = True, default=None, blank=True, upload_to='static/upload/store_photos',
+    store_photo = models.FileField(null = True, default=None, blank=True, upload_to='static/upload/wholesalers_stores_photos',
         validators=[FileExtensionValidator(allowed_extensions=['png','jpg',"jpeg"],message="يمكن رفع الصور فقط بالصيغات التالية: (jpg, png, jpeg)")])
 
 class rep(models.Model):
     id = models.AutoField(primary_key=True)
     city = models.ForeignKey(city, on_delete=models.CASCADE, related_name="+")
-    photo = models.FileField(null = True, default=None, blank=True, upload_to='static/upload/rep_photos',
+    photo = models.FileField(null = True, default=None, blank=True, upload_to='static/upload/reps_photos',
         validators=[FileExtensionValidator(allowed_extensions=['png','jpg',"jpeg"], message="يمكن رفع الصور فقط بالصيغات التالية: (jpg, png, jpeg)")])
 
 class User(AbstractUser):

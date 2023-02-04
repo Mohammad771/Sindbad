@@ -10,8 +10,30 @@
   <div class="container-sm">
     <h1>موقع سندباد</h1>
     
-      {% if request.user.is_authenticated %}
-      <h3>مرحباً! لقد تم تسجيل دخولك باسم {{request.user.first_name}}</h3>
+      {% if user.is_authenticated %}
+      <h3>مرحباً! لقد تم تسجيل دخولك باسم {{user.first_name}}</h3>
+      <h3>انت مسجل كـ</h3>
+      <ul>
+        {% if user.seller_id %}
+        <li>تاجر</li> 
+
+        {% if user.seller_id.store_id %}
+        <li>ولديك متجر مسجل</li>
+        {% elif not user.seller_id.store_id %}
+        <li>لكن ليس لديك متجر مسجل</li>
+        {% endif %}
+        
+        {% endif %}
+
+        {% if user.wholesaler_id %}
+        <li>تاجر جملة</li>
+        {% endif %}
+
+        {% if user.rep_id %}
+        <li>مندوب</li>
+        {% endif %}
+      </ul>
+      
       <h5><a href="{% url 'users:logout' %}">تسجيل الخروج</a></h5>
       {% endif %}
   </div>

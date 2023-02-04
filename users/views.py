@@ -1,5 +1,6 @@
 from django.shortcuts import render, redirect
 from .forms import *
+from stores.views import create_store, update_store
 from django.contrib.auth import authenticate, login, logout as user_logout
 from django.contrib.auth.decorators import login_required
 from django.http import HttpResponseRedirect, HttpResponse
@@ -26,9 +27,8 @@ def register(request):
             user = authenticate(request,username=email, password=password)
 
             if user is not None:
-                # login(request, user)
+                login(request, user)
                 context["msg"] = "Login Successful"
-
 
                 # ----------------- Checking if the registering user has a seller phone number-------------
                 allowed_phone_numbers = allowed_seller_numbers.objects.filter(is_available=True) # fetching the allowed & unused phone numbers
@@ -153,10 +153,73 @@ def admin(request):
 
 
 def profile(request):
-    return render(request,'users/profile.html')
+    context = {}
+
+    # store creation code
+    if request.method == "POST": 
+        if request.POST['type'] == "create_store":
+            if request.user.seller_id.store_id == None: # checking if the user already has a store to prevent inconsistencies 
+                result = create_store(request)
+                if result["status"] == True:
+                    context['msg'] = result["msg"]
+                else:
+                    context['errors'] = result["errors"]
+
+    # store updating code
+        elif request.POST['type'] == "update_store":
+                result = update_store(request)
+                if result["status"] == True:
+                    context['msg'] = result["msg"]
+                else:
+                    context['errors'] = result["errors"]
+
+    # wholsaler updating code
+        elif request.POST['type'] == "update_wholesaler":
+            form = create_wholesaler_form(request.POST, request.FILES, instance=request.user.wholesaler_id)
+
+            if form.is_valid():
+                form.save()
+                context["msg"] = "تم تعديل متجر الجملة بنجاح"
+            else:
+                errors_array = []
+                form_errors =  form.errors.get_json_data()
+                print(form_errors)
+                # print(form_errors['business_name'][0]['message'])
+                for key, errors in form_errors.items():
+                    for error in errors:
+                        errors_array.append(error['message'])
+
+                context['errors'] = errors_array
+
+    # rep updating code
+        elif request.POST['type'] == "update_rep":
+            print("hello")
+            form = create_rep_form(request.POST, request.FILES, instance=request.user.rep_id)
+
+            if form.is_valid():
+                form.save()
+                context["msg"] = "تم تعديل معلومات المندوب بنجاح"
+            else:
+                errors_array = []
+                form_errors =  form.errors.get_json_data()
+                print(form_errors)
+                # print(form_errors['business_name'][0]['message'])
+                for key, errors in form_errors.items():
+                    for error in errors:
+                        errors_array.append(error['message'])
+
+                context['errors'] = errors_array
+
+
+    context['cities'] = city.objects.all()
+    return render(request,'users/profile.html', context)
+
 
 def list_wholesalers(request):
-    return render(request,'users/list_wholesalers.html')
+    context = {}
+
+    context["wholesaler_users"] = User.objects.filter(wholesaler_id__isnull=False)
+    return render(request,'users/list_wholesalers.html', context)
 
 def list_reps(request):
     context = {}

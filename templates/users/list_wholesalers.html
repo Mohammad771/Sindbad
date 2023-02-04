@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 {% extends 'main/baseView.html' %}
 {% load static %}
+{% load get_region %}
 
 {% block title %}
 <title>الصفحة الرئيسية</title>
@@ -39,25 +40,26 @@
         </div> -->
 
         <div class="row gy-4" data-aos="fade-left">
-
+          {% for wholesaler_user in wholesaler_users %}
           <div class="col-lg-3 col-md-6" data-aos="zoom-in" data-aos-delay="100">
             <div class="box">
-              <img src="{% static 'assets/img/hareer.jpg'%}" class="img-fluid" alt="">
+            {% if wholesaler_user.wholesaler_id.store_photo %}
+              <div class="pic"><img src="../../{{wholesaler_user.wholesaler_id.store_photo}}" class="img-fluid" alt=""></div>
+            {% else %}
+              <div class="pic"><img src="{% static 'assets\img\giza.webp' %}" class="img-fluid" alt=""></div>
+            {% endif %}
 
-              <div class="price " style="color: #E09730;">متجر الحرير</div>
+              <div class="price " style="color: #E09730;">{{wholesaler_user.wholesaler_id.business_name}}</div>
 
-              <h3>الرياض</h3>
+              <h3>{{wholesaler_user.wholesaler_id.city}}, {% get_region_from_id wholesaler_user.wholesaler_id.city.region_id %}</h3>
 
-              <ul>
-                <li>ملبوسات</li>
-                <li>منسوجات</li>
-                <li>أحذية</li>
-              </ul>
-              <a href="#" class="btn-buy">0551234567</a>
+              {{wholesaler_user.wholesaler_id.products_types}}
+              <a href="#" class="btn-buy">{{wholesaler_user.phone_number}}</a>
             </div>
           </div>
+          {% endfor %}
 
-          <div class="col-lg-3 col-md-6" data-aos="zoom-in" data-aos-delay="100">
+          <!-- <div class="col-lg-3 col-md-6" data-aos="zoom-in" data-aos-delay="100">
             <div class="box">
               <img src="{% static 'assets/img/gifts.webp' %}" class="img-fluid" alt="">
 
@@ -177,7 +179,7 @@
               </ul>
               <a href="#" class="btn-buy">0551234567</a>
             </div>
-          </div>
+          </div> -->
 
         </div>
 

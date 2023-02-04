@@ -11,19 +11,90 @@
     {% endblock %}
 
     {% block content %}
+    
 </head>
   <body>
+    {% if errors %}
+    {% for error in errors %}
+    {{error}}
+    {% endfor %}
+    {% endif %}
+    <div class="settings-container user">
+      <div class="settings-form">
+          <form>
+          <h2 class="settings-title">المعلومات الأساسية</h2>
+  
+          <div class="form-element">
+              <label class="input-label">الاسم الأول</label>
+              <input
+              class="settings-input"
+              type="text"
+              name="first_name"
+              class="inlineInput first"
+              placeholder="الاسم الأول"
+              required=""
+              />
+          </div>
+  
+          <div class="form-element">
+              <label class="input-label">اسم العائلة</label>
+              <input
+              class="settings-input"
+              type="text"
+              name="last_name"
+              class="inlineInput"
+              placeholder="اسم العائلة"
+              required=""
+              />
+          </div>
+  
+  
+          <div class="form-element">
+              <label class="input-label">البريد الإلكتروني</label>
+              <input
+              class="settings-input"
+              class="email"
+              type="email"
+              name="email"
+              placeholder="البريد الإلكتروني"
+              required=""
+              />
+          </div>
+          <div class="form-element">
+              <label class="input-label">رقم الجوال </label>
+              <input
+              class="settings-input"
+              type="text"
+              name="phone_number"
+              placeholder="رقم الجوال"
+              required=""
+              />
+          </div>
+          <div class="form-element">
+              <label class="input-label"> كلمة السر</label>
+              <a class="change-pass-btn">تغيير</a>
+          </div>
+  
+          <div class="form-element">
+              <label class="input-label"></label>
+              <button class="settings-btn">حفظ</button>
+          </div>
+          </form>
+      </div>
+      </div>
+
+    {% if user.seller_id %}
+    {% if not user.seller_id.store_id %}
     <div class="settings-container seller">
       <div class="settings-form">
-        <form>
-          <h2 class="settings-title">معلومات المتجر</h2>
+        <form action="{% url 'users:profile' %}" method="POST" enctype='multipart/form-data'>
+          <input type="hidden" name="type" value="create_store">
+          {%csrf_token%}
+          <h2 class="settings-title">قم بإضافة معلومات متجرك ليتم عرضه في الموقع</h2>
 
           <div class="form-element first-input">
             <label class="input-label">الصورة</label>
-            <img
-              class="prof-img"
-              src="{% static 'assets/img/store.webp'%}"
-            />
+            <img class="prof-img" src="{% static 'assets/img/store.webp'%}"/>
           </div>
 
           <div class="form-element">
@@ -32,7 +103,7 @@
               class="img-input"
               type="file"
               id="img"
-              name="img"
+              name="store_photo"
               accept="image/*"
             />
           </div>
@@ -43,7 +114,7 @@
             <input
               class="settings-input"
               type="text"
-              name="first_name"
+              name="name"
               class="inlineInput first"
               placeholder="Lille Bittie"
               required=""
@@ -52,7 +123,7 @@
 
           <div class="form-element">
           <label for="store-descrption" class="input-label">وصف المتجر</label>
-          <textarea class="settings-input" name="store-descrption" placeholder="قرطاسية، أدوات مدرسية، فواصل كتب"
+          <textarea class="settings-input" name="description" placeholder="قرطاسية، أدوات مدرسية، فواصل كتب"
           ></textarea>
         </div>
 
@@ -62,13 +133,23 @@
             <input
               type="url"
               class="settings-input"
-              name="phone_number"
+              name="link"
               placeholder="https://www.instagram.com/lille.bitte.cr/"
               required=""
             />
           </div>
 
           <div class="form-element">
+            <label class="input-label">الموقع</label>
+
+            <select class="settings-input" name="city" id="locations-list">
+                {% for city in cities %}
+                <option value="{{city.id}}">{{city.name_ar}}</option>
+                {% endfor %}
+              </select>
+          </div>
+
+          <!-- <div class="form-element">
             <label class="input-label">رقم التواصل </label>
             <input
               class="settings-input"
@@ -77,136 +158,248 @@
               placeholder="0557189956"
               required=""
             />
-          </div>          
+          </div>           -->
           
 
 
           <div class="form-element">
             <label class="input-label"></label>
-            <button class="settings-btn">حفظ</button>
+            <button type="submit" class="settings-btn">حفظ</button>
           </div>
         </form>
       </div>
     </div>
+    {% elif user.seller_id.store_id %}
+    <div class="settings-container seller">
+      <div class="settings-form">
+        <form action="{% url 'users:profile' %}" method="POST" enctype='multipart/form-data'>
+          {%csrf_token%}
+          <input type="hidden" name="type" value="update_store">
+          <h2 class="settings-title">معلومات المتجر</h2>
+
+          <div class="form-element first-input">
+            <label class="input-label">الصورة</label>
+            {% if user.seller_id %}
+            <img class="prof-img" src="../../{{user.seller_id.store_id.store_photo}}"/>
+            {% else %}
+            <img class="prof-img" src="{% static 'assets/img/store.webp'%}"/>
+            {% endif %}
+          </div>
+
+          <div class="form-element">
+            <label class="input-label"></label>
+            <input
+              class="img-input"
+              type="file"
+              id="img"
+              name="store_photo"
+              accept="image/*"
+              name="store_photo"
+            />
+          </div>
+
+
+          <div class="form-element">
+            <label class="input-label">اسم المتجر</label>
+            <input
+              class="settings-input"
+              type="text"
+              name="name"
+              class="inlineInput first"
+              placeholder="Lille Bittie"
+              required=""
+              value="{{user.seller_id.store_id.name}}"
+            />
+          </div>
+
+          <div class="form-element">
+          <label for="store-descrption" class="input-label">وصف المتجر</label>
+          <textarea class="settings-input" name="description" placeholder="قرطاسية، أدوات مدرسية، فواصل كتب"
+          >{{user.seller_id.store_id.description}}</textarea>
+        </div>
+
+
+          <div class="form-element">
+            <label class="input-label">رابط المتجر </label>
+            <input
+              type="url"
+              class="settings-input"
+              name="link"
+              placeholder="https://www.instagram.com/lille.bitte.cr/"
+              required=""
+              value="{{user.seller_id.store_id.link}}"
+            />
+          </div>
+
+          <!-- <div class="form-element">
+            <label class="input-label">رقم التواصل </label>
+            <input
+              class="settings-input"
+              type="text"
+              name="phone_number"
+              placeholder="0557189956"
+              required=""
+            />
+          </div>           -->
+
+          <div class="form-element">
+            <label class="input-label">الموقع</label>
+
+            <select class="settings-input" name="city" id="locations-list">
+                {% for city in cities %}
+                  {% if not city.id == user.seller_id.store_id.city.id %}
+                    <option value="{{city.id}}">{{city.name_ar}}</option>
+                  {% else %}
+                    <option selected value="{{city.id}}">{{city.name_ar}}</option>
+                  {% endif %}
+                {% endfor %}
+              </select>
+          </div>
+          
+
+
+          <div class="form-element">
+            <label class="input-label"></label>
+            <button type="submit" class="settings-btn">حفظ</button>
+          </div>
+        </form>
+      </div>
+    </div>
+    {% endif %}
+    {% endif %}
     
-    <div class="settings-container wholesaler">
-        <div class="settings-form">
-          <form>
-            <h2 class="settings-title">معلومات تاجر الجملة</h2>
-  
-            <div class="form-element first-input">
-              <label class="input-label">الصورة</label>
-              <img
-                class="prof-img"
-                src="{% static 'assets/img/store.webp'%}"
-                />
-            </div>
-  
-            <div class="form-element">
-              <label class="input-label"></label>
-              <input
-                class="img-input"
-                type="file"
-                id="img"
-                name="img"
-                accept="image/*"
-              />
-            </div>
-  
-  
-            <div class="form-element">
-                <label class="input-label">الاسم التاجر أو المؤسسة</label>
-                <input
-                class="settings-input"
-                type="text"
-                name="wholesaler-name"
-                class="inlineInput first"
-                placeholder="اسم التاجر أو المؤسسة"
-                required=""
-              />
-            </div>
-
-            <div class="form-element">
-                <label for="store-descrption" class="input-label">وصف البضائع</label>
-                <textarea class="settings-input" name="store-descrption" placeholder="قرطاسية، أدوات مدرسية، فواصل كتب"
-                ></textarea>
+    {% if user.wholesaler_id %}
+      <div class="settings-container wholesaler">
+          <div class="settings-form">
+            <form action="{% url 'users:profile' %}" method="POST" enctype='multipart/form-data'>
+              <input type="hidden" name="type" value="update_wholesaler">
+              {%csrf_token%}              
+              <h2 class="settings-title">معلومات تاجر الجملة</h2>
+              <div class="form-element first-input">
+                <label class="input-label">الصورة</label>
+                {% if user.wholesaler_id.store_photo %}
+                <img class="prof-img" src="../../{{user.wholesaler_id.store_photo}}"/>
+                {% else %}
+                <img class="prof-img" src="{% static 'assets/img/store.webp'%}"/>
+                {% endif %}
               </div>
-  
-            <div class="form-element">
-              <label class="input-label">الموقع</label>
-
-              <select class="settings-input" name="locations-list" id="locations-list">
-              <option value="rigatoni">Rigatoni</option>
-              <option value="dave">Dave</option>
-              <option value="pumpernickel">Pumpernickel</option>         
-              <option value="reeses">Reeses</option>
-            </select>
-            </div>
-            <div class="form-element">
-                <label class="input-label">رقم الجوال </label>
+    
+              <div class="form-element">
+                <label class="input-label"></label>
                 <input
+                  class="img-input"
+                  type="file"
+                  id="img"
+                  name="store_photo"
+                  accept="image/*"
+                />
+              </div>
+    
+    
+              <div class="form-element">
+                  <label class="input-label">الاسم التاجر أو المؤسسة</label>
+                  <input
                   class="settings-input"
                   type="text"
-                  name="phone_number"
-                  placeholder="رقم الجوال"
+                  name="business_name"
+                  class="inlineInput first"
+                  placeholder="اسم التاجر أو المؤسسة"
                   required=""
+                  value="{{user.wholesaler_id.business_name}}"
                 />
               </div>
 
-  
-            <div class="form-element">
-              <label class="input-label"></label>
-              <button class="settings-btn">حفظ</button>
-            </div>
-          </form>
-        </div>
-      </div>
+              <div class="form-element">
+                  <label for="store-descrption" class="input-label">أنواع البضائع</label>
+                  <textarea class="settings-input" name="products_types" placeholder="قرطاسية، أدوات مدرسية، فواصل كتب"
+                  >{{user.wholesaler_id.products_types}}</textarea>
+                </div>
     
+              <div class="form-element">
+                  <label for="store-descrption" class="input-label">وصف المتجر</label>
+                  <textarea class="settings-input" name="description" placeholder="نبذة عن المتجر"
+                  >{{user.wholesaler_id.description}}</textarea>
+                </div>
+    
+              <div class="form-element">
+                <label class="input-label">الموقع</label>
+
+                <select class="settings-input" name="city" id="locations-list">
+                  {% for city in cities %}
+                    {% if not city.id == user.wholesaler_id.city.id %}
+                      <option value="{{city.id}}">{{city.name_ar}}</option>
+                    {% else %}
+                      <option selected value="{{city.id}}">{{city.name_ar}}</option>
+                    {% endif %}
+                  {% endfor %}
+                </select>
+              </div>
+
+              <!-- <div class="form-element">
+                  <label class="input-label">رقم الجوال </label>
+                  <input
+                    class="settings-input"
+                    type="text"
+                    name="phone_number"
+                    placeholder="رقم الجوال"
+                    required=""
+                  />
+                </div> -->
+
+    
+              <div class="form-element">
+                <label class="input-label"></label>
+                <button type="submit" class="settings-btn">حفظ</button>
+              </div>
+            </form>
+          </div>
+      </div>
+    {% endif %}
+    
+    {% if user.rep_id %}
     <div class="settings-container reps">
     <div class="settings-form">
-        <form>
+      <form action="{% url 'users:profile' %}" method="POST" enctype='multipart/form-data'>
+        <input type="hidden" name="type" value="update_rep">
+        {%csrf_token%}
         <h2 class="settings-title">معلومات المندوب</h2>
 
-
-        <div class="form-element">
-            <label class="input-label">الاسم الأول</label>
-            <input
-            class="settings-input"
-            type="text"
-            name="first_name"
-            class="inlineInput first"
-            placeholder="الاسم الأول"
-            required=""
-            />
+        <div class="form-element first-input">
+          <label class="input-label">الصورة</label>
+          {% if user.rep_id.photo %}
+          <img class="prof-img" src="../../{{user.rep_id.photo}}"/>
+          {% else %}
+          <img class="prof-img" src="{% static 'assets/img/default-profile-pic.jpg'%}"/>
+          {% endif %}
         </div>
 
         <div class="form-element">
-            <label class="input-label">اسم العائلة</label>
-            <input
-            class="settings-input"
-            type="text"
-            name="last_name"
-            class="inlineInput"
-            placeholder="اسم العائلة"
-            required=""
-            />
+          <label class="input-label"></label>
+          <input
+            class="img-input"
+            type="file"
+            id="photo"
+            name="photo"
+            accept="image/*"
+          />
         </div>
-
 
         <div class="form-element">
           <label class="input-label">الموقع</label>
 
-          <select class="settings-input" name="locations-list" id="locations-list">
-          <option value="rigatoni">Rigatoni</option>
-          <option value="dave">Dave</option>
-          <option value="pumpernickel">Pumpernickel</option>         
-          <option value="reeses">Reeses</option>
+          <select class="settings-input" name="city" id="locations-list">
+          {% for city in cities %}
+          {% if not city.id == user.rep_id.city.id %}
+            <option value="{{city.id}}">{{city.name_ar}}</option>
+          {% else %}
+            <option selected value="{{city.id}}">{{city.name_ar}}</option>
+          {% endif %}
+          {% endfor %}
         </select>
-        </div>
+          </div>
 
 
-
-        <div class="form-element">
+        <!-- <div class="form-element">
             <label class="input-label">رقم الجوال </label>
             <input
             class="settings-input"
@@ -215,80 +408,18 @@
             placeholder="رقم الجوال"
             required=""
             />
-        </div>
+        </div> -->
 
         <div class="form-element">
             <label class="input-label"></label>
-            <button class="settings-btn">حفظ</button>
+            <button type="submit" class="settings-btn">حفظ</button>
         </div>
         </form>
     </div>
     </div>
-
-    
-    <div class="settings-container user">
-    <div class="settings-form">
-        <form>
-        <h2 class="settings-title">معلومات المستخدم</h2>
-
-        <div class="form-element">
-            <label class="input-label">الاسم الأول</label>
-            <input
-            class="settings-input"
-            type="text"
-            name="first_name"
-            class="inlineInput first"
-            placeholder="الاسم الأول"
-            required=""
-            />
-        </div>
-
-        <div class="form-element">
-            <label class="input-label">اسم العائلة</label>
-            <input
-            class="settings-input"
-            type="text"
-            name="last_name"
-            class="inlineInput"
-            placeholder="اسم العائلة"
-            required=""
-            />
-        </div>
+    {% endif %}
 
 
-        <div class="form-element">
-            <label class="input-label">البريد الإلكتروني</label>
-            <input
-            class="settings-input"
-            class="email"
-            type="email"
-            name="email"
-            placeholder="البريد الإلكتروني"
-            required=""
-            />
-        </div>
-        <div class="form-element">
-            <label class="input-label">رقم الجوال </label>
-            <input
-            class="settings-input"
-            type="text"
-            name="phone_number"
-            placeholder="رقم الجوال"
-            required=""
-            />
-        </div>
-        <div class="form-element">
-            <label class="input-label"> كلمة السر</label>
-            <a class="change-pass-btn">تغيير</a>
-        </div>
-
-        <div class="form-element">
-            <label class="input-label"></label>
-            <button class="settings-btn">حفظ</button>
-        </div>
-        </form>
-    </div>
-    </div>
 
     <!-- ======= Testimonials Section ======= -->
     <section id="testimonials" class="testimonials mls">

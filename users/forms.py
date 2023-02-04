@@ -38,7 +38,7 @@ class create_wholesaler_form(forms.ModelForm):
 
     class Meta:
         model = wholesaler
-        fields = ('business_name', 'products_types', 'descriptoin', 'city','store_photo',)
+        fields = ('business_name', 'products_types', 'description', 'city','store_photo',)
         error_messages = {
             'business_name': {
                 'required': ("الرجاء ادخال اسم المؤسسة"),
