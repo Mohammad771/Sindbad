@@ -193,12 +193,28 @@ def profile(request):
 
     # rep updating code
         elif request.POST['type'] == "update_rep":
-            print("hello")
             form = create_rep_form(request.POST, request.FILES, instance=request.user.rep_id)
 
             if form.is_valid():
                 form.save()
                 context["msg"] = "تم تعديل معلومات المندوب بنجاح"
+            else:
+                errors_array = []
+                form_errors =  form.errors.get_json_data()
+                print(form_errors)
+                # print(form_errors['business_name'][0]['message'])
+                for key, errors in form_errors.items():
+                    for error in errors:
+                        errors_array.append(error['message'])
+
+                context['errors'] = errors_array
+    # user info update code
+        elif request.POST['type'] == "update_user":
+            form = update_user_form(request.POST, instance=request.user)
+
+            if form.is_valid():
+                form.save()
+                context["msg"] = "تم تعديل المعلومات الأساسية بنجاح"
             else:
                 errors_array = []
                 form_errors =  form.errors.get_json_data()

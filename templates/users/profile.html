@@ -21,7 +21,9 @@
     {% endif %}
     <div class="settings-container user">
       <div class="settings-form">
-          <form>
+        <form action="{% url 'users:profile' %}" method="POST">
+          <input type="hidden" name="type" value="update_user">
+          {%csrf_token%}          
           <h2 class="settings-title">المعلومات الأساسية</h2>
   
           <div class="form-element">
@@ -33,6 +35,7 @@
               class="inlineInput first"
               placeholder="الاسم الأول"
               required=""
+              value="{{user.first_name}}"
               />
           </div>
   
@@ -45,6 +48,7 @@
               class="inlineInput"
               placeholder="اسم العائلة"
               required=""
+              value="{{user.last_name}}"
               />
           </div>
   
@@ -58,6 +62,7 @@
               name="email"
               placeholder="البريد الإلكتروني"
               required=""
+              value="{{user.email}}"
               />
           </div>
           <div class="form-element">
@@ -68,11 +73,12 @@
               name="phone_number"
               placeholder="رقم الجوال"
               required=""
+              value="{{user.phone_number}}"
               />
           </div>
           <div class="form-element">
-              <label class="input-label"> كلمة السر</label>
-              <a class="change-pass-btn">تغيير</a>
+              <label class="input-label"> كلمة المرور</label>
+              <a class="change-pass-btn">تغيير كلمة المرور</a>
           </div>
   
           <div class="form-element">
