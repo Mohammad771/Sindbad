@@ -1430,11 +1430,11 @@ section {
   height: 12px;
   background-color: #fff;
   opacity: 1;
-  border: 1px solid #523e30;
+  border: 1px solid #e09730;
 }
 
 .testimonials .swiper-pagination .swiper-pagination-bullet-active {
-  background-color: #523e30;
+  background-color: #e09730;
 }
 
 .testimonials .swiper-slide {
