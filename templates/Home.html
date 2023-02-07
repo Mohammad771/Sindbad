@@ -1,99 +1,174 @@
-<!DOCTYPE html>
 {% extends 'main/baseView.html' %}
-
-{% block title %}
-    <title>الصفحة الرئيسية</title>
-{% endblock %}
-
 {% block content %}
 
-  <div class="container-sm">
-    <h1>موقع سندباد</h1>
-    
-      {% if user.is_authenticated %}
-      <h3>مرحباً! لقد تم تسجيل دخولك باسم {{user.first_name}}</h3>
-      <h3>انت مسجل كـ</h3>
-      <ul>
-        {% if user.seller_id %}
-        <li>تاجر</li> 
+<!DOCTYPE html>
+{% load static %}
+<html>
 
-        {% if user.seller_id.store_id %}
-        <li>ولديك متجر مسجل</li>
-        {% elif not user.seller_id.store_id %}
-        <li>لكن ليس لديك متجر مسجل</li>
-        {% endif %}
-        
-        {% endif %}
+<head>
+  <meta charset="utf-8">
+  <meta content="width=device-width, initial-scale=1.0" name="viewport">
 
-        {% if user.wholesaler_id %}
-        <li>تاجر جملة</li>
-        {% endif %}
+  <title>FlexStart Bootstrap Template - Index</title>
+  <meta content="" name="description">
 
-        {% if user.rep_id %}
-        <li>مندوب</li>
-        {% endif %}
-      </ul>
+  <meta content="" name="keywords">
+
+  <!-- Favicons -->
+  <link href="../static/assets/img/favicon.png" rel="icon">
+  <link href="../static/assets/img/apple-touch-icon.png" rel="apple-touch-icon">
+
+  <!-- Google Fonts -->
+  <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Nunito:300,300i,400,400i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i" rel="stylesheet">
+
+  <!-- Vendor CSS Files -->
+  <link href="../static/assets/vendor/aos/aos.css" rel="stylesheet">
+  <link href="../static/assets/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+  <link href="../static/assets/vendor/bootstrap-icons/bootstrap-icons.css" rel="stylesheet">
+  <link href="../static/assets/vendor/glightbox/css/glightbox.min.css" rel="stylesheet">
+  <link href="../static/assets/vendor/remixicon/remixicon.css" rel="stylesheet">
+  <link href="../static/assets/vendor/swiper/swiper-bundle.min.css" rel="stylesheet">
+
+  <!-- Template Main CSS File -->
+  <link href="../static/assets/css/style.css" rel="stylesheet">
+
+  <!-- =======================================================
+  * Template Name: FlexStart - v1.12.0
+  * Template URL: https://bootstrapmade.com/flexstart-bootstrap-startup-template/
+  * Author: BootstrapMade.com
+  * License: https://bootstrapmade.com/license/
+  ======================================================== -->
+</head>
+
+<body>
+
+  <!-- ======= Header ======= -->
+  <header style="display: none;" id="header" class="header fixed-top">
+    <div class="container-fluid container-xl d-flex align-items-center justify-content-between">
+
+      <nav id="navbar" class="navbar">
+        <i class="bi bi-list mobile-nav-toggle"></i>
+      </nav><!-- .navbar -->
+
+    </div>
+  </header><!-- End Header -->
+
+
+
+  <main id="main">
+    <div class="container-sm">
+      <h1>موقع سندباد</h1>
       
-      <h5><a href="{% url 'users:logout' %}">تسجيل الخروج</a></h5>
-      {% endif %}
-  </div>
-    <!-- ======= Recent Blog Posts Section ======= -->
-    <section id="recent-blog-posts" class="recent-blog-posts">
+        {% if user.is_authenticated %}
+        <h3>مرحباً! لقد تم تسجيل دخولك باسم {{user.first_name}}</h3>
+        <h3>انت مسجل كـ</h3>
+        <ul>
+          {% if user.seller_id %}
+          <li>تاجر</li> 
+  
+          {% if user.seller_id.store_id %}
+          <li>ولديك متجر مسجل</li>
+          {% elif not user.seller_id.store_id %}
+          <li>لكن ليس لديك متجر مسجل</li>
+          {% endif %}
+          
+          {% endif %}
+  
+          {% if user.wholesaler_id %}
+          <li>تاجر جملة</li>
+          {% endif %}
+  
+          {% if user.rep_id %}
+          <li>مندوب</li>
+          {% endif %}
+        </ul>
+        
+        <h5><a href="{% url 'users:logout' %}">تسجيل الخروج</a></h5>
+        {% endif %}
+    </div>
+
+
+    <!-- ======= Team Section ======= -->
+    <section id="team" class="team">
 
       <div class="container" data-aos="fade-up">
 
         <header class="section-header">
           <p>مساحة إعلانية</p>
+          <span class="line"></span>
         </header>
 
-        <div class="row">
+        <div class="row gy-4">
 
-          <div class="col-lg-4">
-            <div class="post-box">
-              <div class="post-img"><img src="static/assets/img/blog/clothes.webp" class="img-fluid" alt=""></div>
-              <div class="profile mt-auto">
-                <img src="static/assets/img/clothes-logo.jpg" class="testimonial-img" alt="">
+          <div class="col-lg-3 col-md-6 d-flex align-items-stretch" data-aos="fade-up" data-aos-delay="100">
+            <div class="member">
+              <div class="member-img">
+                <img src="../static/assets/img/cake.jpg" class="img-fluid" alt="">
+                <div class="social">
+                  <a href=""><i class="bi bi-heart-fill"></i></a>
+                  <span>44</span>
+                </div>
               </div>
-              <h3 class="post-title">H&M</h3>
-
-              <span class="post-date">ملابس نسائية، ملابس رجالية، ملابس للأطفال</span>
-              <div class="stars">
-                <i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i>
+              <div class="member-info">
+                <h4>متجر الإتحاد</h4>
+                <p>المتجر الرسمي لنادي الاتحاد ، يمكنك شراء المنتجات الرياضية الخاصة بالنادي ، تمتع بتجربة فريدة حيث نوفر خدمة الدفع الالكتروني و خدمة التوصيل السريع.
+                </p>
+                <a class="logIn scrollto" href="">زيارة المتجر</a>
               </div>
-              <a href="blog-single.html" class="readmore stretched-link mt-auto"><span>عرض المتجر</span><i class="bi bi-arrow-right"></i></a>
             </div>
           </div>
 
-          <div class="col-lg-4">
-            <div class="post-box">
-              <div class="post-img"><img src="static/assets/img/blog/perfume.jpg" class="img-fluid" alt=""></div>
-              
-              <div class="profile mt-auto">
-                <img src="static/assets/img/per-logo.webp" class="testimonial-img" alt="">
+          <div class="col-lg-3 col-md-6 d-flex align-items-stretch" data-aos="fade-up" data-aos-delay="200">
+            <div class="member">
+              <div class="member-img">
+                <img src="../static/assets/img/clothes.webp" class="img-fluid" alt="">
+                <div class="social">
+                  <a href=""><i class="bi bi-heart-fill"></i></a>
+                  <span>44</span>
+                </div>
               </div>
-              <h3 class="post-title">H&M</h3>
-
-              <span class="post-date">ملابس نسائية، ملابس رجالية، ملابس للأطفال</span>
-              <div class="stars">
-                <i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i>
+              <div class="member-info">
+                <h4>متجر الإتحاد</h4>
+                <p>المتجر الرسمي لنادي الاتحاد ، يمكنك شراء المنتجات الرياضية الخاصة بالنادي ، تمتع بتجربة فريدة حيث نوفر خدمة الدفع الالكتروني و خدمة التوصيل السريع.
+                </p>
+                <a class="logIn scrollto" href="">زيارة المتجر</a>
               </div>
-              <a href="blog-single.html" class="readmore stretched-link mt-auto"><span>عرض المتجر</span><i class="bi bi-arrow-right"></i></a>
             </div>
           </div>
 
-          <div class="col-lg-4">
-            <div class="post-box">
-              <div class="post-img"><img src="static/assets/img/blog/cake.jpg" class="img-fluid" alt=""></div>
-              <div class="profile mt-auto">
-                <img src="assets/img/cake-logo.webp" class="testimonial-img" alt="">
+          <div class="col-lg-3 col-md-6 d-flex align-items-stretch" data-aos="fade-up" data-aos-delay="300">
+            <div class="member">
+              <div class="member-img">
+                <img src="../static/assets/img/giza.png" class="img-fluid" alt="">
+                <div class="social">
+                  <a href=""><i class="bi bi-heart-fill"></i></a>
+                  <span>44</span>
+                </div>
               </div>
-              <h3 class="post-title">H&M</h3>
+              <div class="member-info">
+                <h4>متجر الإتحاد</h4>
+                <p>المتجر الرسمي لنادي الاتحاد ، يمكنك شراء المنتجات الرياضية الخاصة بالنادي ، تمتع بتجربة فريدة حيث نوفر خدمة الدفع الالكتروني و خدمة التوصيل السريع.
+                </p>
+                <a class="logIn scrollto" href="">زيارة المتجر</a>
+              </div>
+            </div>
+          </div>
 
-              <span class="post-date">ملابس نسائية، ملابس رجالية، ملابس للأطفال</span>
-              <div class="stars">
-                <i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i>
+          <div class="col-lg-3 col-md-6 d-flex align-items-stretch" data-aos="fade-up" data-aos-delay="400">
+            <div class="member">
+              <div class="member-img">
+                <img src="../static/assets/img/perfume.jpg" class="img-fluid" alt="">
+                <div class="social">
+                  <a href=""><i class="bi bi-heart-fill"></i></a>
+                  <span>44</span>
+                </div>
               </div>
-              <a href="blog-single.html" class="readmore stretched-link mt-auto"><span>عرض المتجر</span><i class="bi bi-arrow-right"></i></a>
+              <div class="member-info">
+                <h4>متجر الإتحاد</h4>
+                <p>المتجر الرسمي لنادي الاتحاد ، يمكنك شراء المنتجات الرياضية الخاصة بالنادي ، تمتع بتجربة فريدة حيث نوفر خدمة الدفع الالكتروني و خدمة التوصيل السريع.
+                </p>
+                <a class="logIn scrollto" href="">زيارة المتجر</a>
+              </div>
             </div>
           </div>
 
@@ -101,134 +176,136 @@
 
       </div>
 
-    </section><!-- End Recent Blog Posts Section -->
+    </section><!-- End Team Section -->
 
 
-            <!-- ======= Testimonials Section ======= -->
-            <section id="testimonials" class="testimonials mls">
+    <!-- ======= Testimonials Section ======= -->
+    <section id="testimonials" class="testimonials">
 
-              <div class="container" data-aos="fade-up">
-        
-                <header class="section-header">
-                  <p style="color: white;">المتاجر الأكثر إعجاباً</p>
-                </header>
-        
-                <div class="testimonials-slider swiper" data-aos="fade-up" data-aos-delay="200">
-                  <div class="swiper-wrapper">
-        
-                    <div class="swiper-slide">
-                      <div class="testimonial-item">
-                        <div class="stars">
-                          <i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i>
-                        </div>
+      <div class="container" data-aos="fade-up">
 
-                        <img src="static/assets/img/blog/clothes.webp" class="img-fluid most-liked-stores-pic" alt="">
+        <header class="section-header">
+          <p>المتاجر الأكثر إعجاباً</p>
+          <span class="line"></span>
 
-                        <div class="profile mt-auto">
-                          <img src="static/assets/img/clothes-logo.jpg" class="testimonial-img" alt="">
-                          <h3 class="post-title">H&M</h3>
-                          
-                          <span class="post-date">ملابس نسائية، ملابس رجالية، ملابس للأطفال</span>
-                          <br>
+        </header>
 
-                          <a href="blog-single.html" class="readmore stretched-link mt-auto"><span>عرض المتجر</span><i class="bi bi-arrow-right"></i></a>
+        <div class="testimonials-slider swiper" data-aos="fade-up" data-aos-delay="200">
+          <div class="swiper-wrapper">
 
-                        </div>
-                      </div>
-                    </div><!-- End testimonial item -->
-        
-                    <div class="swiper-slide">
-                      <div class="testimonial-item">
-                        <div class="stars">
-                          <i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i>
-                        </div>
-
-                        <img src="static/assets/img/blog/perfume.jpg" class="img-fluid most-liked-stores-pic" alt="">
-
-                        <div class="profile mt-auto">
-                          <img src="static/static/assets/img/per-logo.webp" class="testimonial-img" alt="">
-                          <h3 class="post-title">H&M</h3>
-                          
-                          <span class="post-date">ملابس نسائية، ملابس رجالية، ملابس للأطفال</span>
-                          <br>
-
-                          <a href="blog-single.html" class="readmore stretched-link mt-auto"><span>عرض المتجر</span><i class="bi bi-arrow-right"></i></a>
-
-                        </div>
-                      </div>
-                    </div><!-- End testimonial item -->
-        
-                    <div class="swiper-slide">
-                      <div class="testimonial-item">
-                        <div class="stars">
-                          <i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i>
-                        </div>
-
-                        <img src="static/assets/img/blog/cake.jpg" class="img-fluid most-liked-stores-pic" alt="">
-
-                        <div class="profile mt-auto">
-                          <img src="static/assets/img/cake-logo.webp" class="testimonial-img" alt="">
-                          <h3 class="post-title">H&M</h3>
-                          
-                          <span class="post-date">ملابس نسائية، ملابس رجالية، ملابس للأطفال</span>
-                          <br>
-
-                          <a href="blog-single.html" class="readmore stretched-link mt-auto"><span>عرض المتجر</span><i class="bi bi-arrow-right"></i></a>
-
-                        </div>
-                      </div>
-                    </div><!-- End testimonial item -->
-        
-                    <div class="swiper-slide">
-                      <div class="testimonial-item">
-                        <div class="stars">
-                          <i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i>
-                        </div>
-
-                        <img src="static/assets/img/blog/clothes.webp" class="img-fluid most-liked-stores-pic" alt="">
-
-                        <div class="profile mt-auto">
-                          <img src="static/assets/img/testimonials/testimonials-1.jpg" class="testimonial-img" alt="">
-                          <h3 class="post-title">H&M</h3>
-                          
-                          <span class="post-date">ملابس نسائية، ملابس رجالية، ملابس للأطفال</span>
-                          <br>
-
-                          <a href="blog-single.html" class="readmore stretched-link mt-auto"><span>عرض المتجر</span><i class="bi bi-arrow-right"></i></a>
-
-                        </div>
-                      </div>
-                    </div><!-- End testimonial item -->
-        
-                    <div class="swiper-slide">
-                      <div class="testimonial-item">
-                        <div class="stars">
-                          <i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i>
-                        </div>
-
-                        <img src="static/assets/img/blog/clothes.webp" class="img-fluid most-liked-stores-pic" alt="">
-
-                        <div class="profile mt-auto">
-                          <img src="assets/img/testimonials/testimonials-1.jpg" class="testimonial-img" alt="">
-                          <h3 class="post-title">H&M</h3>
-                          
-                          <span class="post-date">ملابس نسائية، ملابس رجالية، ملابس للأطفال</span>
-                          <br>
-
-                          <a href="blog-single.html" class="readmore stretched-link mt-auto"><span>عرض المتجر</span><i class="bi bi-arrow-right"></i></a>
-
-                        </div>
-                      </div>
-                    </div><!-- End testimonial item -->
-        
+            <div class="swiper-slide">
+              <div class="testimonial-item">
+                <div class="social">
+                  <a href=""><i class="bi bi-heart-fill"></i></a>
+                  <span>44</span>
                   </div>
-                  <div class="swiper-pagination"></div>
+                <img src="../static/assets/img/perfume.jpg" class="img-fluid most-liked-stores-pic" alt="">
+
+                <div class="profile mt-auto">
+                  <h3 class="post-title">H&M</h3>
+                  
+                  <span class="post-date">ملابس نسائية، ملابس رجالية، ملابس للأطفال</span>
+                  <br>
+
+                <div class="most-like-stores-btn">
+                <a class="logIn scrollto" href="">زيارة المتجر</a>
                 </div>
-        
+                </div>
               </div>
-        
-            </section><!-- End Testimonials Section -->
-  
+            </div><!-- End testimonial item -->
+
+            <div class="swiper-slide">
+              <div class="testimonial-item">
+                <div class="social">
+                  <a href=""><i class="bi bi-heart-fill"></i></a>
+                  <span>44</span>
+                </div>
+                <img src="../static/assets/img/giza.png" class="img-fluid most-liked-stores-pic" alt="">
+
+                <div class="profile mt-auto">
+                  <h3 class="post-title">H&M</h3>
+                  
+                  <span class="post-date">ملابس نسائية، ملابس رجالية، ملابس للأطفال</span>
+                  <br>
+
+                <div class="most-like-stores-btn">
+                <a class="logIn scrollto" href="">زيارة المتجر</a>
+                </div>
+                </div>
+              </div>
+            </div><!-- End testimonial item -->
+
+            <div class="swiper-slide">
+              <div class="testimonial-item">
+                <div class="social">
+                  <a href=""><i class="bi bi-heart-fill"></i></a>
+                  <span>44</span>
+                  </div>
+                <img src="../static/assets/img/gifts.webp" class="img-fluid most-liked-stores-pic" alt="">
+
+                <div class="profile mt-auto">
+                  <h3 class="post-title">H&M</h3>
+                  
+                  <span class="post-date">ملابس نسائية، ملابس رجالية، ملابس للأطفال</span>
+                  <br>
+
+                <div class="most-like-stores-btn">
+                <a class="logIn scrollto" href="">زيارة المتجر</a>
+                </div>
+                </div>
+              </div>
+            </div><!-- End testimonial item -->
+
+            <div class="swiper-slide">
+              <div class="testimonial-item">
+                <div class="social">
+                  <a href=""><i class="bi bi-heart-fill"></i></a>
+                  <span>44</span>
+                  </div>
+                <img src="../static/assets/img/clothes.webp" class="img-fluid most-liked-stores-pic" alt="">
+
+                <div class="profile mt-auto">
+                  <h3 class="post-title">H&M</h3>
+                  
+                  <span class="post-date">مالمتجر الرسمي لنادي الاتحاد ، يمكنك شراء المنتجات الرياضية الخاصة بالنادي ، تمتع بتجربة فريدة حيث نوفر خدمة الدفع الالكتروني و خدمة التوصيل السريع.
+
+                  </span>
+                  <br>
+
+                  <div class="most-like-stores-btn">
+                    <a class="logIn scrollto" href="">زيارة المتجر</a>
+                    </div>
+                </div>
+              </div>
+            </div><!-- End testimonial item -->
+
+            <div class="swiper-slide">
+              <div class="testimonial-item">
+                <div class="social">
+                  <a href=""><i class="bi bi-heart-fill"></i></a>
+                  <span>44</span>
+                  </div>
+                <img src="../static/assets/img/cake.jpg" class="img-fluid most-liked-stores-pic" alt="">
+
+                <div class="profile mt-auto">
+                  <h3 class="post-title">H&M</h3>
+                  
+                  <span class="post-date">ملابس نسائية، ملابس رجالية، ملابس للأطفال</span>
+                  <br>
+                </div>
+                <div class="most-like-stores-btn">
+                <a class="logIn scrollto" href="">زيارة المتجر</a>
+                </div>
+              </div>
+            </div><!-- End testimonial item -->
+
+          </div>
+          <div class="swiper-pagination"></div>
+        </div>
+
+      </div>
+
+    </section><!-- End Testimonials Section -->
 
     <!-- ======= Portfolio Section ======= -->
     <section id="portfolio" class="portfolio">
@@ -236,31 +313,40 @@
       <div class="container" data-aos="fade-up">
 
         <header class="section-header">
-          <p>تسوق حسب الأقسام</p>
+          <p>جميع المتاجر</p>
+          <span class="line"></span>
+
         </header>
 
         <div class="row" data-aos="fade-up" data-aos-delay="100">
           <div class="col-lg-12 d-flex justify-content-center">
             <ul id="portfolio-flters">
-              <li data-filter="*" class="filter-active">All</li>
-              <li data-filter=".filter-app">App</li>
-              <li data-filter=".filter-card">Card</li>
-              <li data-filter=".filter-web">Web</li>
+              <li data-filter="*" class="filter-active">جميع المتاجر</li>
+              <li data-filter=".filter-app">ملابس</li>
+              <li data-filter=".filter-card">عطور</li>
+              <li data-filter=".filter-web">حلويات</li>
+              <li id="myBtn">أخرى</li>
             </ul>
           </div>
         </div>
+
 
         <div class="row gy-4 portfolio-container" data-aos="fade-up" data-aos-delay="200">
 
           <div class="col-lg-4 col-md-6 portfolio-item filter-app">
             <div class="portfolio-wrap">
-              <img src="static/assets/img/portfolio/portfolio-1.jpg" class="img-fluid" alt="">
+              <div class="social">
+                <a href=""><i class="bi bi-heart-fill"></i></a>
+                <span>44</span>
+                </div>
+              <img src="../static/assets/img/portfolio/portfolio-1.jpg" class="img-fluid" alt="">
+
               <div class="portfolio-info">
-                <h4>App 1</h4>
-                <p>App</p>
+                <h4>متجر الإتحاد</h4>
+                <p>المتجر الرسمي لنادي الاتحاد ، يمكنك شراء المنتجات الرياضية الخاصة بالنادي ، تمتع بتجربة فريدة حيث نوفر خدمة الدفع الالكتروني و خدمة التوصيل السريع.</p>
                 <div class="portfolio-links">
-                  <a href="static/assets/img/portfolio/portfolio-1.jpg" data-gallery="portfolioGallery" class="portfokio-lightbox" title="App 1"><i class="bi bi-plus"></i></a>
-                  <a href="portfolio-details.html" title="More Details"><i class="bi bi-link"></i></a>
+                  <a class="logIn scrollto" href="">زيارة المتجر</a>
+
                 </div>
               </div>
             </div>
@@ -268,13 +354,17 @@
 
           <div class="col-lg-4 col-md-6 portfolio-item filter-web">
             <div class="portfolio-wrap">
-              <img src="static/assets/img/portfolio/portfolio-2.jpg" class="img-fluid" alt="">
+              <div class="social">
+                <a href=""><i class="bi bi-heart-fill"></i></a>
+                <span>44</span>
+                </div>
+              <img src="../static/assets/img/portfolio/portfolio-2.jpg" class="img-fluid" alt="">
               <div class="portfolio-info">
-                <h4>Web 3</h4>
-                <p>Web</p>
+                <h4>متجر الإتحاد</h4>
+                <p>المتجر الرسمي لنادي الاتحاد ، يمكنك شراء المنتجات الرياضية الخاصة بالنادي ، تمتع بتجربة فريدة حيث نوفر خدمة الدفع الالكتروني و خدمة التوصيل السريع.</p>
                 <div class="portfolio-links">
-                  <a href="static/assets/img/portfolio/portfolio-2.jpg" data-gallery="portfolioGallery" class="portfokio-lightbox" title="Web 3"><i class="bi bi-plus"></i></a>
-                  <a href="portfolio-details.html" title="More Details"><i class="bi bi-link"></i></a>
+                  <a class="logIn scrollto" href="">زيارة المتجر</a>
+
                 </div>
               </div>
             </div>
@@ -282,13 +372,17 @@
 
           <div class="col-lg-4 col-md-6 portfolio-item filter-app">
             <div class="portfolio-wrap">
-              <img src="static/assets/img/portfolio/portfolio-3.jpg" class="img-fluid" alt="">
+              <div class="social">
+                <a href=""><i class="bi bi-heart-fill"></i></a>
+                <span>44</span>
+                </div>
+              <img src="../static/assets/img/portfolio/portfolio-3.jpg" class="img-fluid" alt="">
               <div class="portfolio-info">
-                <h4>App 2</h4>
-                <p>App</p>
+                <h4>متجر الإتحاد</h4>
+                <p>المتجر الرسمي لنادي الاتحاد ، يمكنك شراء المنتجات الرياضية الخاصة بالنادي ، تمتع بتجربة فريدة حيث نوفر خدمة الدفع الالكتروني و خدمة التوصيل السريع.</p>
                 <div class="portfolio-links">
-                  <a href="static/assets/img/portfolio/portfolio-3.jpg" data-gallery="portfolioGallery" class="portfokio-lightbox" title="App 2"><i class="bi bi-plus"></i></a>
-                  <a href="portfolio-details.html" title="More Details"><i class="bi bi-link"></i></a>
+                  <a class="logIn scrollto" href="">زيارة المتجر</a>
+
                 </div>
               </div>
             </div>
@@ -296,13 +390,17 @@
 
           <div class="col-lg-4 col-md-6 portfolio-item filter-card">
             <div class="portfolio-wrap">
-              <img src="static/assets/img/portfolio/portfolio-4.jpg" class="img-fluid" alt="">
+              <div class="social">
+                <a href=""><i class="bi bi-heart-fill"></i></a>
+                <span>44</span>
+                </div>
+              <img src="../static/assets/img/portfolio/portfolio-4.jpg" class="img-fluid" alt="">
               <div class="portfolio-info">
-                <h4>Card 2</h4>
-                <p>Card</p>
+                <h4>متجر الإتحاد</h4>
+                <p>المتجر الرسمي لنادي الاتحاد ، يمكنك شراء المنتجات الرياضية الخاصة بالنادي ، تمتع بتجربة فريدة حيث نوفر خدمة الدفع الالكتروني و خدمة التوصيل السريع.</p>
                 <div class="portfolio-links">
-                  <a href="static/assets/img/portfolio/portfolio-4.jpg" data-gallery="portfolioGallery" class="portfokio-lightbox" title="Card 2"><i class="bi bi-plus"></i></a>
-                  <a href="portfolio-details.html" title="More Details"><i class="bi bi-link"></i></a>
+                  <a class="logIn scrollto" href="">زيارة المتجر</a>
+
                 </div>
               </div>
             </div>
@@ -310,13 +408,17 @@
 
           <div class="col-lg-4 col-md-6 portfolio-item filter-web">
             <div class="portfolio-wrap">
-              <img src="static/assets/img/portfolio/portfolio-5.jpg" class="img-fluid" alt="">
+              <div class="social">
+                <a href=""><i class="bi bi-heart-fill"></i></a>
+                <span>44</span>
+                </div>
+              <img src="../static/assets/img/portfolio/portfolio-5.jpg" class="img-fluid" alt="">
               <div class="portfolio-info">
-                <h4>Web 2</h4>
-                <p>Web</p>
+                <h4>متجر الإتحاد</h4>
+                <p>المتجر الرسمي لنادي الاتحاد ، يمكنك شراء المنتجات الرياضية الخاصة بالنادي ، تمتع بتجربة فريدة حيث نوفر خدمة الدفع الالكتروني و خدمة التوصيل السريع.</p>
                 <div class="portfolio-links">
-                  <a href="static/assets/img/portfolio/portfolio-5.jpg" data-gallery="portfolioGallery" class="portfokio-lightbox" title="Web 2"><i class="bi bi-plus"></i></a>
-                  <a href="portfolio-details.html" title="More Details"><i class="bi bi-link"></i></a>
+                  <a class="logIn scrollto" href="">زيارة المتجر</a>
+
                 </div>
               </div>
             </div>
@@ -324,13 +426,17 @@
 
           <div class="col-lg-4 col-md-6 portfolio-item filter-app">
             <div class="portfolio-wrap">
-              <img src="static/assets/img/portfolio/portfolio-6.jpg" class="img-fluid" alt="">
+              <div class="social">
+                <a href=""><i class="bi bi-heart-fill"></i></a>
+                <span>44</span>
+                </div>
+              <img src="../static/assets/img/portfolio/portfolio-6.jpg" class="img-fluid" alt="">
               <div class="portfolio-info">
-                <h4>App 3</h4>
-                <p>App</p>
+                <h4>متجر الإتحاد</h4>
+                <p>المتجر الرسمي لنادي الاتحاد ، يمكنك شراء المنتجات الرياضية الخاصة بالنادي ، تمتع بتجربة فريدة حيث نوفر خدمة الدفع الالكتروني و خدمة التوصيل السريع.</p>
                 <div class="portfolio-links">
-                  <a href="static/assets/img/portfolio/portfolio-6.jpg" data-gallery="portfolioGallery" class="portfokio-lightbox" title="App 3"><i class="bi bi-plus"></i></a>
-                  <a href="portfolio-details.html" title="More Details"><i class="bi bi-link"></i></a>
+                  <a class="logIn scrollto" href="">زيارة المتجر</a>
+
                 </div>
               </div>
             </div>
@@ -338,13 +444,17 @@
 
           <div class="col-lg-4 col-md-6 portfolio-item filter-card">
             <div class="portfolio-wrap">
-              <img src="static/assets/img/portfolio/portfolio-7.jpg" class="img-fluid" alt="">
+              <div class="social">
+                <a href=""><i class="bi bi-heart-fill"></i></a>
+                <span>44</span>
+                </div>
+              <img src="../static/assets/img/portfolio/portfolio-7.jpg" class="img-fluid" alt="">
               <div class="portfolio-info">
-                <h4>Card 1</h4>
-                <p>Card</p>
+                <h4>متجر الإتحاد</h4>
+                <p>المتجر الرسمي لنادي الاتحاد ، يمكنك شراء المنتجات الرياضية الخاصة بالنادي ، تمتع بتجربة فريدة حيث نوفر خدمة الدفع الالكتروني و خدمة التوصيل السريع.</p>
                 <div class="portfolio-links">
-                  <a href="static/assets/img/portfolio/portfolio-7.jpg" data-gallery="portfolioGallery" class="portfokio-lightbox" title="Card 1"><i class="bi bi-plus"></i></a>
-                  <a href="portfolio-details.html" title="More Details"><i class="bi bi-link"></i></a>
+                  <a class="logIn scrollto" href="">زيارة المتجر</a>
+
                 </div>
               </div>
             </div>
@@ -352,13 +462,17 @@
 
           <div class="col-lg-4 col-md-6 portfolio-item filter-card">
             <div class="portfolio-wrap">
-              <img src="static/assets/img/portfolio/portfolio-8.jpg" class="img-fluid" alt="">
+              <div class="social">
+                <a href=""><i class="bi bi-heart-fill"></i></a>
+                <span>44</span>
+                </div>
+              <img src="../static/assets/img/portfolio/portfolio-8.jpg" class="img-fluid" alt="">
               <div class="portfolio-info">
-                <h4>Card 3</h4>
-                <p>Card</p>
+                <h4>متجر الإتحاد</h4>
+                <p>المتجر الرسمي لنادي الاتحاد ، يمكنك شراء المنتجات الرياضية الخاصة بالنادي ، تمتع بتجربة فريدة حيث نوفر خدمة الدفع الالكتروني و خدمة التوصيل السريع.</p>
                 <div class="portfolio-links">
-                  <a href="static/assets/img/portfolio/portfolio-8.jpg" data-gallery="portfolioGallery" class="portfokio-lightbox" title="Card 3"><i class="bi bi-plus"></i></a>
-                  <a href="portfolio-details.html" title="More Details"><i class="bi bi-link"></i></a>
+                  <a class="logIn scrollto" href="">زيارة المتجر</a>
+
                 </div>
               </div>
             </div>
@@ -366,13 +480,17 @@
 
           <div class="col-lg-4 col-md-6 portfolio-item filter-web">
             <div class="portfolio-wrap">
-              <img src="static/assets/img/portfolio/portfolio-9.jpg" class="img-fluid" alt="">
+              <div class="social">
+                <a href=""><i class="bi bi-heart-fill"></i></a>
+                <span>44</span>
+                </div>
+              <img src="../static/assets/img/portfolio/portfolio-9.jpg" class="img-fluid" alt="">
               <div class="portfolio-info">
-                <h4>Web 3</h4>
-                <p>Web</p>
+                <h4>متجر الإتحاد</h4>
+                <p>المتجر الرسمي لنادي الاتحاد ، يمكنك شراء المنتجات الرياضية الخاصة بالنادي ، تمتع بتجربة فريدة حيث نوفر خدمة الدفع الالكتروني و خدمة التوصيل السريع.</p>
                 <div class="portfolio-links">
-                  <a href="static/assets/img/portfolio/portfolio-9.jpg" data-gallery="portfolioGallery" class="portfokio-lightbox" title="Web 3"><i class="bi bi-plus"></i></a>
-                  <a href="portfolio-details.html" title="More Details"><i class="bi bi-link"></i></a>
+                  <a class="logIn scrollto" href="">زيارة المتجر</a>
+
                 </div>
               </div>
             </div>
@@ -380,79 +498,96 @@
 
         </div>
 
+      </div>
+
+      <div id="myModal" class="modal">
+
+        <!-- Modal content -->
+        <div class="modal-content">
+          <span class="close">&times;</span>
+
+          <h2>ابحث حسب تصنيف المتجر</h2>
+          <ul id="portfolio-flters">
+            <li data-filter=".filter-app">ملابس</li>
+            <li data-filter=".filter-card">عطور</li>
+            <li data-filter=".filter-web">حلويات</li>
+            <li data-filter=".filter-app">ملابس</li>
+            <li data-filter=".filter-card">عطور</li>
+            <li data-filter=".filter-web">حلويات</li>
+            <li data-filter=".filter-app">ملابس</li>
+            <li data-filter=".filter-card">عطور</li>
+            <li data-filter=".filter-web">حلويات</li>
+            <li data-filter=".filter-app">ملابس</li>
+            <li data-filter=".filter-card">عطور</li>
+            <li data-filter=".filter-web">حلويات</li>
+            <li data-filter=".filter-app">ملابس</li>
+            <li data-filter=".filter-card">عطور</li>
+            <li data-filter=".filter-web">حلويات</li>
+            <li data-filter=".filter-app">ملابس</li>
+            <li data-filter=".filter-card">عطور</li>
+            <li data-filter=".filter-web">حلويات</li>
+          </ul>
+          <a class="logIn scrollto" href="">بحث</a>
+
+        </div>
+      
       </div>
 
     </section><!-- End Portfolio Section -->
 
-    
+
+
+
 
   </main><!-- End #main -->
 
   <!-- ======= Footer ======= -->
-  <!-- <footer id="footer" class="footer">
 
-    <div class="footer-top">
-      <div class="container">
-        <div class="row gy-4">
-          <div class="col-lg-5 col-md-12 footer-info">
-            <a href="index.html" class="logo d-flex align-items-center">
-              <img src="static/assets/img/logo.png" alt="">
-              <span>FlexStart</span>
-            </a>
-            <p>Cras fermentum odio eu feugiat lide par naso tierra. Justo eget nada terra videa magna derita valies darta donna mare fermentum iaculis eu non diam phasellus.</p>
-            <div class="social-links mt-3">
-              <a href="#" class="twitter"><i class="bi bi-twitter"></i></a>
-              <a href="#" class="facebook"><i class="bi bi-facebook"></i></a>
-              <a href="#" class="instagram"><i class="bi bi-instagram"></i></a>
-              <a href="#" class="linkedin"><i class="bi bi-linkedin"></i></a>
-            </div>
-          </div>
-
-          <div class="col-lg-2 col-6 footer-links">
-            <h4>Useful Links</h4>
-            <ul>
-              <li><i class="bi bi-chevron-right"></i> <a href="#">Home</a></li>
-              <li><i class="bi bi-chevron-right"></i> <a href="#">About us</a></li>
-              <li><i class="bi bi-chevron-right"></i> <a href="#">Services</a></li>
-              <li><i class="bi bi-chevron-right"></i> <a href="#">Terms of service</a></li>
-              <li><i class="bi bi-chevron-right"></i> <a href="#">Privacy policy</a></li>
-            </ul>
-          </div>
-
-          <div class="col-lg-2 col-6 footer-links">
-            <h4>Our Services</h4>
-            <ul>
-              <li><i class="bi bi-chevron-right"></i> <a href="#">Web Design</a></li>
-              <li><i class="bi bi-chevron-right"></i> <a href="#">Web Development</a></li>
-              <li><i class="bi bi-chevron-right"></i> <a href="#">Product Management</a></li>
-              <li><i class="bi bi-chevron-right"></i> <a href="#">Marketing</a></li>
-              <li><i class="bi bi-chevron-right"></i> <a href="#">Graphic Design</a></li>
-            </ul>
-          </div>
-
-          <div class="col-lg-3 col-md-12 footer-contact text-center text-md-start">
-            <h4>Contact Us</h4>
-            <p>
-              A108 Adam Street <br>
-              New York, NY 535022<br>
-              United States <br><br>
-              <strong>Phone:</strong> +1 5589 55488 55<br>
-              <strong>Email:</strong> info@example.com<br>
-            </p>
-
-          </div>
-
-        </div>
-      </div>
-    </div>
-
-    <div class="container">
-      <div class="copyright">
-        &copy; Copyright <strong><span>FlexStart</span></strong>. All Rights Reserved
-      </div>
-    </div>
-  </footer> -->
 
   <a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>
 
+  <!-- Vendor JS Files -->
+  <script src="../static/assets/vendor/purecounter/purecounter_vanilla.js"></script>
+  <script src="../static/assets/vendor/aos/aos.js"></script>
+  <script src="../static/assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+  <script src="../static/assets/vendor/glightbox/js/glightbox.min.js"></script>
+  <script src="../static/assets/vendor/isotope-layout/isotope.pkgd.min.js"></script>
+  <script src="../static/assets/vendor/swiper/swiper-bundle.min.js"></script>
+  <script src="../static/assets/vendor/php-email-form/validate.js"></script>
+
+  <!-- Template Main JS File -->
+  <script src="../static/assets/js/main.js"></script>
+
+</body>
+
+
+<script>
+  // Get the modal
+  var modal = document.getElementById("myModal");
+  
+  // Get the button that opens the modal
+  var btn = document.getElementById("myBtn");
+  
+  // Get the <span> element that closes the modal
+  var span = document.getElementsByClassName("close")[0];
+  
+  // When the user clicks the button, open the modal 
+  btn.onclick = function() {
+    modal.style.display = "block";
+  }
+  
+  // When the user clicks on <span> (x), close the modal
+  span.onclick = function() {
+    modal.style.display = "none";
+  }
+  
+  // When the user clicks anywhere outside of the modal, close it
+  window.onclick = function(event) {
+    if (event.target == modal) {
+      modal.style.display = "none";
+    }
+  }
+  </script>
+
+</html>
 {% endblock %}

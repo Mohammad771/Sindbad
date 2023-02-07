@@ -9,8 +9,8 @@ body{
 }
 .container {  
   display: grid; 
-  grid-template-columns: 1fr 1fr 0.7fr 1.3fr 1fr 1fr; 
-  grid-template-rows: 0.4fr 0.7fr 1fr 1fr 0.5fr 0.4fr; 
+  grid-template-columns: 1fr 1fr 0.7fr 1.3fr 1fr 1fr;
+  grid-template-rows: 0.4fr 0.4fr 1fr 0fr 0.5fr 0.4fr; 
   gap: 0px 0px; 
     grid-auto-flow: row;
     width: 100%;
@@ -80,17 +80,17 @@ box-shadow: 5px 5px 0px 0px 50px #000;
 
 input{
 	width: 90%;
-	height: 13%;
-	background: #c9c4be8a;
+  height: 18%;
+  background: #c9c4be8a;
   color: #000000;
-	justify-content: center;
-	display: flex;
-	margin: 3% auto;
-	padding: 10px;
-	border: none;
-	outline: none;
-	border-radius: 5px;
-}
+  justify-content: center;
+  display: flex;
+  margin: 4% auto;
+  padding: 10px;
+  border: none;
+  outline: none;
+  border-radius: 5px;}
+
 ::placeholder { 
   color: #a87027;
 }
@@ -150,6 +150,7 @@ button{
 	transition: .2s ease-in;
 	cursor: pointer;
   display: inline-block;
+  
 }
 
 .button{
@@ -167,12 +168,14 @@ button{
 	cursor: pointer;
   display: block;
   text-align: center;  
+  margin-top: 5%;
 }
 .sign:hover{
 	background: #b46e0c;
 }
 .sign{
 	background: #e09730;
+  margin-top: 5%;
 }
 button:hover,  .button:hover{
 	background: #523e30;
@@ -238,6 +241,13 @@ a:hover{
 .login input{
   height: 15%;
 }
+.login .button{
+  margin-top: 0;
+}
+.login .sign{
+  margin-top: 0;
+}
+
 
 .square { grid-area: 2 / 2 / 6 / 6;
 

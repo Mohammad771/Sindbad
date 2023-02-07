@@ -52,6 +52,8 @@
         <span></span>
       </a>
     </div>
+
+
     <div class="Header-links">
       <nav id="navbar" class="navbar">
         <ul>
@@ -59,8 +61,8 @@
           <li><a class="nav-link scrollto" href="#portfolio">تسوق حسب الأقسام </a></li>
 
           <li><a class="nav-link scrollto" href="#">من نحن</a></li>
-
         </ul>
+        </nav>
     </div>
     {% if not user.is_authenticated %}
     <div class="Header-buttons">
@@ -74,7 +76,6 @@
         <ul>
           <li class="dropdown">
             <i class="fa-solid fa-bars main-list"></i>
-            </i>
             <ul>
               <li><a class="main-links" href="{% url 'stores:home' %}">الصفحة الرئيسية</a></li>
               <li><a class="main-links" href="{% url 'users:rep' %}">التقديم كمندوب توصيل</a></li>
