@@ -52,8 +52,6 @@
         <span></span>
       </a>
     </div>
-
-
     <div class="Header-links">
       <nav id="navbar" class="navbar">
         <ul>
@@ -61,8 +59,8 @@
           <li><a class="nav-link scrollto" href="#portfolio">تسوق حسب الأقسام </a></li>
 
           <li><a class="nav-link scrollto" href="#">من نحن</a></li>
+
         </ul>
-        </nav>
     </div>
     {% if not user.is_authenticated %}
     <div class="Header-buttons">
@@ -72,10 +70,12 @@
     {% endif %}
 
     <div>
-      <nav id="navbar" class="navbar">
+      <nav id="navbar">
+      <!-- <nav id="navbar" class="navbar"> -->
         <ul>
           <li class="dropdown">
             <i class="fa-solid fa-bars main-list"></i>
+            </i>
             <ul>
               <li><a class="main-links" href="{% url 'stores:home' %}">الصفحة الرئيسية</a></li>
               <li><a class="main-links" href="{% url 'users:rep' %}">التقديم كمندوب توصيل</a></li>
@@ -116,7 +116,7 @@
 
 <!-- Template Main JS File -->
 <script src="../../static/assets/js/main.js"></script>
-<script src="https://kit.fontawesome.com/0e05f91eab.js" crossorigin="anonymous"></script>
+<script src="https://kit.fontawesome.com/0e 05f91eab.js" crossorigin="anonymous"></script>
 <script>
   if (window.history.replaceState ) {
     window.history.replaceState( null, null, window.location.href );
