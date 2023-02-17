@@ -36,13 +36,13 @@ class wholesaler(models.Model):
     business_name = models.CharField(max_length=100)
     products_types = models.TextField()
     description = models.TextField()
-    city = models.ForeignKey(city, on_delete=models.CASCADE, related_name="+")
+    city = models.ForeignKey(city, on_delete=models.PROTECT, related_name="+")
     store_photo = models.FileField(null = True, default=None, blank=True, upload_to='static/upload/wholesalers_stores_photos',
         validators=[FileExtensionValidator(allowed_extensions=['png','jpg',"jpeg"],message="يمكن رفع الصور فقط بالصيغات التالية: (jpg, png, jpeg)")])
 
 class rep(models.Model):
     id = models.AutoField(primary_key=True)
-    city = models.ForeignKey(city, on_delete=models.CASCADE, related_name="+")
+    city = models.ForeignKey(city, on_delete=models.PROTECT, related_name="+")
     photo = models.FileField(null = True, default=None, blank=True, upload_to='static/upload/reps_photos',
         validators=[FileExtensionValidator(allowed_extensions=['png','jpg',"jpeg"], message="يمكن رفع الصور فقط بالصيغات التالية: (jpg, png, jpeg)")])
 
@@ -61,9 +61,10 @@ class User(AbstractUser):
     deleted_at = models.DateTimeField(null = True, default=None, blank=True)
 
     is_admin = models.BooleanField("Admin", default=False)
-    seller_id = models.ForeignKey(seller, on_delete=models.CASCADE, related_name="+", null = True, default=None, blank=True)
-    wholesaler_id = models.ForeignKey(wholesaler, on_delete=models.CASCADE, related_name="+", null = True, default=None, blank=True)
-    rep_id = models.ForeignKey(rep, on_delete=models.CASCADE, related_name="+", null = True, default=None, blank=True)
+    seller_id = models.ForeignKey(seller, on_delete=models.SET_NULL, related_name="+", null = True, default=None, blank=True)
+    wholesaler_id = models.ForeignKey(wholesaler, on_delete=models.SET_NULL, related_name="+", null = True, default=None, blank=True)
+    rep_id = models.ForeignKey(rep, on_delete=models.SET_NULL, related_name="+", null = True, default=None, blank=True)
+    liked_stores = models.ManyToManyField(Store, blank=True, related_name="+")
     # is_customer = models.BooleanField("Customer", default=False) (All users are customers)
 
 

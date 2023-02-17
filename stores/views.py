@@ -1,13 +1,16 @@
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, HttpResponse
 from django.db import connection
 from users.models import city, region
 from .forms import *
+from .models import Store
 # Create your views here.
-
+# cursor = connection.cursor()
+# cursor.execute("")
 def home(request):
-    # cursor = connection.cursor()
-    # cursor.execute("")
-    return render(request,'Home.html')
+    context = {}
+    stores = Store.objects.all()
+    context['stores'] = stores
+    return render(request,'Home.html', context)
 
 def store(request):
     return render(request,'stores/store.html')
@@ -75,10 +78,32 @@ def update_store(incoming_reqest):
 
     return render(request,'users/profile.html')
 
-# def edit_store(request):
-#     return render(request,'main/about_us.html')
 
 def about_us(request):
     return render(request,'main/about_us.html')
+
+
+def like(request):
+
+    store_id = request.POST['store_id'] # get the id of the job title to be changed
+    selected_store = Store.objects.get(pk=store_id) # fetch the job title row that the user wants to change
+
+    if selected_store in request.user.liked_stores.all():
+        request.user.liked_stores.remove(selected_store)
+        request.user.save()
+
+        selected_store.likes = selected_store.likes - 1
+        selected_store.save() # saving the changes
+        html = "disliked"
+    
+    else:
+        selected_store.likes = selected_store.likes + 1
+        selected_store.save() # saving the changes
+
+        request.user.liked_stores.add(selected_store)
+        request.user.save()
+        html = "liked" # a variable that contains a success message to be sent as an http respone back to ajax function
+        
+    return HttpResponse(html) # returning "success" as an http response because an error is produced when noting is returned.
 
 

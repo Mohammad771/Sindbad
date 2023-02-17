@@ -1,4 +1,5 @@
 {% extends 'main/baseView.html' %}
+{% load print_categories %}
 {% block content %}
 
 <!DOCTYPE html>
@@ -41,6 +42,7 @@
 </head>
 
 <body>
+  {%csrf_token%}
 
   <!-- ======= Header ======= -->
   <header style="display: none;" id="header" class="header fixed-top">
@@ -101,12 +103,13 @@
 
         <div class="row gy-4">
 
+          
           <div class="col-lg-3 col-md-6 d-flex align-items-stretch" data-aos="fade-up" data-aos-delay="100">
             <div class="member">
               <div class="member-img">
                 <img src="../static/assets/img/cake.jpg" class="img-fluid" alt="">
                 <div class="social">
-                  <a href=""><i class="bi bi-heart-fill"></i></a>
+                  <a onclick="console.log('ssss')"><i class="bi bi-heart-fill"></i></a>
                   <span>44</span>
                 </div>
               </div>
@@ -193,113 +196,36 @@
 
         <div class="testimonials-slider swiper" data-aos="fade-up" data-aos-delay="200">
           <div class="swiper-wrapper">
-
+            {% for store in stores %}
             <div class="swiper-slide">
               <div class="testimonial-item">
                 <div class="social">
-                  <a href=""><i class="bi bi-heart-fill"></i></a>
-                  <span>44</span>
+                  {% if store in user.liked_stores.all %}
+                  <a onclick="like('{{store.id}}')"><i style="color: #ff0000;" class="heart_{{store.id}} bi bi-heart-fill"></i></a>
+                  {% else %}
+                  <a onclick="like('{{store.id}}')"><i class="heart_{{store.id}} bi bi-heart-fill"></i></a>
+                  {% endif %}
+                  <span id="likes_{{store.id}}" class="likes_{{store.id}}">{{store.likes}}</span>
                   </div>
                 <img src="../static/assets/img/perfume.jpg" class="img-fluid most-liked-stores-pic" alt="">
 
                 <div class="profile mt-auto">
-                  <h3 class="post-title">H&M</h3>
+                  <h3 class="post-title">{{store.name}}</h3>
                   
-                  <span class="post-date">ملابس نسائية، ملابس رجالية، ملابس للأطفال</span>
-                  <br>
-
-                <div class="most-like-stores-btn">
-                <a class="logIn scrollto" href="">زيارة المتجر</a>
-                </div>
-                </div>
-              </div>
-            </div><!-- End testimonial item -->
-
-            <div class="swiper-slide">
-              <div class="testimonial-item">
-                <div class="social">
-                  <a href=""><i class="bi bi-heart-fill"></i></a>
-                  <span>44</span>
-                </div>
-                <img src="../static/assets/img/giza.png" class="img-fluid most-liked-stores-pic" alt="">
-
-                <div class="profile mt-auto">
-                  <h3 class="post-title">H&M</h3>
-                  
-                  <span class="post-date">ملابس نسائية، ملابس رجالية، ملابس للأطفال</span>
-                  <br>
-
-                <div class="most-like-stores-btn">
-                <a class="logIn scrollto" href="">زيارة المتجر</a>
-                </div>
-                </div>
-              </div>
-            </div><!-- End testimonial item -->
-
-            <div class="swiper-slide">
-              <div class="testimonial-item">
-                <div class="social">
-                  <a href=""><i class="bi bi-heart-fill"></i></a>
-                  <span>44</span>
-                  </div>
-                <img src="../static/assets/img/gifts.webp" class="img-fluid most-liked-stores-pic" alt="">
-
-                <div class="profile mt-auto">
-                  <h3 class="post-title">H&M</h3>
-                  
-                  <span class="post-date">ملابس نسائية، ملابس رجالية، ملابس للأطفال</span>
-                  <br>
-
-                <div class="most-like-stores-btn">
-                <a class="logIn scrollto" href="">زيارة المتجر</a>
-                </div>
-                </div>
-              </div>
-            </div><!-- End testimonial item -->
-
-            <div class="swiper-slide">
-              <div class="testimonial-item">
-                <div class="social">
-                  <a href=""><i class="bi bi-heart-fill"></i></a>
-                  <span>44</span>
-                  </div>
-                <img src="../static/assets/img/clothes.webp" class="img-fluid most-liked-stores-pic" alt="">
-
-                <div class="profile mt-auto">
-                  <h3 class="post-title">H&M</h3>
-                  
-                  <span class="post-date">مالمتجر الرسمي لنادي الاتحاد ، يمكنك شراء المنتجات الرياضية الخاصة بالنادي ، تمتع بتجربة فريدة حيث نوفر خدمة الدفع الالكتروني و خدمة التوصيل السريع.
-
+                  <span class="post-date">
+                    {% print_categories store.categories.all %}
                   </span>
                   <br>
 
-                  <div class="most-like-stores-btn">
-                    <a class="logIn scrollto" href="">زيارة المتجر</a>
-                    </div>
-                </div>
-              </div>
-            </div><!-- End testimonial item -->
-
-            <div class="swiper-slide">
-              <div class="testimonial-item">
-                <div class="social">
-                  <a href=""><i class="bi bi-heart-fill"></i></a>
-                  <span>44</span>
-                  </div>
-                <img src="../static/assets/img/cake.jpg" class="img-fluid most-liked-stores-pic" alt="">
-
-                <div class="profile mt-auto">
-                  <h3 class="post-title">H&M</h3>
-                  
-                  <span class="post-date">ملابس نسائية، ملابس رجالية، ملابس للأطفال</span>
-                  <br>
-                </div>
                 <div class="most-like-stores-btn">
-                <a class="logIn scrollto" href="">زيارة المتجر</a>
+                <a class="logIn scrollto" target="_blank" href="{{store.link}}">زيارة المتجر</a>
+                </div>
                 </div>
               </div>
-            </div><!-- End testimonial item -->
+            </div>
+            {% endfor %}
 
+ 
           </div>
           <div class="swiper-pagination"></div>
         </div>
@@ -526,7 +452,7 @@
             <li data-filter=".filter-web">حلويات</li>
             <li data-filter=".filter-app">ملابس</li>
             <li data-filter=".filter-card">عطور</li>
-            <li data-filter=".filter-web">حلويات</li>
+            <li style="background-color: #d31e1e;" data-filter=".filter-web">حلويات</li>
           </ul>
           <a class="logIn scrollto" href="">بحث</a>
 
@@ -548,46 +474,77 @@
   <a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>
 
   <!-- Vendor JS Files -->
-  <script src="../static/assets/vendor/purecounter/purecounter_vanilla.js"></script>
+  <!-- <script src="../static/assets/vendor/purecounter/purecounter_vanilla.js"></script>
   <script src="../static/assets/vendor/aos/aos.js"></script>
   <script src="../static/assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
   <script src="../static/assets/vendor/glightbox/js/glightbox.min.js"></script>
   <script src="../static/assets/vendor/isotope-layout/isotope.pkgd.min.js"></script>
   <script src="../static/assets/vendor/swiper/swiper-bundle.min.js"></script>
-  <script src="../static/assets/vendor/php-email-form/validate.js"></script>
+  <script src="../static/assets/vendor/php-email-form/validate.js"></script> -->
 
-  <!-- Template Main JS File -->
   <script src="../static/assets/js/main.js"></script>
 
 </body>
 
 
 <script>
-  // Get the modal
-  var modal = document.getElementById("myModal");
-  
-  // Get the button that opens the modal
-  var btn = document.getElementById("myBtn");
-  
-  // Get the <span> element that closes the modal
-  var span = document.getElementsByClassName("close")[0];
-  
-  // When the user clicks the button, open the modal 
-  btn.onclick = function() {
-    modal.style.display = "block";
+
+function like(store_id)
+{
+    var url = 'like/';
+        $.ajax({
+            url: url,
+            type: 'POST',
+            data : jQuery.param({'store_id': store_id,
+              "csrfmiddlewaretoken": $('[name=csrfmiddlewaretoken]').val()}),
+            success : (data) => {
+              var likes_string = $("#likes_"+store_id).text();
+              var likes_int = parseInt(likes_string);
+
+              if (data == "liked"){
+                var new_likes = likes_int + 1;
+                $(".heart_"+store_id).css("color", "#ff0000")
+            }
+              else if (data == "disliked"){
+                var new_likes = likes_int - 1;
+                $(".heart_"+store_id).css("color", "#444444")
+            }
+
+            $(".likes_"+store_id).html(new_likes)
+
+            },
+            error : function(jqXHR, textStatus, errorThrown) {
+                alert('Error: '+jqXHR.status);
+            }
+        });
+    
   }
+
+  // // Get the modal
+  // var modal = document.getElementById("myModal");
   
-  // When the user clicks on <span> (x), close the modal
-  span.onclick = function() {
-    modal.style.display = "none";
-  }
+  // // Get the button that opens the modal
+  // var btn = document.getElementById("myBtn");
   
-  // When the user clicks anywhere outside of the modal, close it
-  window.onclick = function(event) {
-    if (event.target == modal) {
-      modal.style.display = "none";
-    }
-  }
+  // // Get the <span> element that closes the modal
+  // var span = document.getElementsByClassName("close")[0];
+  
+  // // When the user clicks the button, open the modal 
+  // btn.onclick = function() {
+  //   modal.style.display = "block";
+  // }
+  
+  // // When the user clicks on <span> (x), close the modal
+  // span.onclick = function() {
+  //   modal.style.display = "none";
+  // }
+  
+  // // When the user clicks anywhere outside of the modal, close it
+  // window.onclick = function(event) {
+  //   if (event.target == modal) {
+  //     modal.style.display = "none";
+  //   }
+  // }
   </script>
 
 </html>

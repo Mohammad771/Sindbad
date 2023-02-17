@@ -258,7 +258,7 @@ section {
 .navbar a i,
 .navbar a:focus i {
   font-size: 12px;
-  line-height: 0;
+  line-height: 10;
   margin-left: 5px;
 }
 
@@ -2755,7 +2755,7 @@ section {
   color: white !important;
   background-color:#e09730 ;
   }
-  * Import Google font - Poppins */
+  /* * Import Google font - Poppins */ 
   @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap');
   *{
     margin: 0;

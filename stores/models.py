@@ -13,6 +13,7 @@ class Store(models.Model):
         validators=[FileExtensionValidator(allowed_extensions=['png','jpg',"jpeg"],message="يمكن رفع الصور فقط بالصيغات التالية: (jpg, png, jpeg)")])
     city = models.ForeignKey('users.city', on_delete=models.CASCADE, related_name="+")
     categories = models.ManyToManyField('category', blank=True, related_name="+")
+    likes = models.IntegerField(default=0)
 
 
 class category(models.Model):
