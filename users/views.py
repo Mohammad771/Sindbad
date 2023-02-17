@@ -7,7 +7,7 @@ from django.http import HttpResponseRedirect, HttpResponse
 from django.contrib.auth.forms import PasswordResetForm
 from django.core.mail import send_mail
 from .models import allowed_seller_numbers, seller, city, wholesaler as wholesaler_model, rep as rep_model, User
-
+from stores.models import category
 
 # Create your views here.
 
@@ -156,7 +156,8 @@ def profile(request):
     context = {}
 
     # store creation code
-    if request.method == "POST": 
+    if request.method == "POST":
+        print(request.POST)
         if request.POST['type'] == "create_store":
             if request.user.seller_id.store_id == None: # checking if the user already has a store to prevent inconsistencies 
                 result = create_store(request)
@@ -228,6 +229,7 @@ def profile(request):
 
 
     context['cities'] = city.objects.all()
+    context['categories'] = category.objects.all()
     return render(request,'users/profile.html', context)
 
 

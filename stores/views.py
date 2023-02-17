@@ -2,7 +2,7 @@ from django.shortcuts import render, redirect, HttpResponse
 from django.db import connection
 from users.models import city, region
 from .forms import *
-from .models import Store
+from .models import Store, category as categories_model
 # Create your views here.
 # cursor = connection.cursor()
 # cursor.execute("")
@@ -16,12 +16,18 @@ def store(request):
     return render(request,'stores/store.html')
 
 def create_store(incoming_reqest):
-    context = {} 
+    context = {}
 
+    categories = incoming_reqest.POST.getlist("categories[]")
     form = store_creation_form(incoming_reqest.POST, incoming_reqest.FILES)
 
     if form.is_valid():
         new_store = form.save()
+
+        for category in categories:
+            new_store.categories.add(categories_model.objects.get(pk=category))
+        new_store.save()
+        
 
         try:
             seller_account = incoming_reqest.user.seller_id
@@ -55,10 +61,20 @@ def create_store(incoming_reqest):
 def update_store(incoming_reqest):
     context = {}
 
+    categories = incoming_reqest.POST.getlist("categories[]")
     form = store_creation_form(incoming_reqest.POST, incoming_reqest.FILES, instance=incoming_reqest.user.seller_id.store_id)
 
     if form.is_valid():
-        form.save()
+        updated_store = form.save()
+
+        for category in categories_model.objects.all():
+            if str(category.id) in categories:
+                updated_store.categories.add(category)
+            else:
+                updated_store.categories.remove(category)
+        updated_store.save()
+
+
         context["msg"] = "تم تعديل المتجر بنجاح"
         context["status"] = True
     else:

@@ -133,12 +133,6 @@
           ></textarea>
         </div>
 
-          <!-- <div class="form-element">
-          <label for="categories" class="input-label">أنواع السلع</label>
-            <input type="checkbox" name="categories">
-        </div> -->
-
-
           <div class="form-element">
             <label class="input-label">رابط المتجر </label>
             <input
@@ -160,19 +154,16 @@
               </select>
           </div>
 
-          <!-- <div class="form-element">
-            <label class="input-label">رقم التواصل </label>
-            <input
-              class="settings-input"
-              type="text"
-              name="phone_number"
-              placeholder="0557189956"
-              required=""
-            />
-          </div>           -->
+          <div class="form-element">
+            <label class="input-label">أقسام المتجر</label>
+            {% for category in categories %}
+            <label>
+              <span>{{category.name}}</span>
+              <input style="margin-left: 20px;" type="checkbox" name="categories[]" value="{{category.id}}">
+            </label>
+            {% endfor %}
+          </div>
           
-
-
           <div class="form-element">
             <label class="input-label"></label>
             <button type="submit" class="settings-btn">حفظ</button>
@@ -190,7 +181,7 @@
 
           <div class="form-element first-input">
             <label class="input-label">الصورة</label>
-            {% if user.seller_id %}
+            {% if user.seller_id.store_id.store_photo %}
             <img class="prof-img" src="../../{{user.seller_id.store_id.store_photo}}"/>
             {% else %}
             <img class="prof-img" src="{% static 'assets/img/store.webp'%}"/>
@@ -265,6 +256,20 @@
                   {% endif %}
                 {% endfor %}
               </select>
+          </div>
+
+          <div class="form-element">
+            <label class="input-label">أقسام المتجر</label>
+            {% for category in categories %}
+            <label>
+              <span>{{category.name}}</span>
+              {% if category in user.seller_id.store_id.categories.all %}
+              <input style="margin-left: 20px;" checked type="checkbox" name="categories[]" value="{{category.id}}">
+              {% else %}
+              <input style="margin-left: 20px;" type="checkbox" name="categories[]" value="{{category.id}}">
+              {% endif %}
+            </label>
+            {% endfor %}
           </div>
           
 
@@ -635,6 +640,53 @@
       </div>
     </section>
     <!-- End Testimonials Section -->
+            <!-- Modal content -->
+            <div id="myModal" class="modal">
+
+              <!-- Modal content -->
+              <div class="modal-content">
+                <span class="close">&times;</span>
+      
+                <h2>قم باختيار أقسام متجرك</h2>
+                <ul id="portfolio-flters">
+                  <li data-filter=".filter-app">ملابس</li>
+                  <li style="background-color: #d31e1e;" data-filter=".filter-web">حلويات</li>
+                </ul>
+      
+              </div>
+            
+            </div>
+      
   </body>
+  
 </html>
+
+<script>
+    
+  // Get the modal
+  var modal = document.getElementById("myModal");
+  
+  // Get the button that opens the modal
+  var btn = document.getElementById("myBtn");
+  
+  // Get the <span> element that closes the modal
+  var span = document.getElementsByClassName("close")[0];
+  
+  // When the user clicks the button, open the modal 
+  btn.onclick = function() {
+    modal.style.display = "block";
+  }
+  
+  // When the user clicks on <span> (x), close the modal
+  span.onclick = function() {
+    modal.style.display = "none";
+  }
+  
+  // When the user clicks anywhere outside of the modal, close it
+  window.onclick = function(event) {
+    if (event.target == modal) {
+      modal.style.display = "none";
+    }
+  }
+</script>
 {% endblock %}
