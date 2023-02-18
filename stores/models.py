@@ -15,6 +15,13 @@ class Store(models.Model):
     categories = models.ManyToManyField('category', blank=True, related_name="+")
     likes = models.IntegerField(default=0)
 
+    def clean(self):
+        link = self.link
+
+        if not link.startswith("https://www."):
+            raise ValidationError(
+                {'link': "يجب ان يكون الرابط بهذه الصيغة: https://www.example.com"})
+
 
 class category(models.Model):
     id = models.AutoField(primary_key=True)

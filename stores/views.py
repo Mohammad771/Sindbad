@@ -8,8 +8,20 @@ from .models import Store, category as categories_model
 # cursor.execute("")
 def home(request):
     context = {}
-    stores = Store.objects.all()
-    context['stores'] = stores
+    top_stores = Store.objects.order_by('-likes')[:6]
+    all_stores = Store.objects.all()
+
+    categories = categories_model.objects.all()
+    top_3_categories = []
+    top_3_categories.append(categories_model.objects.get(pk=1)) #الكترونيات
+    top_3_categories.append(categories_model.objects.get(pk=4)) #حلويات
+    top_3_categories.append(categories_model.objects.get(pk=6)) #ألبسة
+
+
+    context['top_stores'] = top_stores
+    context['all_stores'] = all_stores
+    context['top_3_categories'] = top_3_categories
+    context['categories'] = categories
     return render(request,'Home.html', context)
 
 def store(request):
