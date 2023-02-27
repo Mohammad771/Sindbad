@@ -3,9 +3,13 @@ from django.db import connection
 from users.models import city, region
 from .forms import *
 from .models import Store, category as categories_model
+# Db query execute:
 # Create your views here.
 # cursor = connection.cursor()
 # cursor.execute("")
+
+# How to develop ads
+
 def home(request):
     context = {}
     top_stores = Store.objects.order_by('-likes')[:6]
@@ -113,25 +117,30 @@ def about_us(request):
 
 def like(request):
 
-    store_id = request.POST['store_id'] # get the id of the job title to be changed
-    selected_store = Store.objects.get(pk=store_id) # fetch the job title row that the user wants to change
+    if request.user.is_authenticated:
+        store_id = request.POST['store_id'] # get the id of the job title to be changed
+        selected_store = Store.objects.get(pk=store_id) # fetch the job title row that the user wants to change
 
-    if selected_store in request.user.liked_stores.all():
-        request.user.liked_stores.remove(selected_store)
-        request.user.save()
+        if selected_store in request.user.liked_stores.all():
+            request.user.liked_stores.remove(selected_store)
+            request.user.save()
 
-        selected_store.likes = selected_store.likes - 1
-        selected_store.save() # saving the changes
-        html = "disliked"
-    
+            selected_store.likes = selected_store.likes - 1
+            selected_store.save() # saving the changes
+            html = "disliked"
+
+        else:
+            selected_store.likes = selected_store.likes + 1
+            selected_store.save() # saving the changes
+
+            request.user.liked_stores.add(selected_store)
+            request.user.save()
+            html = "liked" # a variable that contains a success message to be sent as an http respone back to ajax function
+            
+        return HttpResponse(html) # returning "success" as an http response because an error is produced when noting is returned.
+
     else:
-        selected_store.likes = selected_store.likes + 1
-        selected_store.save() # saving the changes
-
-        request.user.liked_stores.add(selected_store)
-        request.user.save()
-        html = "liked" # a variable that contains a success message to be sent as an http respone back to ajax function
-        
-    return HttpResponse(html) # returning "success" as an http response because an error is produced when noting is returned.
+        html = "not signed in" # a variable that contains a success message to be sent as an http respone back to ajax function
+        return HttpResponse(html) # returning "success" as an http response because an error is produced when noting is returned.
 
 

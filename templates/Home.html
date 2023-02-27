@@ -59,6 +59,7 @@
 
 
   <main id="main">
+    <!-- <button class="btn-outline-primary" onclick="testpopup()"> Test </button> -->
     <!-- <div class="container-sm">
       <h1>موقع سندباد</h1>
       
@@ -329,7 +330,7 @@
   <!-- ======= Footer ======= -->
 
 
-  <a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>
+  <a href="#" style="color: #38761d;" class="back-to-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>
 
   <!-- Vendor JS Files -->
   <!-- <script src="../static/assets/vendor/purecounter/purecounter_vanilla.js"></script>
@@ -341,7 +342,7 @@
   <script src="../static/assets/vendor/php-email-form/validate.js"></script> -->
 
   <script src="../static/assets/js/main.js"></script>
-
+<!-- <h3 style="color: #38761d;">تم الحفظ</h3> -->
 </body>
 
 
@@ -366,6 +367,18 @@ function like(store_id)
               else if (data == "disliked"){
                 var new_likes = likes_int - 1;
                 $(".heart_"+store_id).css("color", "#444444")
+            }
+              else {
+                Swal.fire({
+                  toast: true,
+                  position: 'top-end',
+                  icon: 'info',
+                  title: 'يجب عليك تسجيل الدخول اولاً',
+                  backdrop:'rgba(0,0,0,0)',
+                  timerProgressBar: true,
+                  showConfirmButton: false,
+                  timer: 2000
+                  })
             }
 
             $(".likes_"+store_id).html(new_likes)
@@ -403,6 +416,42 @@ function like(store_id)
       modal.style.display = "none";
     }
   }
+function testpopup(){
+
+  Swal.fire({
+  // color: '#444444',
+  background: '#daf9c4',
+  // target: 'div#soso',
+  // heightAuto:false,
+  iconColor: "#38761d",
+  toast: true,
+  width: 280,
+  position: 'top-end',
+  icon: 'success',
+  html:'<h3 style="color: #38761d; margin-top: 8px;">تم الحفظ</h3>',
+  // title: 'تم الحفظ',
+  backdrop:'rgba(0,0,0,0)',
+  timerProgressBar: true,
+  // text: 'الرجاء التحقق من اسم المستخدم وكلمة المرور',
+  showConfirmButton: false,
+  timer: 2000
+})
+
+}
+
+
+
+
+// window.addEventListener('load', (event) => {
+//     Swal.fire({
+//   icon: 'error',
+//   title: 'بيانات خاطئة!',
+//   text: 'الرجاء التحقق من اسم المستخدم وكلمة المرور',
+//   footer: '<a href="">كيف يمكنني اصلاح المشكلة؟</a>'
+// })
+// });
+  
+
   </script>
 
 </html>
