@@ -100,7 +100,9 @@
 
           <div class="form-element first-input">
             <label class="input-label">الصورة</label>
+            <div class="pic-frame ">
             <img class="prof-img" src="{% static 'assets/img/store.webp'%}"/>
+            </div>
           </div>
 
           <div class="form-element">
@@ -181,11 +183,14 @@
 
           <div class="form-element first-input">
             <label class="input-label">الصورة</label>
+            <div class="pic-frame ">
+
             {% if user.seller_id.store_id.store_photo %}
             <img class="prof-img" src="../../{{user.seller_id.store_id.store_photo}}"/>
             {% else %}
             <img class="prof-img" src="{% static 'assets/img/store.webp'%}"/>
             {% endif %}
+          </div>
           </div>
 
           <div class="form-element">
@@ -260,16 +265,32 @@
 
           <div class="form-element">
             <label class="input-label">أقسام المتجر</label>
-            {% for category in categories %}
-            <label>
-              <span>{{category.name}}</span>
-              {% if category in user.seller_id.store_id.categories.all %}
-              <input style="margin-left: 20px;" checked type="checkbox" name="categories[]" value="{{category.id}}">
-              {% else %}
-              <input style="margin-left: 20px;" type="checkbox" name="categories[]" value="{{category.id}}">
-              {% endif %}
-            </label>
-            {% endfor %}
+            <a id="myBtn" class="change-pass-btn">اختيار</a>
+                        <!-- Modal content -->
+                        <div id="myModal" class="modal">
+
+                          <!-- Modal content -->
+                          <div class="modal-content">
+                            <span class="close">&times;</span>
+                  
+                            <h2>قم باختيار أقسام متجرك</h2>
+            
+                            <div class="form-element grid-container">
+                              {% for category in categories %}
+                              <label  class="grid-item">
+                                <span>{{category.name}}</span>
+                                {% if category in user.seller_id.store_id.categories.all %}
+                                <input style="margin-left: 20px;" checked type="checkbox" name="categories[]" value="{{category.id}}">
+                                {% else %}
+                                <input style="margin-left: 20px;" type="checkbox" name="categories[]" value="{{category.id}}">
+                                {% endif %}
+                              </label>
+                              {% endfor %}
+                            </div>
+                  
+                          </div>
+                        
+                        </div>
           </div>
           
 
@@ -293,11 +314,14 @@
               <h2 class="settings-title">معلومات تاجر الجملة</h2>
               <div class="form-element first-input">
                 <label class="input-label">الصورة</label>
+                <div class="pic-frame ">
+
                 {% if user.wholesaler_id.store_photo %}
                 <img class="prof-img" src="../../{{user.wholesaler_id.store_photo}}"/>
                 {% else %}
                 <img class="prof-img" src="{% static 'assets/img/store.webp'%}"/>
                 {% endif %}
+                </div>
               </div>
     
               <div class="form-element">
@@ -382,11 +406,13 @@
 
         <div class="form-element first-input">
           <label class="input-label">الصورة</label>
+          <div class="pic-frame ">
           {% if user.rep_id.photo %}
           <img class="prof-img" src="../../{{user.rep_id.photo}}"/>
           {% else %}
           <img class="prof-img" src="{% static 'assets/img/default-profile-pic.jpg'%}"/>
           {% endif %}
+          </div>
         </div>
 
         <div class="form-element">
@@ -436,226 +462,65 @@
     {% endif %}
 
 
-
     <!-- ======= Testimonials Section ======= -->
-    <section id="testimonials" class="testimonials mls">
+    <section id="testimonials" class="testimonials">
+
       <div class="container" data-aos="fade-up">
+
         <header class="section-header">
-          <p style="color: white">المتاجر المفضلة</p>
+          <p>المتاجر المفضلة</p>
+          <span class="line"></span>
+
         </header>
 
-        <div
-          class="testimonials-slider swiper"
-          data-aos="fade-up"
-          data-aos-delay="200"
-        >
+        <div class="testimonials-slider swiper" data-aos="fade-up" data-aos-delay="200">
           <div class="swiper-wrapper">
+            {% for store in top_stores %}
             <div class="swiper-slide">
               <div class="testimonial-item">
-                <div class="stars">
-                  <i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i
-                  ><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i
-                  ><i class="bi bi-star-fill"></i>
+                <div class="social">
+                  {% if store in user.liked_stores.all %}
+                  <a onclick="like('{{store.id}}')"><i style="color: #ff0000;" class="heart_{{store.id}} bi bi-heart-fill"></i></a>
+                  {% else %}
+                  <a onclick="like('{{store.id}}')"><i class="heart_{{store.id}} bi bi-heart-fill"></i></a>
+                  {% endif %}
+                  <span id="likes_{{store.id}}" class="likes_{{store.id}}">{{store.likes}}</span>
                 </div>
-
-                <img
-                  src="static/assets/img/blog/clothes.webp"
-                  class="img-fluid most-liked-stores-pic"
-                  alt=""
-                />
-
+                  {% if store.store_photo %}
+                    <img src="../{{store.store_photo}}" class="img-fluid most-liked-stores-pic" alt="">
+                  {% else %}
+                    <!-- <img src="../static/assets/img/perfume.jpg" class="img-fluid most-liked-stores-pic" alt=""> -->
+                    <img src="static/assets/img/store.webp" class="img-fluid most-liked-stores-pic" alt="">
+                  {% endif %}
                 <div class="profile mt-auto">
-                  <img
-                    src="static/assets/img/clothes-logo.jpg"
-                    class="testimonial-img"
-                    alt=""
-                  />
-                  <h3 class="post-title">H&M</h3>
+                  <h3 class="post-title">{{store.name}}</h3>
+                  
+                  <span class="post-date">
+                    <!-- print_categories store.categories.all -->
+                  </span>
+                  <br>
 
-                  <span class="post-date"
-                    >ملابس نسائية، ملابس رجالية، ملابس للأطفال</span
-                  >
-                  <br />
-
-                  <a
-                    href="blog-single.html"
-                    class="readmore stretched-link mt-auto"
-                    ><span>عرض المتجر</span><i class="bi bi-arrow-right"></i
-                  ></a>
+                <div class="most-like-stores-btn">
+                <a class="logIn scrollto" target="_blank" href="{{store.link}}">زيارة المتجر</a>
+                </div>
                 </div>
               </div>
             </div>
-            <!-- End testimonial item -->
+            {% endfor %}
 
-            <div class="swiper-slide">
-              <div class="testimonial-item">
-                <div class="stars">
-                  <i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i
-                  ><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i
-                  ><i class="bi bi-star-fill"></i>
-                </div>
-
-                <img
-                  src="static/assets/img/blog/perfume.jpg"
-                  class="img-fluid most-liked-stores-pic"
-                  alt=""
-                />
-
-                <div class="profile mt-auto">
-                  <img
-                    src="static/static/assets/img/per-logo.webp"
-                    class="testimonial-img"
-                    alt=""
-                  />
-                  <h3 class="post-title">H&M</h3>
-
-                  <span class="post-date"
-                    >ملابس نسائية، ملابس رجالية، ملابس للأطفال</span
-                  >
-                  <br />
-
-                  <a
-                    href="blog-single.html"
-                    class="readmore stretched-link mt-auto"
-                    ><span>عرض المتجر</span><i class="bi bi-arrow-right"></i
-                  ></a>
-                </div>
-              </div>
-            </div>
-            <!-- End testimonial item -->
-
-            <div class="swiper-slide">
-              <div class="testimonial-item">
-                <div class="stars">
-                  <i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i
-                  ><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i
-                  ><i class="bi bi-star-fill"></i>
-                </div>
-
-                <img
-                  src="static/assets/img/blog/cake.jpg"
-                  class="img-fluid most-liked-stores-pic"
-                  alt=""
-                />
-
-                <div class="profile mt-auto">
-                  <img
-                    src="static/assets/img/cake-logo.webp"
-                    class="testimonial-img"
-                    alt=""
-                  />
-                  <h3 class="post-title">H&M</h3>
-
-                  <span class="post-date"
-                    >ملابس نسائية، ملابس رجالية، ملابس للأطفال</span
-                  >
-                  <br />
-
-                  <a
-                    href="blog-single.html"
-                    class="readmore stretched-link mt-auto"
-                    ><span>عرض المتجر</span><i class="bi bi-arrow-right"></i
-                  ></a>
-                </div>
-              </div>
-            </div>
-            <!-- End testimonial item -->
-
-            <div class="swiper-slide">
-              <div class="testimonial-item">
-                <div class="stars">
-                  <i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i
-                  ><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i
-                  ><i class="bi bi-star-fill"></i>
-                </div>
-
-                <img
-                  src="static/assets/img/blog/clothes.webp"
-                  class="img-fluid most-liked-stores-pic"
-                  alt=""
-                />
-
-                <div class="profile mt-auto">
-                  <img
-                    src="static/assets/img/testimonials/testimonials-1.jpg"
-                    class="testimonial-img"
-                    alt=""
-                  />
-                  <h3 class="post-title">H&M</h3>
-
-                  <span class="post-date"
-                    >ملابس نسائية، ملابس رجالية، ملابس للأطفال</span
-                  >
-                  <br />
-
-                  <a
-                    href="blog-single.html"
-                    class="readmore stretched-link mt-auto"
-                    ><span>عرض المتجر</span><i class="bi bi-arrow-right"></i
-                  ></a>
-                </div>
-              </div>
-            </div>
-            <!-- End testimonial item -->
-
-            <div class="swiper-slide">
-              <div class="testimonial-item">
-                <div class="stars">
-                  <i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i
-                  ><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i
-                  ><i class="bi bi-star-fill"></i>
-                </div>
-
-                <img
-                  src="static/assets/img/blog/clothes.webp"
-                  class="img-fluid most-liked-stores-pic"
-                  alt=""
-                />
-
-                <div class="profile mt-auto">
-                  <img
-                    src="assets/img/testimonials/testimonials-1.jpg"
-                    class="testimonial-img"
-                    alt=""
-                  />
-                  <h3 class="post-title">H&M</h3>
-
-                  <span class="post-date"
-                    >ملابس نسائية، ملابس رجالية، ملابس للأطفال</span
-                  >
-                  <br />
-
-                  <a
-                    href="blog-single.html"
-                    class="readmore stretched-link mt-auto"
-                    ><span>عرض المتجر</span><i class="bi bi-arrow-right"></i
-                  ></a>
-                </div>
-              </div>
-            </div>
-            <!-- End testimonial item -->
+ 
           </div>
           <div class="swiper-pagination"></div>
         </div>
-      </div>
-    </section>
-    <!-- End Testimonials Section -->
-            <!-- Modal content -->
-            <div id="myModal" class="modal">
 
-              <!-- Modal content -->
-              <div class="modal-content">
-                <span class="close">&times;</span>
-      
-                <h2>قم باختيار أقسام متجرك</h2>
-                <ul id="portfolio-flters">
-                  <li data-filter=".filter-app">ملابس</li>
-                  <li style="background-color: #d31e1e;" data-filter=".filter-web">حلويات</li>
-                </ul>
-      
-              </div>
-            
-            </div>
+      </div>
+
+    </section><!-- End Testimonials Section -->
+
+
+
+    
+
       
   </body>
   
@@ -688,5 +553,29 @@
       modal.style.display = "none";
     }
   }
+
+
+
+  const containers = document.querySelectorAll('.grid-item');
+
+containers.forEach(function(container) {
+  const checkbox = container.querySelector('input[type="checkbox"]');
+  const label = container.querySelector('label');
+  const key = 'checkbox-' + checkbox.value;
+  const checked = localStorage.getItem(key) === 'true';
+  if (checked) {
+    checkbox.checked = true;
+    container.classList.add('checked');
+  }
+  checkbox.addEventListener('change', function() {
+    if (this.checked) {
+      localStorage.setItem(key, 'true');
+      container.classList.add('checked');
+    } else {
+      localStorage.removeItem(key);
+      container.classList.remove('checked');
+    }
+  });
+});
 </script>
 {% endblock %}
