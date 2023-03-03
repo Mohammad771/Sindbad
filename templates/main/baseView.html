@@ -72,6 +72,7 @@
     <div>
       <!-- <nav id="navbar"> -->
       <nav id="navbar" class="navbar">
+        {% if user.is_authenticated %}
         <ul>
           <li class="dropdown">
             <i class="fa-solid fa-bars main-list"></i>
@@ -83,10 +84,12 @@
               <li><a class="main-links" href="{% url 'users:list_reps' %}">عرض المندوبين المتاحين</a></li>
               <li><a class="main-links" href="{% url 'users:list_wholesalers' %}">عرض تجار الجملة</a></li>
               <li><a class="main-links" href="{% url 'users:profile' %}">إعدادت الحساب</a></li>
+              
               <li><a class="main-links" href="{% url 'users:logout' %}">تسجيل الخروج</a></li>
             </ul>
           </li>
         </ul>
+        {% endif %}
       </nav>
     </div>
 
@@ -97,6 +100,10 @@
 </header><!-- End Header -->
 
 <body>
+  <!-- warning, error, success, info, and question -->
+  {% if msg %}
+    <p id="msg" style="display: none;">{{msg}}</p>
+  {% endif %}
   <br><br><br><br><br>
 
   {% block content %}
@@ -124,6 +131,26 @@
   if (window.history.replaceState ) {
     window.history.replaceState( null, null, window.location.href );
   }
+
+  window.addEventListener('load', (event) => {
+
+  if ($('#msg').length){
+    
+        Swal.fire({
+          toast: true,
+          position: 'top-end',
+          icon: '{{msg.type}}',
+          title: '{{msg.content}}',
+          backdrop:'rgba(0,0,0,0)',
+          timerProgressBar: true,
+          showConfirmButton: false,
+          timer: 2000
+          })
+    }
+
+});
   </script>
+
+
 
 </html>

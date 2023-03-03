@@ -3,6 +3,8 @@ from django.db import connection
 from users.models import city, region
 from .forms import *
 from .models import Store, category as categories_model
+from django.contrib.auth.decorators import login_required
+
 # Db query execute:
 # Create your views here.
 # cursor = connection.cursor()
@@ -31,6 +33,7 @@ def home(request):
 def store(request):
     return render(request,'stores/store.html')
 
+@login_required
 def create_store(incoming_reqest):
     context = {}
 
@@ -74,6 +77,7 @@ def create_store(incoming_reqest):
 
     return context
 
+@login_required
 def update_store(incoming_reqest):
     context = {}
 

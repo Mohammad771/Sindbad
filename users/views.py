@@ -8,8 +8,10 @@ from django.contrib.auth.forms import PasswordResetForm
 from django.core.mail import send_mail
 from .models import allowed_seller_numbers, seller, city, wholesaler as wholesaler_model, rep as rep_model, User
 from stores.models import category
+from django.contrib.auth.decorators import login_required
 
 # Create your views here.
+
 
 def register(request):
 
@@ -151,7 +153,7 @@ def logout(request):
 def admin(request):
     return render(request,'admin.html')
 
-
+@login_required
 def profile(request):
     context = {}
 
@@ -232,19 +234,21 @@ def profile(request):
     context['categories'] = category.objects.all()
     return render(request,'users/profile.html', context)
 
-
+@login_required
 def list_wholesalers(request):
     context = {}
 
     context["wholesaler_users"] = User.objects.filter(wholesaler_id__isnull=False)
     return render(request,'users/list_wholesalers.html', context)
 
+@login_required
 def list_reps(request):
     context = {}
 
     context["rep_users"] = User.objects.filter(rep_id__isnull=False)
     return render(request,'users/list_reps.html', context)
 
+@login_required
 def wholesaler(request):
     context = {} 
 
@@ -270,8 +274,11 @@ def wholesaler(request):
     return render(request,'users/wholesalers-form.html', context)
     
 
+@login_required
 def rep(request):
-    context = {} 
+    context = {}
+    msg = {}
+    context['msg'] = msg
 
     if request.method == "POST": 
         print(request.POST)
@@ -282,7 +289,10 @@ def rep(request):
             new_rep = form.save()
             request.user.rep_id = new_rep
             request.user.save()
-            context["msg"] = "تم انشاء حساب المندوب بنجاح"
+            msg['type'] = "success"
+            msg['content'] = "تم انشاء حساب المندوب بنجاح"
+            return render(request,'users/profile.html', context)
+
         else:
             errors_array = []
             form_errors =  form.errors.get_json_data()
@@ -292,6 +302,8 @@ def rep(request):
                     errors_array.append(error['message'])
 
             context['errors'] = errors_array
+            msg['type'] = "error"
+            msg['content'] = "الرجاء التأكد من صحة المعلومات المدخلة"
 
     context['cities'] = city.objects.all()
     return render(request,'users/reps-form.html', context)

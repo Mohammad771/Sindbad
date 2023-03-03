@@ -21,6 +21,9 @@ STATICFILES_DIRS = (
     os.path.join(BASE_DIR, 'static'),
 )
 
+LOGIN_REDIRECT_URL = '/users/login/'
+LOGIN_URL = '/users/login/'
+
 # STATIC_ROOT = os.path.join(os.path.abspath(
 #     os.path.join("C:\\Users\\mohmd\\OneDrive\\Desktop", 'sindbad', 'static')), '')
 

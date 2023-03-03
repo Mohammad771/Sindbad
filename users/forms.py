@@ -63,7 +63,7 @@ class create_wholesaler_form(forms.ModelForm):
             'products_types': {
                 'required': ("الرجاء ادخال انواع البضائع الخاصة بمؤسستك"),
             },
-            'descriptoin': {
+            'description': {
                 'required': ("الرجاء ادخال وصف لموسستك ومنتجاتك"),
             },
         #    'store_photo': {
