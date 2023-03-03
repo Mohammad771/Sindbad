@@ -31,7 +31,7 @@ def home(request):
     return render(request,'Home.html', context)
 
 def store(request):
-    return render(request,'stores/store.html')
+    return render(request,'stores/store-management.html')
 
 @login_required
 def create_store(incoming_reqest):

@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+{% extends 'main/baseView.html' %}
+{% load static %}
+<head>
+    {% block title %}
+        <title>تفعيل المتاجر</title>
+    {% endblock %}
+
+    {% block pageCSS %}
+    {% endblock %}
+
+    {% block content %}
+    
+</head>
+  <body>
+    <header class="section-header st-m">
+      <p>تفعيل المتاجر</p>
+      <span class="line"></span>
+    </header>
+
+    <div class="search-bar">
+      <input type="text" placeholder="بحث">
+      <button type="submit" class="search-button"><i class="fa fa-search"></i></button>
+    </div>
+    
+    
+    <div class="table">
+      <div class="row t-header">
+        <div class="cell">رقم الجوال</div>
+        <div class="cell">رابط المتجر</div>
+      </div>
+      <div class="row">
+        <div class="cell">(555) 123-4567</div>
+        <div class="cell">
+          <a class="logIn scrollto" href="">زيارة المتجر</a>
+        </div>      </div>
+      <div class="row">
+        <div class="cell">(555) 234-5678</div>
+        <div class="cell">
+          <span>المتجر  غير مفعل</span>
+        </div>
+      </div>
+      <div class="row">
+        <div class="cell">(555) 345-6789</div>
+        <div class="cell">
+          <a class="logIn scrollto" href="">زيارة المتجر</a>
+        </div>      </div>
+    </div>
+  </body>
+  </html>
+  {% endblock %}
