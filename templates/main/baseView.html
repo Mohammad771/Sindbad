@@ -87,7 +87,7 @@
               <li><a class="main-links" href="{% url 'users:list_reps' %}">عرض المندوبين المتاحين</a></li>
               <li><a class="main-links" href="{% url 'users:list_wholesalers' %}">عرض تجار الجملة</a></li>
               <li><a class="main-links" href="{% url 'users:profile' %}">إعدادت الحساب</a></li>
-              
+              <li><a class="main-links" href="{% url 'stores:store' %}">الأرقام المسموحة</a></li>
               <li><a class="main-links" href="{% url 'users:logout' %}">تسجيل الخروج</a></li>
             </ul>
           </li>
@@ -147,7 +147,11 @@
           backdrop:'rgba(0,0,0,0)',
           timerProgressBar: true,
           showConfirmButton: false,
-          timer: 2000
+          timer: 2500,
+          didOpen: (toast) => {
+            toast.addEventListener('mouseenter', Swal.stopTimer)
+            toast.addEventListener('mouseleave', Swal.resumeTimer)
+          }
           })
     }
 

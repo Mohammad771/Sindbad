@@ -24,16 +24,25 @@
                 <h2 class="settings-title">التقديم كمندوب</h2>
                 
                 {% if errors %}
-                {% for error in errors %}
-                {{error}}
-                {% endfor %}
+                <ul>
+                  {% for error in errors %}
+                  <li>
+                    <span>
+                      <i style="color: rgb(237, 87, 87);" class="fa-solid fa-angle-left"></i>
+                    </span>
+                    {{error}}
+                  </li>
+                  <br>
+                  {% endfor %}
+                </ul>
                 {% endif %}
 
                 <div class="form-element first-input">
                     <label class="input-label">الصورة الشخصية</label>
-                    <img class="prof-img" src="{% static 'assets/img/default-profile-pic.jpg'%}" />
-                  </div>
-          
+                    <img style="width: 100px; height: 100px; border: none;" class="prof-img" src="{% static 'assets/img/default-profile-pic.jpg'%}" />
+                     <!-- border: #999999 0.5px dashed -->
+                  </div> 
+         
                   <div class="form-element">
                     <label class="input-label"></label>
                     <input class="img-input" type="file" id="img" name="photo" accept="image/*" />

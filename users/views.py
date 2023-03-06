@@ -156,6 +156,8 @@ def admin(request):
 @login_required
 def profile(request):
     context = {}
+    msg = {}
+    context['msg'] = msg
 
     # store creation code
     if request.method == "POST":
@@ -164,17 +166,23 @@ def profile(request):
             if request.user.seller_id.store_id == None: # checking if the user already has a store to prevent inconsistencies 
                 result = create_store(request)
                 if result["status"] == True:
-                    context['msg'] = result["msg"]
+                    msg['type'] = "success"
+                    msg['content'] = "تم إنشاء متجرك بنجاح"
                 else:
-                    context['errors'] = result["errors"]
+                    msg['type'] = "error"
+                    msg['content'] = "الرجاء التأكد من صحة المعلومات المدخلة"
+                    context['create_store_errors'] = result["errors"]
 
     # store updating code
         elif request.POST['type'] == "update_store":
                 result = update_store(request)
                 if result["status"] == True:
-                    context['msg'] = result["msg"]
+                    msg['type'] = "success"
+                    msg['content'] = "تم تعديل متجرك بنجاح"
                 else:
-                    context['errors'] = result["errors"]
+                    msg['type'] = "error"
+                    msg['content'] = "الرجاء التأكد من صحة المعلومات المدخلة"
+                    context['update_store_errors'] = result["errors"]
 
     # wholsaler updating code
         elif request.POST['type'] == "update_wholesaler":
@@ -182,7 +190,8 @@ def profile(request):
 
             if form.is_valid():
                 form.save()
-                context["msg"] = "تم تعديل متجر الجملة بنجاح"
+                msg['type'] = "success"
+                msg['content'] = "تم تعديل متجر الجملة بنجاح"
             else:
                 errors_array = []
                 form_errors =  form.errors.get_json_data()
@@ -192,7 +201,9 @@ def profile(request):
                     for error in errors:
                         errors_array.append(error['message'])
 
-                context['errors'] = errors_array
+                context['update_wholesaler_errors'] = errors_array
+                msg['type'] = "error"
+                msg['content'] = "الرجاء التأكد من صحة المعلومات المدخلة"
 
     # rep updating code
         elif request.POST['type'] == "update_rep":
@@ -200,7 +211,8 @@ def profile(request):
 
             if form.is_valid():
                 form.save()
-                context["msg"] = "تم تعديل معلومات المندوب بنجاح"
+                msg['type'] = "success"
+                msg['content'] = "تم تعديل معلومات المندوب بنجاح"
             else:
                 errors_array = []
                 form_errors =  form.errors.get_json_data()
@@ -210,14 +222,17 @@ def profile(request):
                     for error in errors:
                         errors_array.append(error['message'])
 
-                context['errors'] = errors_array
-    # user info update code
+                context['update_rep_errors'] = errors_array
+                msg['type'] = "error"
+                msg['content'] = "الرجاء التأكد من صحة المعلومات المدخلة"
+
         elif request.POST['type'] == "update_user":
             form = update_user_form(request.POST, instance=request.user)
 
             if form.is_valid():
                 form.save()
-                context["msg"] = "تم تعديل المعلومات الأساسية بنجاح"
+                msg['type'] = "success"
+                msg['content'] = "تم تعديل المعلومات الأساسية بنجاح"
             else:
                 errors_array = []
                 form_errors =  form.errors.get_json_data()
@@ -227,8 +242,9 @@ def profile(request):
                     for error in errors:
                         errors_array.append(error['message'])
 
-                context['errors'] = errors_array
-
+                context['update_user_errors'] = errors_array
+                msg['type'] = "error"
+                msg['content'] = "الرجاء التأكد من صحة المعلومات المدخلة"
 
     context['cities'] = city.objects.all()
     context['categories'] = category.objects.all()
@@ -250,8 +266,10 @@ def list_reps(request):
 
 @login_required
 def wholesaler(request):
-    context = {} 
-
+    context = {}
+    msg = {}
+    context['msg'] = msg
+    
     if request.method == "POST": 
         form = create_wholesaler_form(request.POST, request.FILES)
 
@@ -259,7 +277,12 @@ def wholesaler(request):
             new_wholesaler = form.save()
             request.user.wholesaler_id = new_wholesaler
             request.user.save()
-            context["msg"] = "تم انشاء حساب تاجر الجملة بنجاح"
+            request.user.save()
+            msg['type'] = "success"
+            msg['content'] = "تم انشاء حساب تاجر الجملة بنجاح"
+
+            context['cities'] = city.objects.all()
+            return render(request,'users/profile.html', context)
         else:
             errors_array = []
             form_errors =  form.errors.get_json_data()
@@ -269,6 +292,8 @@ def wholesaler(request):
                     errors_array.append(error['message'])
 
             context['errors'] = errors_array
+            msg['type'] = "error"
+            msg['content'] = "الرجاء التأكد من صحة المعلومات المدخلة"
 
     context['cities'] = city.objects.all()
     return render(request,'users/wholesalers-form.html', context)
@@ -291,6 +316,8 @@ def rep(request):
             request.user.save()
             msg['type'] = "success"
             msg['content'] = "تم انشاء حساب المندوب بنجاح"
+
+            context['cities'] = city.objects.all()
             return render(request,'users/profile.html', context)
 
         else:

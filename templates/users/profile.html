@@ -14,17 +14,26 @@
     
 </head>
   <body>
-    {% if errors %}
-    {% for error in errors %}
-    {{error}}
-    {% endfor %}
-    {% endif %}
     <div class="settings-container user">
       <div class="settings-form">
         <form action="{% url 'users:profile' %}" method="POST">
           <input type="hidden" name="type" value="update_user">
           {%csrf_token%}          
           <h2 class="settings-title">المعلومات الأساسية</h2>
+
+          {% if update_user_errors %}
+          <ul>
+            {% for error in update_user_errors %}
+            <li>
+              <span>
+                <i style="color: rgb(237, 87, 87);" class="fa-solid fa-angle-left"></i>
+              </span>
+              {{error}}
+            </li>
+            <br>
+            {% endfor %}
+          </ul>
+          {% endif %}
   
           <div class="form-element">
               <label class="input-label">الاسم الأول</label>
@@ -34,7 +43,6 @@
               name="first_name"
               class="inlineInput first"
               placeholder="الاسم الأول"
-              required=""
               value="{{user.first_name}}"
               />
           </div>
@@ -47,7 +55,7 @@
               name="last_name"
               class="inlineInput"
               placeholder="اسم العائلة"
-              required=""
+              
               value="{{user.last_name}}"
               />
           </div>
@@ -61,7 +69,7 @@
               type="email"
               name="email"
               placeholder="البريد الإلكتروني"
-              required=""
+              
               value="{{user.email}}"
               />
           </div>
@@ -72,7 +80,7 @@
               type="text"
               name="phone_number"
               placeholder="رقم الجوال"
-              required=""
+              
               value="{{user.phone_number}}"
               />
           </div>
@@ -97,6 +105,20 @@
           <input type="hidden" name="type" value="create_store">
           {%csrf_token%}
           <h2 class="settings-title">قم بإضافة معلومات متجرك ليتم عرضه في الموقع</h2>
+
+          {% if create_store_errors %}
+          <ul>
+            {% for error in create_store_errors %}
+            <li>
+              <span>
+                <i style="color: rgb(237, 87, 87);" class="fa-solid fa-angle-left"></i>
+              </span>
+              {{error}}
+            </li>
+            <br>
+            {% endfor %}
+          </ul>
+          {% endif %}
 
           <div class="form-element first-input">
             <label class="input-label">الصورة</label>
@@ -125,7 +147,7 @@
               name="name"
               class="inlineInput first"
               placeholder="Lille Bittie"
-              required=""
+              
             />
           </div>
 
@@ -142,7 +164,7 @@
               class="settings-input"
               name="link"
               placeholder="https://www.instagram.com/lille.bitte.cr/"
-              required=""
+              
             />
           </div>
 
@@ -181,6 +203,20 @@
           <input type="hidden" name="type" value="update_store">
           <h2 class="settings-title">معلومات المتجر</h2>
 
+          {% if update_store_errors %}
+          <ul>
+            {% for error in update_store_errors %}
+            <li>
+              <span>
+                <i style="color: rgb(237, 87, 87);" class="fa-solid fa-angle-left"></i>
+              </span>
+              {{error}}
+            </li>
+            <br>
+            {% endfor %}
+          </ul>
+          {% endif %}
+
           <div class="form-element first-input">
             <label class="input-label">الصورة</label>
             <div class="pic-frame ">
@@ -214,7 +250,6 @@
               name="name"
               class="inlineInput first"
               placeholder="Lille Bittie"
-              required=""
               value="{{user.seller_id.store_id.name}}"
             />
           </div>
@@ -233,7 +268,7 @@
               class="settings-input"
               name="link"
               placeholder="https://www.instagram.com/lille.bitte.cr/"
-              required=""
+              
               value="{{user.seller_id.store_id.link}}"
             />
           </div>
@@ -245,7 +280,7 @@
               type="text"
               name="phone_number"
               placeholder="0557189956"
-              required=""
+              
             />
           </div>           -->
 
@@ -312,6 +347,21 @@
               <input type="hidden" name="type" value="update_wholesaler">
               {%csrf_token%}              
               <h2 class="settings-title">معلومات تاجر الجملة</h2>
+
+              {% if update_wholesaler_errors %}
+              <ul>
+                {% for error in update_wholesaler_errors %}
+                <li>
+                  <span>
+                    <i style="color: rgb(237, 87, 87);" class="fa-solid fa-angle-left"></i>
+                  </span>
+                  {{error}}
+                </li>
+                <br>
+                {% endfor %}
+              </ul>
+              {% endif %}
+
               <div class="form-element first-input">
                 <label class="input-label">الصورة</label>
                 <div class="pic-frame ">
@@ -344,7 +394,7 @@
                   name="business_name"
                   class="inlineInput first"
                   placeholder="اسم التاجر أو المؤسسة"
-                  required=""
+                  
                   value="{{user.wholesaler_id.business_name}}"
                 />
               </div>
@@ -382,7 +432,7 @@
                     type="text"
                     name="phone_number"
                     placeholder="رقم الجوال"
-                    required=""
+                    
                   />
                 </div> -->
 
@@ -403,6 +453,20 @@
         <input type="hidden" name="type" value="update_rep">
         {%csrf_token%}
         <h2 class="settings-title">معلومات المندوب</h2>
+
+        {% if update_rep_errors %}
+        <ul>
+          {% for error in update_rep_errors %}
+          <li>
+            <span>
+              <i style="color: rgb(237, 87, 87);" class="fa-solid fa-angle-left"></i>
+            </span>
+            {{error}}
+          </li>
+          <br>
+          {% endfor %}
+        </ul>
+        {% endif %}
 
         <div class="form-element first-input">
           <label class="input-label">الصورة</label>
@@ -448,7 +512,7 @@
             type="text"
             name="phone_number"
             placeholder="رقم الجوال"
-            required=""
+            
             />
         </div> -->
 

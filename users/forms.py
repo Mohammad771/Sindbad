@@ -27,6 +27,13 @@ class register_form(UserCreationForm):
         error_messages = {
             'email': {
                 'required': ("الرجاء ادخال البريد الالكتروني بشكل صحيح"),
+                'invalid': ("الرجاء ادخال البريد الالكتروني بشكل صحيح"),
+            },
+            'first_name': {
+                'required': ("الرجاء ادخال الاسم الأول بشكل صحيح"),
+            },
+            'last_name': {
+                'required': ("الرجاء ادخال الأسم الأخير بشكل صحيح"),
             },
             'phone_number': {
                 'required': ("الرجاء إدخال رقم الجوال بشكل صحيح، الصيغة الصحيحة: 0512345678"),
@@ -43,6 +50,13 @@ class update_user_form(forms.ModelForm):
         error_messages = {
             'email': {
                 'required': ("الرجاء ادخال البريد الالكتروني بشكل صحيح"),
+                'invalid': ("الرجاء ادخال البريد الالكتروني بشكل صحيح"),
+            },
+            'first_name': {
+                'required': ("الرجاء ادخال الاسم الأول بشكل صحيح"),
+            },
+            'last_name': {
+                'required': ("الرجاء ادخال الأسم الأخير بشكل صحيح"),
             },
             'phone_number': {
                 'required': ("الرجاء إدخال رقم الجوال بشكل صحيح، الصيغة الصحيحة: 0512345678"),
@@ -58,13 +72,13 @@ class create_wholesaler_form(forms.ModelForm):
         fields = ('business_name', 'products_types', 'description', 'city','store_photo',)
         error_messages = {
             'business_name': {
-                'required': ("الرجاء ادخال اسم المؤسسة"),
+                'required': ("الرجاء إدخال اسم المؤسسة"),
             },
             'products_types': {
-                'required': ("الرجاء ادخال انواع البضائع الخاصة بمؤسستك"),
+                'required': ("الرجاء إدخال انواع البضائع الخاصة بمؤسستك"),
             },
             'description': {
-                'required': ("الرجاء ادخال وصف لموسستك ومنتجاتك"),
+                'required': ("الرجاء إدخال وصف لمؤسستك ومنتجاتك"),
             },
         #    'store_photo': {
         #         'invalid_extension': ("يمكن رفع الصور فقط بالصيغات التالية: jpg, png"),

@@ -22,22 +22,30 @@
       <form action="{% url 'users:wholesaler' %}" method="POST" enctype='multipart/form-data'>
         {%csrf_token%}
         <h2 class="settings-title">التقديم كتاجر جملة</h2>
+        
+        {% if errors %}
+        <ul>
+          {% for error in errors %}
+          <li>
+            <span>
+              <i style="color: rgb(237, 87, 87);" class="fa-solid fa-angle-left"></i>
+            </span>
+            {{error}}
+          </li>
+          <br>
+          {% endfor %}
+        </ul>
+        {% endif %}
 
         <div class="form-element first-input">
           <label class="input-label">صورة المتجر</label>
-          <img class="prof-img" src="{% static 'assets/img/store.webp'%}" />
+          <img style="width: 100px; height: 100px; border: none;" class="prof-img" src="{% static 'assets/img/store.webp'%}" />
         </div>
 
         <div class="form-element">
           <label class="input-label"></label>
           <input class="img-input" type="file" id="img" name="store_photo" accept="image/*" />
         </div>
-
-        {% if errors %}
-        {% for error in errors %}
-        {{error}} <br>
-        {% endfor %}
-        {% endif %}
         <div class="form-element">
 
           <label class="input-label">اسم المؤسسة</label>
@@ -53,7 +61,7 @@
 
         <div class="form-element">
           <label for="store-descrption" class="input-label">الوصف</label>
-          <textarea class="settings-input" name="descriptoin"
+          <textarea class="settings-input" name="description"
             placeholder="متجر يقوم ببيع الادوات المكتبية بالجملة مقره في الرياض ويوفر توصيل مجاني لمناطق الملكة"></textarea>
         </div>
 
