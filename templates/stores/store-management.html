@@ -24,28 +24,47 @@
       <button type="submit" class="search-button"><i class="fa fa-search"></i></button>
     </div>
     
+    {% if errors %}
+    <ul>
+      {% for error in errors %}
+      <li>
+        <span>
+          <i style="color: rgb(237, 87, 87);" class="fa-solid fa-angle-left"></i>
+        </span>
+        {{error}}
+      </li>
+      <br>
+      {% endfor %}
+    </ul>
+    {% endif %}
+
+    <form action="#" method="post">
+      {% csrf_token %}
+      <div class="search-bar">
+        <input name="phone_number" type="text" placeholder="أضافة رقم">
+        <button type="submit" class="search-button"><i class="fas fa-plus"></i></button>
+      </div>
+    </form>
+
+    
     
     <div class="table">
       <div class="row t-header">
         <div class="cell">رقم الجوال</div>
         <div class="cell">رابط المتجر</div>
       </div>
+      {% for number in numbers %}
       <div class="row">
-        <div class="cell">(555) 123-4567</div>
+        <div class="cell">{{number.phone_number}}</div>
         <div class="cell">
-          <a class="logIn scrollto" href="">زيارة المتجر</a>
-        </div>      </div>
-      <div class="row">
-        <div class="cell">(555) 234-5678</div>
-        <div class="cell">
-          <span>المتجر  غير مفعل</span>
+          {% if number.is_available %}
+          <span style="color: red;">لم يتم استخدام الرقم</span>
+          {% else %}
+          <span style="color: green;">تم استخدام الرقم</span>
+          {% endif %}
         </div>
       </div>
-      <div class="row">
-        <div class="cell">(555) 345-6789</div>
-        <div class="cell">
-          <a class="logIn scrollto" href="">زيارة المتجر</a>
-        </div>      </div>
+      {% endfor %}
     </div>
   </body>
   </html>

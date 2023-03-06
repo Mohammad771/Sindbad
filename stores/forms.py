@@ -1,5 +1,5 @@
 from django import forms
-from .models import Store
+from .models import Store, allowed_seller_numbers
 
 class store_creation_form(forms.ModelForm):
 
@@ -15,5 +15,18 @@ class store_creation_form(forms.ModelForm):
             },
             'link': {
                 'required': ("الرجاء إدخال رابط المتجر"),
+            },
+        }
+
+class allowed_number_form(forms.ModelForm):
+
+    class Meta:
+        model = allowed_seller_numbers
+        fields = ('phone_number',)
+        error_messages = {
+            'phone_number': {
+                'required': ("الرجاء إدخال رقم الجوال بشكل صحيح، الصيغة الصحيحة: 0512345678"),
+                'invalid': ("الرجاء إدخال رقم الجوال بشكل صحيح، الصيغة الصحيحة: 0512345678"),
+                'max_length': ("يجب ان يحتوي رقم الجوال على 10 خانات فقط"),
             },
         }

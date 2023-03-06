@@ -90,13 +90,6 @@ class User(AbstractUser):
 
 
 
-class allowed_seller_numbers(models.Model):
-    id = models.AutoField(primary_key=True)
-    phone_number = models.CharField(max_length=10, blank=True)
-    is_available = models.BooleanField(default=True) # True if the number was already used to create a store
-    user_id = models.ForeignKey(User, on_delete=models.CASCADE, related_name="+", null = True, default=None, blank=True) # which user has claimed this seller number
-
-
 
 
 

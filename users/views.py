@@ -6,7 +6,8 @@ from django.contrib.auth.decorators import login_required
 from django.http import HttpResponseRedirect, HttpResponse
 from django.contrib.auth.forms import PasswordResetForm
 from django.core.mail import send_mail
-from .models import allowed_seller_numbers, seller, city, wholesaler as wholesaler_model, rep as rep_model, User
+from .models import seller, city, wholesaler as wholesaler_model, rep as rep_model, User
+from stores.models import allowed_seller_numbers
 from stores.models import category
 from django.contrib.auth.decorators import login_required
 

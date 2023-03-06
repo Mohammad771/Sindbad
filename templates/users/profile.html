@@ -180,12 +180,32 @@
 
           <div class="form-element">
             <label class="input-label">أقسام المتجر</label>
-            {% for category in categories %}
-            <label>
-              <span>{{category.name}}</span>
-              <input style="margin-left: 20px;" type="checkbox" name="categories[]" value="{{category.id}}">
-            </label>
-            {% endfor %}
+            <a id="myBtn" class="change-pass-btn">اختيار</a>
+                        <!-- Modal content -->
+                        <div id="myModal" class="modal">
+
+                          <!-- Modal content -->
+                          <div class="modal-content">
+                            <span class="close">&times;</span>
+                  
+                            <h2>قم باختيار أقسام متجرك</h2>
+            
+                            <div class="form-element grid-container">
+                              {% for category in categories %}
+                              <label  class="grid-item">
+                                <span>{{category.name}}</span>
+                                {% if category in user.seller_id.store_id.categories.all %}
+                                <input style="margin-left: 20px;" checked type="checkbox" name="categories[]" value="{{category.id}}">
+                                {% else %}
+                                <input style="margin-left: 20px;" type="checkbox" name="categories[]" value="{{category.id}}">
+                                {% endif %}
+                              </label>
+                              {% endfor %}
+                            </div>
+                  
+                          </div>
+                        
+                        </div>
           </div>
           
           <div class="form-element">
@@ -303,11 +323,9 @@
             <a id="myBtn" class="change-pass-btn">اختيار</a>
                         <!-- Modal content -->
                         <div id="myModal" class="modal">
-
                           <!-- Modal content -->
                           <div class="modal-content">
                             <span class="close">&times;</span>
-                  
                             <h2>قم باختيار أقسام متجرك</h2>
             
                             <div class="form-element grid-container">

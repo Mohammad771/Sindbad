@@ -2,7 +2,7 @@ from django.shortcuts import render, redirect, HttpResponse
 from django.db import connection
 from users.models import city, region
 from .forms import *
-from .models import Store, category as categories_model
+from .models import Store, category as categories_model, allowed_seller_numbers
 from django.contrib.auth.decorators import login_required
 
 # Db query execute:
@@ -30,8 +30,36 @@ def home(request):
     context['categories'] = categories
     return render(request,'Home.html', context)
 
-def store(request):
-    return render(request,'stores/store-management.html')
+def allowed_numbers(request):
+    context = {}
+    msg = {}
+    context['msg'] = msg
+
+    if request.method == "POST":
+
+        form = allowed_number_form(request.POST)
+
+        if form.is_valid():
+            form.save()
+            msg['type'] = "success"
+            msg['content'] = "تمت إضافة الرقم بنجاح"
+        else:
+            errors_array = []
+            form_errors =  form.errors.get_json_data()
+            print(form_errors)
+            # print(form_errors['business_name'][0]['message'])
+            for key, errors in form_errors.items():
+                for error in errors:
+                    errors_array.append(error['message'])
+
+            context['errors'] = errors_array
+            msg['type'] = "error"
+            msg['content'] = "الرجاء التأكد من صحة المعلومات المدخلة"
+
+
+    context['numbers'] = allowed_seller_numbers.objects.all()
+    return render(request,'stores/store-management.html', context)
+
 
 @login_required
 def create_store(incoming_reqest):
