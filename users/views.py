@@ -162,7 +162,6 @@ def profile(request):
 
     # store creation code
     if request.method == "POST":
-        print(request.POST)
         if request.POST['type'] == "create_store":
             if request.user.seller_id.store_id == None: # checking if the user already has a store to prevent inconsistencies 
                 result = create_store(request)

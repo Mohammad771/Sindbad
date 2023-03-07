@@ -324,18 +324,20 @@
                         <!-- Modal content -->
                         <div id="myModal" class="modal">
                           <!-- Modal content -->
-                          <div class="modal-content">
+                          <div id="category_label" class="modal-content">
                             <span class="close">&times;</span>
                             <h2>قم باختيار أقسام متجرك</h2>
             
                             <div class="form-element grid-container">
                               {% for category in categories %}
-                              <label  class="grid-item">
-                                <span>{{category.name}}</span>
                                 {% if category in user.seller_id.store_id.categories.all %}
-                                <input style="margin-left: 20px;" checked type="checkbox" name="categories[]" value="{{category.id}}">
+                                <label style="background-color: #e09730;" class="grid-item">
+                                  <span>{{category.name}}</span>
+                                <input class="category_input" style="margin-left: 20px;" checked type="checkbox" name="categories[]" value="{{category.id}}">
                                 {% else %}
-                                <input style="margin-left: 20px;" type="checkbox" name="categories[]" value="{{category.id}}">
+                                <label class="grid-item category_label">
+                                  <span>{{category.name}}</span>
+                                <input class="category_input" style="margin-left: 20px;" type="checkbox" name="categories[]" value="{{category.id}}">
                                 {% endif %}
                               </label>
                               {% endfor %}
@@ -609,6 +611,35 @@
 </html>
 
 <script>
+
+document.querySelectorAll('.category_input').forEach(item => {
+    item.addEventListener('click', event => {
+      if (event.target.checked){
+        event.target.parentElement.style.background = "#e09730"
+      }
+
+      else {
+        event.target.parentElement.style.background = "#eeeeee"
+      }
+      }
+    )
+})
+
+// if (event.target.classList.contains("category_label")){
+//         // console.log(event.target.parentElement)
+//         console.log("clicked label")
+
+//       }
+//       else if (event.target.parentElement.classList.contains("category_label")){
+//         // console.log(event.target.parentElement)
+//         console.log("clicked a child of label")
+//         }
+//         // console.log(event.srcElement);
+
+// const onClick = (event) => {
+//   console.log(event.srcElement);
+// }
+// window.addEventListener('click', onClick);
     
   // Get the modal
   var modal = document.getElementById("myModal");
@@ -637,27 +668,25 @@
   }
 
 
-
-  const containers = document.querySelectorAll('.grid-item');
-
-containers.forEach(function(container) {
-  const checkbox = container.querySelector('input[type="checkbox"]');
-  const label = container.querySelector('label');
-  const key = 'checkbox-' + checkbox.value;
-  const checked = localStorage.getItem(key) === 'true';
-  if (checked) {
-    checkbox.checked = true;
-    container.classList.add('checked');
-  }
-  checkbox.addEventListener('change', function() {
-    if (this.checked) {
-      localStorage.setItem(key, 'true');
-      container.classList.add('checked');
-    } else {
-      localStorage.removeItem(key);
-      container.classList.remove('checked');
-    }
-  });
-});
+// const containers = document.querySelectorAll('.grid-item');
+// containers.forEach(function(container) {
+//   const checkbox = container.querySelector('input[type="checkbox"]');
+//   const label = container.querySelector('label');
+//   const key = 'checkbox-' + checkbox.value;
+//   const checked = localStorage.getItem(key) === 'true';
+//   if (checked) {
+//     checkbox.checked = true;
+//     container.classList.add('checked');
+//   }
+//   checkbox.addEventListener('change', function() {
+//     if (this.checked) {
+//       localStorage.setItem(key, 'true');
+//       container.classList.add('checked');
+//     } else {
+//       localStorage.removeItem(key);
+//       container.classList.remove('checked');
+//     }
+//   });
+// });
 </script>
 {% endblock %}
