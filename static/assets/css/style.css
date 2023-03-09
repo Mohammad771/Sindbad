@@ -1690,9 +1690,9 @@ section {
 
 .most-liked-stores-pic{
   /* width: 315px; */
-  height: 315px;
+  height: auto;
   object-fit: cover;
-  object-position: 25% 25%;
+  /* object-position: 25% 25%; */
   
 }
 

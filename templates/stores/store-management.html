@@ -24,29 +24,15 @@
       <button type="submit" class="search-button"><i class="fa fa-search"></i></button>
     </div>
     
-    {% if errors %}
-    <ul>
-      {% for error in errors %}
-      <li>
-        <span>
-          <i style="color: rgb(237, 87, 87);" class="fa-solid fa-angle-left"></i>
-        </span>
-        {{error}}
-      </li>
-      <br>
-      {% endfor %}
-    </ul>
-    {% endif %}
-
-    <form action="#" method="post">
+    
+    <form action="" method="post">
       {% csrf_token %}
       <div class="search-bar">
         <input name="phone_number" type="text" placeholder="أضافة رقم">
         <button type="submit" class="search-button"><i class="fas fa-plus"></i></button>
       </div>
     </form>
-
-    
+        
     
     <div class="table">
       <div class="row t-header">
@@ -58,7 +44,7 @@
         <div class="cell">{{number.phone_number}}</div>
         <div class="cell">
           {% if number.is_available %}
-          <span style="color: red;">لم يتم استخدام الرقم</span>
+          <span>لم يتم استخدام الرقم</span>
           {% else %}
           <span style="color: green;">تم استخدام الرقم</span>
           {% endif %}

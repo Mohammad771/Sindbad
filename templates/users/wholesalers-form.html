@@ -49,20 +49,20 @@
         <div class="form-element">
 
           <label class="input-label">اسم المؤسسة</label>
-          <input class="settings-input" type="text" name="business_name" class="inlineInput first"
+          <input class="settings-input" type="text" name="business_name" class="inlineInput first" value="{{returned_data.business_name}}"
             placeholder="اسم التاجر أو المؤسسة" />
         </div>
 
         <div class="form-element">
           <label for="store-descrption" class="input-label">نوع البضائع</label>
-          <textarea class="settings-input" name="products_types"
-            placeholder="قرطاسية، أدوات مدرسية، فواصل كتب"></textarea>
+          <textarea class="settings-input" name="products_types" value=""
+            placeholder="قرطاسية، أدوات مدرسية، فواصل كتب">{{returned_data.products_types}}</textarea>
         </div>
 
         <div class="form-element">
           <label for="store-descrption" class="input-label">الوصف</label>
           <textarea class="settings-input" name="description"
-            placeholder="متجر يقوم ببيع الادوات المكتبية بالجملة مقره في الرياض ويوفر توصيل مجاني لمناطق الملكة"></textarea>
+            placeholder="متجر يقوم ببيع الادوات المكتبية بالجملة مقره في الرياض ويوفر توصيل مجاني لمناطق الملكة">{{returned_data.description}}</textarea>
         </div>
 
         <div class="form-element">
@@ -70,7 +70,11 @@
 
           <select class="settings-input" name="city" id="locations-list">
             {% for city in cities %}
-            <option value="{{city.id}}">{{city.name_ar}}</option>
+              {% if city.id == returned_data.city.id %}
+                <option selected value="{{city.id}}">{{city.name_ar}}</option>
+              {% else %}
+                <option value="{{city.id}}">{{city.name_ar}}</option>
+              {% endif %}
             {% endfor %}
           </select>
         </div>

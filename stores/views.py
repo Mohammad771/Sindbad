@@ -47,6 +47,7 @@ def allowed_numbers(request):
             errors_array = []
             form_errors =  form.errors.get_json_data()
             print(form_errors)
+            first_error_key = list(form_errors.keys())[0]
             # print(form_errors['business_name'][0]['message'])
             for key, errors in form_errors.items():
                 for error in errors:
@@ -54,7 +55,8 @@ def allowed_numbers(request):
 
             context['errors'] = errors_array
             msg['type'] = "error"
-            msg['content'] = "الرجاء التأكد من صحة المعلومات المدخلة"
+            msg['content'] = form_errors[first_error_key][0]['message']
+
 
 
     context['numbers'] = allowed_seller_numbers.objects.all()
@@ -102,7 +104,7 @@ def create_store(incoming_reqest):
                 errors_array.append(error['message'])
 
         context['errors'] = errors_array
-
+        context['returned_data'] = form.cleaned_data
     return context
 
 @login_required
@@ -136,6 +138,7 @@ def update_store(incoming_reqest):
                 errors_array.append(error['message'])
 
         context['errors'] = errors_array
+
 
     return context
 

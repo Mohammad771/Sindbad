@@ -172,6 +172,7 @@ def profile(request):
                     msg['type'] = "error"
                     msg['content'] = "الرجاء التأكد من صحة المعلومات المدخلة"
                     context['create_store_errors'] = result["errors"]
+                    context['returned_data'] = result["returned_data"]
 
     # store updating code
         elif request.POST['type'] == "update_store":
@@ -183,6 +184,7 @@ def profile(request):
                     msg['type'] = "error"
                     msg['content'] = "الرجاء التأكد من صحة المعلومات المدخلة"
                     context['update_store_errors'] = result["errors"]
+                    context['returned_data'] = result["returned_data"]
 
     # wholsaler updating code
         elif request.POST['type'] == "update_wholesaler":
@@ -201,9 +203,11 @@ def profile(request):
                     for error in errors:
                         errors_array.append(error['message'])
 
-                context['update_wholesaler_errors'] = errors_array
+                
                 msg['type'] = "error"
                 msg['content'] = "الرجاء التأكد من صحة المعلومات المدخلة"
+                context['update_wholesaler_errors'] = errors_array
+                context['returned_data'] = result["returned_data"]
 
     # rep updating code
         elif request.POST['type'] == "update_rep":
@@ -277,7 +281,6 @@ def wholesaler(request):
             new_wholesaler = form.save()
             request.user.wholesaler_id = new_wholesaler
             request.user.save()
-            request.user.save()
             msg['type'] = "success"
             msg['content'] = "تم انشاء حساب تاجر الجملة بنجاح"
 
@@ -292,6 +295,7 @@ def wholesaler(request):
                     errors_array.append(error['message'])
 
             context['errors'] = errors_array
+            context['returned_data'] = form.cleaned_data
             msg['type'] = "error"
             msg['content'] = "الرجاء التأكد من صحة المعلومات المدخلة"
 

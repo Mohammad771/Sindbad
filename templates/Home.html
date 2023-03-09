@@ -209,10 +209,10 @@
                   <span id="likes_{{store.id}}" class="likes_{{store.id}}">{{store.likes}}</span>
                 </div>
                   {% if store.store_photo %}
-                    <img src="../{{store.store_photo}}" class="img-fluid most-liked-stores-pic" alt="">
+                    <img style="max-height: 220px;" src="../{{store.store_photo}}" class="img-fluid most-liked-stores-pic" alt="">
                   {% else %}
                     <!-- <img src="../static/assets/img/perfume.jpg" class="img-fluid most-liked-stores-pic" alt=""> -->
-                    <img src="static/assets/img/store.webp" class="img-fluid most-liked-stores-pic" alt="">
+                    <img style="max-height: 220px;" src="static/assets/img/store.webp" class="img-fluid most-liked-stores-pic" alt="">
                   {% endif %}
                 <div class="profile mt-auto">
                   <h3 class="post-title">{{store.name}}</h3>
@@ -290,7 +290,6 @@
                 <p>{{store.description}}</p>
                 <div class="portfolio-links">
                   <a class="logIn scrollto" href="">زيارة المتجر</a>
-
                 </div>
               </div>
             </div>

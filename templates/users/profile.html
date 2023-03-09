@@ -147,6 +147,7 @@
               name="name"
               class="inlineInput first"
               placeholder="Lille Bittie"
+              value="{{returned_data.name}}"
               
             />
           </div>
@@ -154,7 +155,7 @@
           <div class="form-element">
           <label for="store-descrption" class="input-label">وصف المتجر</label>
           <textarea class="settings-input" name="description" placeholder="متجر يهتم ببيع كل ما هو جديد في التقنية"
-          ></textarea>
+          >{{returned_data.description}}</textarea>
         </div>
 
           <div class="form-element">
@@ -164,7 +165,7 @@
               class="settings-input"
               name="link"
               placeholder="https://www.instagram.com/lille.bitte.cr/"
-              
+              value="{{returned_data.link}}"
             />
           </div>
 
@@ -173,7 +174,11 @@
 
             <select class="settings-input" name="city" id="locations-list">
                 {% for city in cities %}
-                <option value="{{city.id}}">{{city.name_ar}}</option>
+                  {% if city.id == returned_data.city.id %}
+                    <option selected value="{{city.id}}">{{city.name_ar}}</option>
+                  {% else %}
+                    <option value="{{city.id}}">{{city.name_ar}}</option>
+                  {% endif %}
                 {% endfor %}
               </select>
           </div>
