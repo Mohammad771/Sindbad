@@ -16,22 +16,22 @@
   <meta content="" name="keywords">
 
   <!-- Favicons -->
-  <link href="../static/assets/img/favicon.png" rel="icon">
-  <link href="../static/assets/img/apple-touch-icon.png" rel="apple-touch-icon">
+  <link href="{% static 'assets/img/favicon.png'%}" rel="icon">
+  <link href="{% static 'assets/img/apple-touch-icon.png'%}" rel="apple-touch-icon">
 
   <!-- Google Fonts -->
   <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Nunito:300,300i,400,400i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i" rel="stylesheet">
 
   <!-- Vendor CSS Files -->
-  <link href="../static/assets/vendor/aos/aos.css" rel="stylesheet">
-  <link href="../static/assets/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
-  <link href="../static/assets/vendor/bootstrap-icons/bootstrap-icons.css" rel="stylesheet">
-  <link href="../static/assets/vendor/glightbox/css/glightbox.min.css" rel="stylesheet">
-  <link href="../static/assets/vendor/remixicon/remixicon.css" rel="stylesheet">
-  <link href="../static/assets/vendor/swiper/swiper-bundle.min.css" rel="stylesheet">
+  <!-- <link href="{% static 'assets/vendor/aos/aos.css'%}" rel="stylesheet">
+  <link href="{% static 'assets/vendor/bootstrap/css/bootstrap.min.css'%}" rel="stylesheet">
+  <link href="{% static 'assets/vendor/bootstrap-icons/bootstrap-icons.css%'}" rel="stylesheet">
+  <link href="{% static 'assets/vendor/glightbox/css/glightbox.min.css%'}" rel="stylesheet">
+  <link href="{% static 'assets/vendor/remixicon/remixicon.css'%}" rel="stylesheet">
+  <link href="{% static 'assets/vendor/swiper/swiper-bundle.min.css%'}" rel="stylesheet"> -->
 
   <!-- Template Main CSS File -->
-  <link href="../static/assets/css/style.css" rel="stylesheet">
+  <link href="{% static 'assets/css/style.css' %}" rel="stylesheet">
 
   <!-- =======================================================
   * Template Name: FlexStart - v1.12.0
@@ -108,7 +108,7 @@
           <div class="col-lg-3 col-md-6 d-flex align-items-stretch" data-aos="fade-up" data-aos-delay="100">
             <div class="member">
               <div class="member-img">
-                <img src="../static/assets/img/cake.jpg" class="img-fluid" alt="">
+                <img src="{% static 'assets/img/cake.jpg'%}" class="img-fluid" alt="">
                 <div class="social">
                   <a onclick="console.log('ssss')"><i class="bi bi-heart-fill"></i></a>
                   <span>44</span>
@@ -126,7 +126,7 @@
           <div class="col-lg-3 col-md-6 d-flex align-items-stretch" data-aos="fade-up" data-aos-delay="200">
             <div class="member">
               <div class="member-img">
-                <img src="../static/assets/img/clothes.webp" class="img-fluid" alt="">
+                <img src="{% static 'assets/img/clothes.webp'%}" class="img-fluid" alt="">
                 <div class="social">
                   <a href=""><i class="bi bi-heart-fill"></i></a>
                   <span>44</span>
@@ -144,7 +144,7 @@
           <div class="col-lg-3 col-md-6 d-flex align-items-stretch" data-aos="fade-up" data-aos-delay="300">
             <div class="member">
               <div class="member-img">
-                <img src="../static/assets/img/giza.png" class="img-fluid" alt="">
+                <img src="{% static 'assets/img/giza.png'%}" class="img-fluid" alt="">
                 <div class="social">
                   <a href=""><i class="bi bi-heart-fill"></i></a>
                   <span>44</span>
@@ -162,7 +162,7 @@
           <div class="col-lg-3 col-md-6 d-flex align-items-stretch" data-aos="fade-up" data-aos-delay="400">
             <div class="member">
               <div class="member-img">
-                <img src="../static/assets/img/perfume.jpg" class="img-fluid" alt="">
+                <img src="{% static 'assets/img/perfume.jpg'%}" class="img-fluid" alt="">
                 <div class="social">
                   <a href=""><i class="bi bi-heart-fill"></i></a>
                   <span>44</span>
@@ -211,7 +211,7 @@
                   {% if store.store_photo %}
                     <img style="max-height: 220px;" src="../{{store.store_photo}}" class="img-fluid most-liked-stores-pic" alt="">
                   {% else %}
-                    <!-- <img src="../static/assets/img/perfume.jpg" class="img-fluid most-liked-stores-pic" alt=""> -->
+                    <!-- <img src="{% static 'assets/img/perfume.jpg" class="img-fluid most-liked-stores-pic" alt=""> -->
                     <img style="max-height: 220px;" src="static/assets/img/store.webp" class="img-fluid most-liked-stores-pic" alt="">
                   {% endif %}
                 <div class="profile mt-auto">
@@ -282,7 +282,7 @@
                 {% if store.store_photo %}
                   <img src="../{{store.store_photo}}" class="img-fluid" alt="">
                 {% else %}
-                  <img src="../static/assets/img/portfolio/portfolio-9.jpg" class="img-fluid" alt="">
+                  <img src="{% static 'assets/img/portfolio/portfolio-9.jpg'%}" class="img-fluid" alt="">
                   <!-- <img src="../static/assets/img/portfolio/portfolio-9.jpg" class="img-fluid" alt=""> -->
                 {% endif %}
               <div class="portfolio-info">
@@ -340,7 +340,7 @@
   <script src="../static/assets/vendor/swiper/swiper-bundle.min.js"></script>
   <script src="../static/assets/vendor/php-email-form/validate.js"></script> -->
 
-  <script src="../static/assets/js/main.js"></script>
+  <!-- <script src="{% static 'assets/js/main.js'}"></script> -->
 <!-- <h3 style="color: #38761d;">تم الحفظ</h3> -->
 </body>
 
