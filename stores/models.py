@@ -10,7 +10,7 @@ class Store(models.Model):
     description = models.TextField()
     link = models.CharField(max_length=300)
     store_photo = models.FileField(null = True, default=None, blank=True, upload_to='static/upload/sellers_stores_photos',
-        validators=[FileExtensionValidator(allowed_extensions=['png','jpg',"jpeg"],message="يمكن رفع الصور فقط بالصيغات التالية: (jpg, png, jpeg)")])
+        validators=[FileExtensionValidator(allowed_extensions=['png','jpg',"jpeg", "webp"], message="يمكن رفع الصور فقط بالصيغات التالية: (jpg, png, jpeg, webp")])
     city = models.ForeignKey('users.city', on_delete=models.CASCADE, related_name="+")
     categories = models.ManyToManyField('category', blank=True, related_name="+")
     likes = models.IntegerField(default=0)

@@ -13,6 +13,8 @@
     {% block content %}
     
 </head>
+
+ {% if user.id == 1 %}
   <body>
     <header class="section-header st-m">
       <p>تفعيل المتاجر</p>
@@ -54,4 +56,7 @@
     </div>
   </body>
   </html>
+  {% else %}
+  <br><br><br><center><h1 style="color: aliceblue;">انت غير مصرح به لعرض هذه الصفحة</h1></center>
+  {% endif %}
   {% endblock %}

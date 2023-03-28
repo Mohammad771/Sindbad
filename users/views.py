@@ -17,6 +17,8 @@ from django.contrib.auth.decorators import login_required
 def register(request):
 
     context = {}
+    msg = {}
+    context['msg'] = msg
 
     if request.method == "POST":
         request_post_copy = request.POST.copy()
@@ -72,10 +74,27 @@ def register(request):
 
         else:
             print(form.errors)
-            context['errors'] =  form.errors
-            context['form_errors'] = form
-            # return redirect('/register')
-            return render(request, 'users/register.html', context)
+            msg['type'] = "error"
+            msg['content'] = "الرجاء التأكد من صحة المعلومات المدخلة"
+            errors_array = []
+            form_errors =  form.errors.get_json_data()
+            print(form_errors)
+            # print(form_errors['business_name'][0]['message'])
+            for key, errors in form_errors.items():
+                if key == "username":
+                    continue
+
+                elif key == "password2":
+                    errors_array.append("يجب ان يتشابه حقل كلمة المرور مع تأكيد كلمة المرور")
+                    continue
+
+                for error in errors:
+                    print(key)
+                    errors_array.append(error['message'])
+
+            context['errors'] = errors_array
+            msg['type'] = "error"
+            msg['content'] = "الرجاء التأكد من صحة المعلومات المدخلة"
 
 
         
@@ -86,13 +105,16 @@ def register(request):
 
 
 def user_login(request):
+
+    context = {}
+    msg = {}
+    context['msg'] = msg
+
     if request.user.is_authenticated:
         return redirect('/')
 
     if 'next' in request.GET:
         request.session['next'] = request.GET['next']
-
-    context = {}
 
     if request.method == "POST":
         requried_page = request.GET.get('next', None)
@@ -116,11 +138,12 @@ def user_login(request):
         
         else:
             print("incorrect credentials")
-            context['msg'] = "البريد الالكتروني او كلمة المرور غير صحيحة"
+            msg['type'] = "error"
+            msg['content'] = "الرجاء التأكد من البريد الالكتروني وكلمة المرور"
             return render(request, 'users/login.html', context)
     
     else:
-        return render(request, 'users/login.html')
+        return render(request, 'users/login.html', context)
 
 @login_required
 def logout(request):

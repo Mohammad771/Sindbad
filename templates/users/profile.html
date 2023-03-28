@@ -200,9 +200,9 @@
                               <label  class="grid-item">
                                 <span>{{category.name}}</span>
                                 {% if category in user.seller_id.store_id.categories.all %}
-                                <input style="margin-left: 20px;" checked type="checkbox" name="categories[]" value="{{category.id}}">
+                                <input class="category_input" style="margin-left: 20px;" checked type="checkbox" name="categories[]" value="{{category.id}}">
                                 {% else %}
-                                <input style="margin-left: 20px;" type="checkbox" name="categories[]" value="{{category.id}}">
+                                <input class="category_input" style="margin-left: 20px;" type="checkbox" name="categories[]" value="{{category.id}}">
                                 {% endif %}
                               </label>
                               {% endfor %}

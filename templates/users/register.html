@@ -20,7 +20,20 @@
     </div>
 
     <div class="form-content">
-        {{form_errors.errors}}
+        {% if errors %}
+        <ul>
+          {% for error in errors %}
+          <li>
+            <span>
+              <i style="color: rgb(237, 87, 87);" class="fa-solid fa-angle-left"></i>
+            </span>
+            {{error}}
+          </li>
+          <br>
+          {% endfor %}
+        </ul>
+        {% endif %}
+
     <form action="{% url 'users:register' %}" method="POST">
         {%csrf_token%}
         <div class="userInfoContainer">
@@ -43,5 +56,38 @@
             <a class="inlineInput button" href="{% url 'users:user_login' %}" class="inlineInput">لدي حساب مسجل</a>
         </div>
     </form>
+    {% if msg %}
+    <p id="msg" style="display: none;">{{msg}}</p>
+    {% endif %}
 
   </div>
+  
+  <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+  <script>
+    if (window.history.replaceState ) {
+      window.history.replaceState( null, null, window.location.href );
+    }
+  
+    window.addEventListener('load', (event) => {
+  
+    if ($('#msg').length){
+      
+          Swal.fire({
+            toast: true,
+            position: 'top-end',
+            icon: '{{msg.type}}',
+            title: '{{msg.content}}',
+            backdrop:'rgba(0,0,0,0)',
+            timerProgressBar: true,
+            showConfirmButton: false,
+            timer: 4000,
+            didOpen: (toast) => {
+              toast.addEventListener('mouseenter', Swal.stopTimer)
+              toast.addEventListener('mouseleave', Swal.resumeTimer)
+            }
+            })
+      }
+  
+  });
+    </script>

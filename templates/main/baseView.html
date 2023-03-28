@@ -58,11 +58,14 @@
     <div class="Header-links">
       <nav id="navbar" class="navbar">
         <ul>
+          {% if home %}
           <li><a class="nav-link scrollto" href="#testimonials">المتاجر الأكثر إعجاباً</a></li>
           <li><a class="nav-link scrollto" href="#portfolio">تسوق حسب الأقسام </a></li>
-
+          {% else %}
+          <li><a class="nav-link scrollto" href="{% url 'stores:home' %}#testimonials">المتاجر الأكثر إعجاباً</a></li>
+          <li><a class="nav-link scrollto" href="{% url 'stores:home' %}#portfolio">تسوق حسب الأقسام </a></li>
+          {% endif %}
           <li><a class="nav-link scrollto" href="#">من نحن</a></li>
-
         </ul>
     </div>
     {% if not user.is_authenticated %}

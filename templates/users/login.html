@@ -38,14 +38,47 @@
               />
             </div>
           </div>
-
           <div class="form-footer">
             <button type="submit" class="inlineInput first sign">تسجيل الدخول</button>
             <a class="inlineInput button" href="{% url 'users:register' %}">إنشاء حساب</a>
           </div>
         </form>
+        {% if msg %}
+        <p id="msg" style="display: none;">{{msg}}</p>
+        {% endif %}
         </div>
       </div>
     </div>
   </body>
+
+  <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+  <script>
+    if (window.history.replaceState ) {
+      window.history.replaceState( null, null, window.location.href );
+    }
+  
+    window.addEventListener('load', (event) => {
+  
+    if ($('#msg').length){
+      
+          Swal.fire({
+            toast: true,
+            position: 'top-end',
+            icon: '{{msg.type}}',
+            title: '{{msg.content}}',
+            backdrop:'rgba(0,0,0,0)',
+            timerProgressBar: true,
+            showConfirmButton: false,
+            timer: 4000,
+            didOpen: (toast) => {
+              toast.addEventListener('mouseenter', Swal.stopTimer)
+              toast.addEventListener('mouseleave', Swal.resumeTimer)
+            }
+            })
+      }
+  
+  });
+    </script>
+
 </html>

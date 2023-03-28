@@ -25,9 +25,15 @@ class register_form(UserCreationForm):
         model = User
         fields = ('username', 'email', 'password1', 'password2','first_name', 'last_name', 'phone_number',)
         error_messages = {
+            # 'password_mismatch': ("يجب ان يتشابه حقل كلمة المرور مع تأكيد كلمة المرور"), doesn't work
+
             'email': {
                 'required': ("الرجاء ادخال البريد الالكتروني بشكل صحيح"),
                 'invalid': ("الرجاء ادخال البريد الالكتروني بشكل صحيح"),
+                'unique': ("هذا البريد الالكتروني موجود مسبقاً"),
+            },
+            'username': {
+                'unique': ("هذا البريد الالكتروني موجود مسبقاً"),
             },
             'first_name': {
                 'required': ("الرجاء ادخال الاسم الأول بشكل صحيح"),
@@ -40,6 +46,7 @@ class register_form(UserCreationForm):
                 'invalid': ("الرجاء إدخال رقم الجوال بشكل صحيح، الصيغة الصحيحة: 0512345678"),
                 'max_length': ("يجب ان يحتوي رقم الجوال على 10 خانات فقط"),
             },
+
         }
 
 class update_user_form(forms.ModelForm):

@@ -6,22 +6,26 @@ from .models import Store, category as categories_model, allowed_seller_numbers
 from django.contrib.auth.decorators import login_required
 
 # Db query execute:
-# Create your views here.
 # cursor = connection.cursor()
-# cursor.execute("")
+# cursor.execute('''''')
 
 # How to develop ads
 
 def home(request):
+
     context = {}
+    context['home'] = True
     top_stores = Store.objects.order_by('-likes')[:6]
     all_stores = Store.objects.all()
 
     categories = categories_model.objects.all()
     top_3_categories = []
-    top_3_categories.append(categories_model.objects.get(pk=1)) #الكترونيات
-    top_3_categories.append(categories_model.objects.get(pk=4)) #حلويات
-    top_3_categories.append(categories_model.objects.get(pk=6)) #ألبسة
+    try:
+        top_3_categories.append(categories_model.objects.get(pk=1)) #الكترونيات
+        top_3_categories.append(categories_model.objects.get(pk=4)) #حلويات
+        top_3_categories.append(categories_model.objects.get(pk=6)) #ألبسة
+    except:
+        print('There are no categories in the database!')
 
 
     context['top_stores'] = top_stores
@@ -35,14 +39,14 @@ def allowed_numbers(request):
     msg = {}
     context['msg'] = msg
 
-    if request.method == "POST":
+    if request.method == 'POST':
 
         form = allowed_number_form(request.POST)
 
         if form.is_valid():
             form.save()
-            msg['type'] = "success"
-            msg['content'] = "تمت إضافة الرقم بنجاح"
+            msg['type'] = 'success'
+            msg['content'] = 'تمت إضافة الرقم بنجاح'
         else:
             errors_array = []
             form_errors =  form.errors.get_json_data()
@@ -54,7 +58,7 @@ def allowed_numbers(request):
                     errors_array.append(error['message'])
 
             context['errors'] = errors_array
-            msg['type'] = "error"
+            msg['type'] = 'error'
             msg['content'] = form_errors[first_error_key][0]['message']
 
 
@@ -67,7 +71,7 @@ def allowed_numbers(request):
 def create_store(incoming_reqest):
     context = {}
 
-    categories = incoming_reqest.POST.getlist("categories[]")
+    categories = incoming_reqest.POST.getlist('categories[]')
     form = store_creation_form(incoming_reqest.POST, incoming_reqest.FILES)
 
     if form.is_valid():
@@ -83,19 +87,19 @@ def create_store(incoming_reqest):
             seller_account.store_id = new_store
             seller_account.save()
 
-            context["msg"] = "تم انشاء المتجر بنجاح"
-            context["status"] = True
+            context['msg'] = 'تم انشاء المتجر بنجاح'
+            context['status'] = True
         except Exception as e:
-            print("There was an error while assigning the new store to the seller, The error is:")
+            print('There was an error while assigning the new store to the seller, The error is:')
             print(e)
 
             new_store.delete()
 
-            context["status"] = False
+            context['status'] = False
             context['errors'] = ['حدث خطأ اثناء إنشاء المتجر، رمز الخطأ: stores_profile_37']
 
     else:
-        context["status"] = False
+        context['status'] = False
         errors_array = []
         form_errors =  form.errors.get_json_data()
         # print(form_errors['business_name'][0]['message'])
@@ -111,7 +115,7 @@ def create_store(incoming_reqest):
 def update_store(incoming_reqest):
     context = {}
 
-    categories = incoming_reqest.POST.getlist("categories[]")
+    categories = incoming_reqest.POST.getlist('categories[]')
     form = store_creation_form(incoming_reqest.POST, incoming_reqest.FILES, instance=incoming_reqest.user.seller_id.store_id)
 
     if form.is_valid():
@@ -125,10 +129,10 @@ def update_store(incoming_reqest):
         updated_store.save()
 
 
-        context["msg"] = "تم تعديل المتجر بنجاح"
-        context["status"] = True
+        context['msg'] = 'تم تعديل المتجر بنجاح'
+        context['status'] = True
     else:
-        context["status"] = False
+        context['status'] = False
         errors_array = []
         form_errors =  form.errors.get_json_data()
         print(form_errors)
@@ -162,7 +166,7 @@ def like(request):
 
             selected_store.likes = selected_store.likes - 1
             selected_store.save() # saving the changes
-            html = "disliked"
+            html = 'disliked'
 
         else:
             selected_store.likes = selected_store.likes + 1
@@ -170,12 +174,12 @@ def like(request):
 
             request.user.liked_stores.add(selected_store)
             request.user.save()
-            html = "liked" # a variable that contains a success message to be sent as an http respone back to ajax function
+            html = 'liked' # a variable that contains a success message to be sent as an http respone back to ajax function
             
-        return HttpResponse(html) # returning "success" as an http response because an error is produced when noting is returned.
+        return HttpResponse(html) # returning 'success' as an http response because an error is produced when noting is returned.
 
     else:
-        html = "not signed in" # a variable that contains a success message to be sent as an http respone back to ajax function
-        return HttpResponse(html) # returning "success" as an http response because an error is produced when noting is returned.
+        html = 'not signed in' # a variable that contains a success message to be sent as an http respone back to ajax function
+        return HttpResponse(html) # returning 'success' as an http response because an error is produced when noting is returned.
 
 
