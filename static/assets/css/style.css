@@ -386,7 +386,7 @@ section {
     display: block;
   }
 
-  .navbar ul {
+  .Header-links .navbar ul {
     display: none;
   }
 }
