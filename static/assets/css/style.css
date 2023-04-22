@@ -101,9 +101,9 @@ section {
   .breadcrumbs {
     margin-top: 57px;
   }
-  .Header-buttons {
+  /* .Header-buttons {
     display: none;
-  }
+  } */
 }
 
 .breadcrumbs h2 {
